@@ -29,13 +29,13 @@ class EstadoColonia(Enum):
 class Colonia:
     """Representa una colonia felina con sus gatos y su responsable."""
 
-    def __init__(self, nombre, responsable):
+    def __init__(self, nombre, responsable, repositorio):
         """Inicializa la colonia. El estado inicial siempre es SOLICITADA."""
         self.nombre = nombre
         self.responsable = responsable
         self._estado = EstadoColonia.SOLICITADA  # Regla: estado inicial fijo.
         self._ultima_actualizacion = date.today()
-        self._gatos = {}
+        self._repo = repositorio
 
     # -- PROPIEDADES --
 
@@ -103,35 +103,33 @@ class Colonia:
         """Agrega un gato a la colonia."""
         if not isinstance(gato, Gato):
             raise ValueError("Solo se permiten objetos Gato.")
-        if gato.id_gato in self._gatos:
+        if self._repo.obtener(gato.id_gato) is not None:
             raise ValueError(f"Ya existe un gato con id {gato.id_gato}.")
-        self._gatos[gato.id_gato] = gato
+        self._repo.guardar(gato)
 
-    def eliminar_gato(self, id_gato: str):
-        """Elimina un gato de la colonia por su id."""
-        if id_gato not in self._gatos:
-            raise ValueError(f"No existe ningún gato con id {id_gato}.")
-        del self._gatos[id_gato]
+    def quitar_gato(self, id_gato: str):
+        """Quita un gato de la colonia por su id."""
+        self._repo.eliminar(id_gato)
 
     def buscar_por_id(self, id_gato: str):
         """Devuelve el gato con ese id o None si no existe."""
-        return self._gatos.get(id_gato)
+        return self._repo.obtener(id_gato)
 
     def buscar_por_nombre(self, nombre: str):
         """Devuelve una lista de gatos cuyo nombre coincida (sin distinguir mayúsculas)."""
         nombre = nombre.strip().lower()
-        return [g for g in self._gatos.values() if g.nombre.lower() == nombre]
+        return [g for g in self._repo.listar() if g.nombre.lower() == nombre]
 
     def listar_sin_esterilizar(self):
         """Devuelve una lista de gatos que no están esterilizados."""
-        return [g for g in self._gatos.values() if not g.esterilizado]
+        return [g for g in self._repo.listar() if not g.esterilizado]
 
 
     # -- REPORTES --
 
     def reporte_censo(self):
         """Devuelve estadísticas de población de la colonia."""
-        gatos = list(self._gatos.values())
+        gatos = self._repo.listar()
         total = len(gatos)
         machos = sum(1 for g in gatos if g.sexo == Sexo.MACHO)
         hembras = sum(1 for g in gatos if g.sexo == Sexo.HEMBRA)
@@ -156,5 +154,5 @@ class Colonia:
             "estado": self._estado.value,
             "ultima_actualizacion": self._ultima_actualizacion.strftime("%d/%m/%Y"),
             "necesita_actualizacion": self.necesita_actualizacion(),
-            "total_gatos": len(self._gatos),
+            "total_gatos": len(self._repo.listar()),
         }
