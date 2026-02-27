@@ -20,6 +20,7 @@ class RepositorioGatos:
         """Devuelve una lista con todos los gatos."""
         raise NotImplementedError
 
-    def quitar(self, id_gato):
-        """Quita un gato por su id."""
-        raise NotImplementedError
+# TODO: Implementar cuando añada fecha a ciertos estados del gato.
+#    def quitar(self, id_gato):
+#        """Quita un gato por su id."""
+#        raise NotImplementedError

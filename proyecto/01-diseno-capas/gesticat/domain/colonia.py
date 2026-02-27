@@ -5,13 +5,14 @@ Reglas de negocio:
 - El estado inicial siempre es SOLICITADA.
 - Una colonia debe tener siempre un responsable asignado.
 - Las colonias deben actualizarse cada 3 meses.
-- No puede haber dos gatos con el mismo id en la misma colonia.
+- No puede haber dos gatos con el mismo id.
+- El censo solo cuenta gatos activos en la colonia.
 """
 
 from enum import Enum
 from datetime import date
 
-from domain.gato import Gato, Sexo
+from domain.gato import Gato, Sexo, EstadoGato
 from domain.responsable import Responsable, PersonaFisica, Protectora
 
 # -- ENUMS --
@@ -23,6 +24,11 @@ class EstadoColonia(Enum):
     PENDIENTE = "Pendiente actualización (Anexo II)"
     BAJA = "Baja (Anexo III)"
 
+
+# -- CONSTANTES --
+
+#Estados que se consideran activos en la colonia.
+_ESTADOS_ACTIVOS = {EstadoGato.COL, EstadoGato.ACOG}
 
 # -- CLASE PRINCIPAL --
 
@@ -107,29 +113,37 @@ class Colonia:
             raise ValueError(f"Ya existe un gato con id {gato.id_gato}.")
         self._repo.guardar(gato)
 
-    def quitar_gato(self, id_gato: str):
-        """Quita un gato de la colonia por su id."""
-        self._repo.eliminar(id_gato)
+    # TO DO:
+    #def quitar_gato(self, id_gato: str):
+    #    """Quita un gato de la colonia por su id."""
+    #    self._repo.eliminar(id_gato)
 
     def buscar_por_id(self, id_gato: str):
         """Devuelve el gato con ese id o None si no existe."""
         return self._repo.obtener(id_gato)
+    
 
     def buscar_por_nombre(self, nombre: str):
         """Devuelve una lista de gatos cuyo nombre coincida (sin distinguir mayúsculas)."""
         nombre = nombre.strip().lower()
         return [g for g in self._repo.listar() if g.nombre.lower() == nombre]
+    
+    # -- MÉTODOS PRIVADOS DE APOYO --
+
+    def _gatos_activos(self):
+        """Devuelve la lista de gatos con estado activo en la colonia."""
+        return [g for g in self._repo.listar() if g.estado in _ESTADOS_ACTIVOS]
 
     def listar_sin_esterilizar(self):
         """Devuelve una lista de gatos que no están esterilizados."""
-        return [g for g in self._repo.listar() if not g.esterilizado]
-
+        return [g for g in self._gatos_activos() if not g.esterilizado]
+    
 
     # -- REPORTES --
 
     def reporte_censo(self):
-        """Devuelve estadísticas de población de la colonia."""
-        gatos = self._repo.listar()
+        """Devuelve estadísticas de población activa de la colonia."""
+        gatos = self._gatos_activos()
         total = len(gatos)
         machos = sum(1 for g in gatos if g.sexo == Sexo.MACHO)
         hembras = sum(1 for g in gatos if g.sexo == Sexo.HEMBRA)
@@ -154,5 +168,5 @@ class Colonia:
             "estado": self._estado.value,
             "ultima_actualizacion": self._ultima_actualizacion.strftime("%d/%m/%Y"),
             "necesita_actualizacion": self.necesita_actualizacion(),
-            "total_gatos": len(self._repo.listar()),
+            "total_gatos": len(self._gatos_activos()),
         }
