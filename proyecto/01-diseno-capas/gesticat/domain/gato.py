@@ -65,9 +65,9 @@ class Gato:
         return self._id_gato
     
     @id_gato.setter
-    def id_gato(self, id):
+    def id_gato(self, valor):
         """Valida que el código sean 3 cifras."""
-        dato = (id or "").strip().upper()
+        dato = (valor or "").strip().upper()
         if len(dato) != 3:
             raise ValueError("Codigo invalido.")
         if not dato.isdigit():

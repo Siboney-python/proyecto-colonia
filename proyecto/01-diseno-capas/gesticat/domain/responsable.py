@@ -106,7 +106,6 @@ class PersonaFisica(Responsable):
 
     @fecha_nacimiento.setter
     def fecha_nacimiento(self, valor):
-        from datetime import date
         if isinstance(valor, str):
             try:
                 partes = valor.split("/")
@@ -117,7 +116,10 @@ class PersonaFisica(Responsable):
             raise TypeError("La fecha debe ser un objeto date o string dd/mm/aaaa.")
         if valor > date.today():
             raise ValueError("La fecha de nacimiento no puede ser futura.")
-        # TODO: Validar que la persona sea mayor de 18 años.
+        hoy = date.today()
+        edad_minima = hoy.replace(year = hoy.year - 18)
+        if valor > edad_minima:
+            raise ValueError("El responsable debe ser mayor de edad.")
         self._fecha_nacimiento = valor
 
     def __str__(self):
