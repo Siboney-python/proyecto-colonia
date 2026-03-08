@@ -26,6 +26,10 @@ class ServicioColonia:
                     clinica_veterinaria, esterilizado, fecha_registro)
         self._colonia.agregar_gato(gato)
 
+    def quitar_gato(self, id_gato):
+        """Elimina un gato de la colonia por su id."""
+        self._colonia.quitar_gato(id_gato)
+
     def actualizar_estado_gato(self, id_gato, nuevo_estado: EstadoGato):
         """Actualiza el estado de un gato existente."""
         gato = self._colonia.buscar_por_id(id_gato)

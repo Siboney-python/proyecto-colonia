@@ -112,17 +112,15 @@ class Colonia:
         if self._repo.obtener(gato.id_gato) is not None:
             raise ValueError(f"Ya existe un gato con id {gato.id_gato}.")
         self._repo.guardar(gato)
-
-    # TO DO:
-    #def quitar_gato(self, id_gato: str):
-    #    """Quita un gato de la colonia por su id."""
-    #    self._repo.eliminar(id_gato)
+ 
+    def quitar_gato(self, id_gato: str):
+        """Quita un gato de la colonia por su id."""
+        self._repo.quitar(id_gato)
 
     def buscar_por_id(self, id_gato: str):
         """Devuelve el gato con ese id o None si no existe."""
         return self._repo.obtener(id_gato)
     
-
     def buscar_por_nombre(self, nombre: str):
         """Devuelve una lista de gatos cuyo nombre coincida (sin distinguir mayúsculas)."""
         nombre = nombre.strip().lower()

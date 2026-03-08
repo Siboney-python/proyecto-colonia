@@ -5,9 +5,10 @@ Este módulo define los gatos individuales del programa de gestión de colonias 
 
 Reglas de negocio:
 - No puede estar esterilizado sin clínica veterinaria asignada.
-- No puede tener fecha de esterilización si no está esterilizado.
-- No puede tener marca de esterilización si no está esterilizado.
+- No puede revertirse la esterilización una vez aplicada.
+
 """
+# TODO: - No puede tener marca de esterilización si no está esterilizado.
 
 from enum import Enum
 from datetime import date
@@ -146,7 +147,7 @@ class Gato:
     
     @property
     def esterilizado(self):
-        """Si el gato está esterilizado."""
+        """Si el gato está o no esterilizado."""
         return self._esterilizado
 
     @esterilizado.setter
@@ -154,6 +155,10 @@ class Gato:
         """Valida que sea booleano y que cumpla las reglas de negocio."""
         if not isinstance(valor, bool):
             raise TypeError("Esterilizado debe ser True o False.")
+        # Regla: no se puede revertir la esterilización.
+        if hasattr(self, '_esterilizado') and self._esterilizado and not valor:
+        # hasattr (tiene atributo, si existe)
+            raise ValueError("Un gato esterilizado no puede pasar a no esterilizado.")
         # Regla: si está esterilizado, debe tener clínica asignada.
         if valor and not self._clinica_veterinaria:
             raise ValueError("Un gato esterilizado debe tener clínica veterinaria asignada.")

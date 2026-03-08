@@ -20,7 +20,6 @@ class RepositorioGatos:
         """Devuelve una lista con todos los gatos."""
         raise NotImplementedError
 
-
     def quitar(self, id_gato):
         """Quita un gato por su id."""
         raise NotImplementedError
