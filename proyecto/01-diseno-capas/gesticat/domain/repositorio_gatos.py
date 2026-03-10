@@ -10,16 +10,16 @@ class RepositorioGatos:
 
     def guardar(self, gato):
         """Guarda un gato en el repositorio."""
-        raise NotImplementedError
+        raise NotImplementedError("guardar no implementado.")
 
     def obtener(self, id_gato):
         """Recupera un gato por su id. Devuelve None si no existe."""
-        raise NotImplementedError
+        raise NotImplementedError("obtener no implementado.")
 
     def listar(self):
         """Devuelve una lista con todos los gatos."""
-        raise NotImplementedError
+        raise NotImplementedError("listar no implementado.")
 
     def quitar(self, id_gato):
         """Quita un gato por su id."""
-        raise NotImplementedError
+        raise NotImplementedError("quitar no implementado.")
