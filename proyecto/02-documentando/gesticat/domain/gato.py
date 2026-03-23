@@ -6,20 +6,20 @@ Este módulo define los gatos individuales del programa de gestión de colonias 
 Reglas de negocio:
 - No puede estar esterilizado sin clínica veterinaria asignada.
 - No puede revertirse la esterilización una vez aplicada.
-
 """
-# TODO: - No puede tener marca de esterilización si no está esterilizado.
 
 from enum import Enum
 from datetime import date
 
-# -- ENUMS: Con los Enum defino las opciones cerradas. --
+
+# -- ENUMS --
 
 class Sexo(Enum):
-    """Sexo del gato."""    
+    """Sexo biológico del gato."""
     HEMBRA = "H"
     MACHO = "M"
     DESCONOCIDO = "?"
+
 
 class EstadoGato(Enum):
     """Estado actual del gato en el programa."""
@@ -30,12 +30,14 @@ class EstadoGato(Enum):
     DESA = "Desaparecido"
     # TODO: Registrar fecha cuando el estado pase a ADOP, FALL o DESA.
 
-# TODO: 
+
+# TODO:
 # class MarcaEsterilizacion(Enum):
-#    """Marca física de esterilización en las orejas."""
-#    SIN_MARCA = "Sin marcar"
-#    IZQUIERDA = "Oreja izquierda"
-#    DERECHA = "Oreja derecha"
+#     """Marca física de esterilización en las orejas."""
+#     SIN_MARCA = "Sin marcar"
+#     IZQUIERDA = "Oreja izquierda"
+#     DERECHA = "Oreja derecha"
+
 
 # -- CLASE PRINCIPAL --
 
@@ -43,12 +45,16 @@ class Gato:
     """Representa un gato individual dentro del programa de colonias felinas."""
 
     def __init__(self, id_gato, nombre, color,
-                 sexo: Sexo, estado: EstadoGato, 
-                 clinica_veterinaria,  
-                 esterilizado, 
-                 #marca_esterilizacion,
-                 fecha_registro):
-        """Inicializa un nuevo gato."""
+                 sexo: Sexo, estado: EstadoGato,
+                 clinica_veterinaria,
+                 esterilizado,
+                 fecha_registro=None):
+        """Inicializa un nuevo gato con todos sus datos.
+
+        Si no se indica fecha_registro, se usa la fecha de hoy. Esto permite
+        tanto el uso diario (sin indicar fecha) como migraciones desde registros
+        en papel, pasando la fecha histórica explícitamente.
+        """
         self.id_gato = id_gato
         self.nombre = nombre
         self.color = color
@@ -57,50 +63,49 @@ class Gato:
         self.clinica_veterinaria = clinica_veterinaria
         self.esterilizado = esterilizado
         self.fecha_registro = fecha_registro
-        
-    # -- PROPIEDADES (GETTERS) --
+
+
+    # -- PROPIEDADES --
 
     @property
     def id_gato(self):
-        """Identificador único del gato."""
+        """Identificador único del gato. Debe ser exactamente 3 dígitos."""
         return self._id_gato
-    
+
     @id_gato.setter
     def id_gato(self, valor):
-        """Valida que el código sean 3 cifras."""
+        """Exige exactamente 3 dígitos numéricos."""
         dato = (valor or "").strip().upper()
-        if len(dato) != 3:
-            raise ValueError("Codigo invalido.")
-        if not dato.isdigit():
-            raise ValueError("Codigo invalido.")
+        if len(dato) != 3 or not dato.isdigit():
+            raise ValueError("El ID debe ser exactamente 3 dígitos numéricos.")
         self._id_gato = dato
-    
+
     @property
     def nombre(self):
         """Nombre del gato."""
         return self._nombre
-    
+
     @nombre.setter
     def nombre(self, valor):
-        """Valida nombre no vacio y sin espacios laterales."""
+        """Exige que el nombre no esté vacío ni tenga espacios laterales."""
         texto = valor or ""
         if not texto.strip():
-            raise ValueError("El nombre no puede estar vacio.")
+            raise ValueError("El nombre no puede estar vacío.")
         if texto != texto.strip():
             raise ValueError("El nombre no puede tener espacios laterales.")
         self._nombre = texto
-    
+
     @property
     def color(self):
-        """Color o patrón del gato."""
+        """Color o patrón del pelaje del gato."""
         return self._color
-    
+
     @color.setter
     def color(self, valor):
-        """Valida color no vacio y sin espacios laterales."""
+        """Exige que el color no esté vacío ni tenga espacios laterales."""
         texto = valor or ""
         if not texto.strip():
-            raise ValueError("El color no puede estar vacio.")
+            raise ValueError("El color no puede estar vacío.")
         if texto != texto.strip():
             raise ValueError("El color no puede tener espacios laterales.")
         self._color = texto
@@ -109,69 +114,82 @@ class Gato:
     def sexo(self):
         """Sexo biológico del gato."""
         return self._sexo
-    
+
     @sexo.setter
     def sexo(self, dato):
+        """Exige que el valor sea una opción válida del enum Sexo."""
         if not isinstance(dato, Sexo):
-            raise TypeError(f"El sexo debe ser una opción de la clase Sexo") 
+            raise TypeError("El sexo debe ser una opción de la clase Sexo.")
         self._sexo = dato
 
     @property
     def estado(self):
-        """Estado actual del gato."""
+        """Estado actual del gato en el programa."""
         return self._estado
-    
+
     @estado.setter
     def estado(self, dato):
+        """Exige que el valor sea una opción válida del enum EstadoGato."""
         if not isinstance(dato, EstadoGato):
-            raise TypeError(f"El estado debe ser una opción de la clase EstadoGato") 
+            raise TypeError("El estado debe ser una opción de la clase EstadoGato.")
         self._estado = dato
-    
+
     @property
     def clinica_veterinaria(self):
-        """Clínica donde se esterilizó."""
+        """Clínica donde se realizó la esterilización. Puede ser None."""
         return self._clinica_veterinaria
-    
+
     @clinica_veterinaria.setter
     def clinica_veterinaria(self, valor):
-        """Valida clinica_veterinaria no vacio y sin espacios laterales."""
+        """Acepta None o un nombre no vacío sin espacios laterales."""
         if valor is None:
             self._clinica_veterinaria = None
             return
         texto = valor.strip()
         if not texto:
-            raise ValueError("Clinica_veterinaria no puede estar vacio.")
+            raise ValueError("La clínica veterinaria no puede estar vacía.")
         if valor != texto:
-            raise ValueError("Clinica_veterinaria no puede tener espacios laterales.")
+            raise ValueError("La clínica veterinaria no puede tener espacios laterales.")
         self._clinica_veterinaria = texto
-    
+
     @property
     def esterilizado(self):
-        """Si el gato está o no esterilizado."""
+        """Indica si el gato está esterilizado."""
         return self._esterilizado
 
     @esterilizado.setter
     def esterilizado(self, valor):
-        """Valida que sea booleano y que cumpla las reglas de negocio."""
+        """Aplica las reglas de negocio sobre la esterilización.
+
+        Reglas:
+        - No se puede revertir: un gato esterilizado no puede pasar a no esterilizado.
+        - Requiere clínica: si se marca como esterilizado, debe tener clínica asignada.
+        """
         if not isinstance(valor, bool):
             raise TypeError("Esterilizado debe ser True o False.")
-        # Regla: no se puede revertir la esterilización.
+        # Comprobamos si ya existe el atributo para evitar fallar en la primera asignación (__init__).
         if hasattr(self, '_esterilizado') and self._esterilizado and not valor:
-        # hasattr (tiene atributo, si existe)
             raise ValueError("Un gato esterilizado no puede pasar a no esterilizado.")
-        # Regla: si está esterilizado, debe tener clínica asignada.
         if valor and not self._clinica_veterinaria:
             raise ValueError("Un gato esterilizado debe tener clínica veterinaria asignada.")
         self._esterilizado = valor
 
     @property
     def fecha_registro(self):
-        """Fecha de alta en el sistema."""
+        """Fecha de alta del gato en el sistema."""
         return self._fecha_registro
 
     @fecha_registro.setter
     def fecha_registro(self, valor):
-        """Valida formato, que sea un objeto date y no futuro."""
+        """Acepta string dd/mm/aaaa, un objeto date o None (usa fecha de hoy).
+
+        El valor por defecto None permite el uso diario sin indicar fecha,
+        y pasar una fecha explícita facilita migraciones desde registros en papel.
+        """
+        # Si no se indica fecha, se usa hoy. Útil para el uso diario.
+        if valor is None:
+            self._fecha_registro = date.today()
+            return
         if isinstance(valor, str):
             try:
                 partes = valor.split("/")
@@ -183,6 +201,3 @@ class Gato:
         if valor > date.today():
             raise ValueError("La fecha de registro no puede ser futura.")
         self._fecha_registro = valor
-
-
-

@@ -1,12 +1,14 @@
-# domain/repositorio_gatos.py
+"""
+Dominio/repositorio_gatos: Contrato del repositorio de gatos de GestiCat.
+
+Define las operaciones mínimas que cualquier implementación de almacenamiento
+de gatos debe cumplir. Cualquier repositorio concreto debe heredar de esta
+clase e implementar todos sus métodos.
+"""
+
 
 class RepositorioGatos:
-    """
-    Contrato para el repositorio de gatos.
-    
-    Define las operaciones mínimas que cualquier implementación
-    de almacenamiento de gatos debe cumplir.
-    """
+    """Define la interfaz mínima que requiere el dominio para gestionar gatos."""
 
     def guardar(self, gato):
         """Guarda un gato en el repositorio."""
@@ -17,9 +19,9 @@ class RepositorioGatos:
         raise NotImplementedError("obtener no implementado.")
 
     def listar(self):
-        """Devuelve una lista con todos los gatos."""
+        """Devuelve una lista con todos los gatos del repositorio."""
         raise NotImplementedError("listar no implementado.")
 
     def quitar(self, id_gato):
-        """Quita un gato por su id."""
+        """Elimina un gato por su id del repositorio."""
         raise NotImplementedError("quitar no implementado.")
