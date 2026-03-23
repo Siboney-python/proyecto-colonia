@@ -10,9 +10,13 @@ clase e implementar todos sus métodos.
 class RepositorioGatos:
     """Define la interfaz mínima que requiere el dominio para gestionar gatos."""
 
-    def guardar(self, gato):
-        """Guarda un gato en el repositorio."""
-        raise NotImplementedError("guardar no implementado.")
+    def insertar(self, gato):
+        """Inserta un gato nuevo en el repositorio. Falla si ya existe."""
+        raise NotImplementedError("insertar no implementado.")
+
+    def actualizar(self, gato):
+        """Actualiza un gato existente en el repositorio. Falla si no existe."""
+        raise NotImplementedError("actualizar no implementado.")
 
     def obtener(self, id_gato):
         """Recupera un gato por su id. Devuelve None si no existe."""

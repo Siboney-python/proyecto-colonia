@@ -126,7 +126,7 @@ class Colonia:
     # -- GESTIÓN DE GATOS --
 
     def agregar_gato(self, gato: Gato):
-        """Agrega un gato a la colonia.
+        """Agrega un gato nuevo a la colonia.
 
         Lanza TypeError si el objeto no es un Gato.
         Lanza ValueError si ya existe un gato con el mismo id.
@@ -135,7 +135,15 @@ class Colonia:
             raise TypeError("Solo se permiten objetos Gato.")
         if self._repo.obtener(gato.id_gato) is not None:
             raise ValueError(f"Ya existe un gato con id {gato.id_gato}.")
-        self._repo.guardar(gato)
+        self._repo.insertar(gato)
+
+    def actualizar_gato(self, gato: Gato):
+        """Persiste los cambios de un gato ya existente en el repositorio.
+
+        Necesario para repositorios con persistencia real (JSON, SQLite, API...)
+        donde modificar el objeto en memoria no es suficiente para guardar el cambio.
+        """
+        self._repo.actualizar(gato)
 
     def quitar_gato(self, id_gato: str):
         """Quita un gato de la colonia por su id."""

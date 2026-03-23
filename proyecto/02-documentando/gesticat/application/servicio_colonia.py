@@ -20,7 +20,7 @@ class ServicioColonia:
     # -- GATOS --
 
     def registrar_gato(self, id_gato, nombre, color, sexo, estado,
-                       clinica_veterinaria, esterilizado, fecha_registro):
+                       clinica_veterinaria, esterilizado, fecha_registro=None):
         """Crea un gato y lo añade a la colonia."""
         gato = Gato(id_gato, nombre, color, sexo, estado,
                     clinica_veterinaria, esterilizado, fecha_registro)
@@ -31,22 +31,26 @@ class ServicioColonia:
         self._colonia.quitar_gato(id_gato)
 
     def actualizar_estado_gato(self, id_gato, nuevo_estado: EstadoGato):
-        """Actualiza el estado de un gato existente."""
+        """Actualiza el estado de un gato existente y lo persiste en el repositorio."""
         gato = self._colonia.buscar_por_id(id_gato)
         if gato is None:
             raise ValueError(f"No existe ningún gato con id {id_gato}.")
         gato.estado = nuevo_estado
+        # Llamamos a actualizar() para que repositorios con persistencia real
+        # reflejen el cambio. En memoria no es estrictamente necesario porque
+        # trabajamos con referencias, pero es correcto y consistente hacerlo.
+        self._colonia.actualizar_gato(gato)
 
     def actualizar_esterilizacion_gato(self, id_gato, esterilizado: bool,
                                         clinica_veterinaria=None):
-        """Actualiza el estado de esterilización de un gato."""
+        """Actualiza el estado de esterilización de un gato y lo persiste."""
         gato = self._colonia.buscar_por_id(id_gato)
         if gato is None:
             raise ValueError(f"No existe ningún gato con id {id_gato}.")
-        # Si se esteriliza, actualizamos también la clínica si se proporciona.
         if clinica_veterinaria and not gato.clinica_veterinaria:
             gato.clinica_veterinaria = clinica_veterinaria
         gato.esterilizado = esterilizado
+        self._colonia.actualizar_gato(gato)
 
     def listar_sin_esterilizar(self):
         """Devuelve la lista de gatos activos no esterilizados."""

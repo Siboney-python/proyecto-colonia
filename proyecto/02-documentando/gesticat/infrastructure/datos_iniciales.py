@@ -5,7 +5,6 @@ Este módulo carga una colonia con un responsable y varios gatos de ejemplo
 para poder probar el sistema manualmente al arrancar la aplicación.
 """
 
-from datetime import date
 from domain.gato import Gato, Sexo, EstadoGato
 from domain.colonia import Colonia
 from domain.responsable import PersonaFisica
@@ -31,11 +30,13 @@ def cargar_datos_iniciales():
     colonia = Colonia("Colonia Sur", responsable, repositorio)
 
     # -- GATOS --
+    # Las fechas de registro son históricas (anteriores al sistema),
+    # por eso se pasan explícitamente en lugar de usar la fecha de hoy.
     gatos = [
         Gato("001", "Miguelito", "Gris", Sexo.MACHO, EstadoGato.COL,
              "Clínica Sur", True, "10/01/2024"),
         Gato("002", "Kiwi", "Blanca", Sexo.HEMBRA, EstadoGato.ACOG,
-          "Clínica Sur", True, "15/02/2024"),
+             "Clínica Sur", True, "15/02/2024"),
         Gato("003", "GordiLuis", "Pardo", Sexo.MACHO, EstadoGato.FALL,
              "Clínica Norte", True, "20/03/2024"),
         Gato("004", "Sombra", "Negro", Sexo.HEMBRA, EstadoGato.COL,
