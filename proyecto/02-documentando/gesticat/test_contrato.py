@@ -1,12 +1,24 @@
-"""Prueba manual del contrato RepositorioGatos."""
+"""Prueba manual del contrato RepositorioGatos.
+
+Verifica que la clase base lanza NotImplementedError en todos sus métodos.
+Esto garantiza que cualquier implementación concreta (como RepositorioGatosMemoria o
+futuros repositorios con persistencia real) que olvide implementar algún método 
+recibirá un error claro en lugar de un comportamiento silencioso inesperado.
+"""
 
 from domain.repositorio_gatos import RepositorioGatos
 
 repo = RepositorioGatos()
 
-print("guardar lanza NotImplementedError")
+print("insertar lanza NotImplementedError")
 try:
-    repo.guardar(None)
+    repo.insertar(None)
+except NotImplementedError as e:
+    print("Error esperado:", e)
+
+print("actualizar lanza NotImplementedError")
+try:
+    repo.actualizar(None)
 except NotImplementedError as e:
     print("Error esperado:", e)
 
