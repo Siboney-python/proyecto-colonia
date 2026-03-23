@@ -1,8 +1,9 @@
 """
 Aplicación/servicio_colonia: Casos de uso del proyecto GestiCat.
 
-Este módulo coordina las operaciones entre la presentación y el dominio.
-No contiene lógica de negocio — esa responsabilidad es del dominio.
+Este módulo coordina las operaciones entre la presentación y el dominio,
+orquestando los casos de uso sin contener lógica de negocio — esa
+responsabilidad pertenece exclusivamente al dominio.
 """
 
 from domain.colonia import Colonia, EstadoColonia
@@ -21,7 +22,12 @@ class ServicioColonia:
 
     def registrar_gato(self, id_gato, nombre, color, sexo, estado,
                        clinica_veterinaria, esterilizado, fecha_registro=None):
-        """Crea un gato y lo añade a la colonia."""
+        """Crea un gato y lo añade a la colonia.
+
+        Si no se indica fecha_registro, se usa la fecha de hoy.
+        Pasar una fecha explícita permite registrar gatos con fechas históricas
+        en migraciones desde registros en papel.
+        """
         gato = Gato(id_gato, nombre, color, sexo, estado,
                     clinica_veterinaria, esterilizado, fecha_registro)
         self._colonia.agregar_gato(gato)
@@ -43,7 +49,12 @@ class ServicioColonia:
 
     def actualizar_esterilizacion_gato(self, id_gato, esterilizado: bool,
                                         clinica_veterinaria=None):
-        """Actualiza el estado de esterilización de un gato y lo persiste."""
+        """Marca un gato como esterilizado y lo persiste en el repositorio.
+
+        En la práctica siempre se llama con esterilizado=True — el dominio
+        impide revertir una esterilización una vez aplicada.
+        Si se indica clinica_veterinaria y el gato no tenía una asignada, se actualiza.
+        """
         gato = self._colonia.buscar_por_id(id_gato)
         if gato is None:
             raise ValueError(f"No existe ningún gato con id {id_gato}.")

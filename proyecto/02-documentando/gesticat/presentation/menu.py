@@ -2,7 +2,7 @@
 Presentación/menu: Interfaz de consola del proyecto GestiCat.
 
 Este módulo muestra el menú principal y gestiona la interacción con el usuario.
-No contiene lógica de negocio — esa responsabilidad es del dominio.
+No contiene lógica de negocio — delega toda la lógica en el servicio.
 """
 
 from application.servicio_colonia import ServicioColonia
@@ -10,6 +10,7 @@ from domain.colonia import EstadoColonia
 from domain.gato import EstadoGato, Sexo
 from domain.responsable import PersonaFisica, Protectora
 from infrastructure.datos_iniciales import cargar_datos_iniciales
+
 
 # -- MENÚ --
 
@@ -32,13 +33,19 @@ def mostrar_menu():
     print("0. Salir.")
 
 
-
 # -- OPCIONES DE GATOS --
 
-# TODO: Aplicar try/except para poder hacer bucles que repita solo el input incorrecto sin el 'return' de los fallos que sale de las funciones y regreas al bucle del menú principal. 
+# TODO: Aplicar try/except en cada función de input para repetir solo el campo
+# incorrecto sin salir al menú principal con return. Actualmente, cualquier
+# input inválido aborta toda la función y vuelve al bucle principal.
 
 def registrar_gato(servicio: ServicioColonia):
-    """Pide los datos de un gato y lo registra en la colonia."""
+    """Pide los datos de un gato y lo registra en la colonia.
+
+    La fecha de registro es opcional — si se deja vacía se usa la fecha de hoy.
+    Pasar una fecha explícita permite registrar gatos con fechas históricas
+    en migraciones desde registros en papel.
+    """
     print("\n-- Registrar gato. --")
     id_gato = input("ID (3 dígitos): ").strip()
     if not id_gato.isdigit() or len(id_gato) != 3:
@@ -65,11 +72,11 @@ def registrar_gato(servicio: ServicioColonia):
         print("❌ Opción no válida. Introduce s o n.")
         return
     esterilizado = esterilizado_input == "s"
-    fecha_registro = input("Fecha de registro (dd/mm/aaaa): ")
+    fecha_input = input("Fecha de registro (dd/mm/aaaa, Enter para usar hoy): ").strip() or None
     servicio.registrar_gato(id_gato, nombre, color, sexo, estado,
-                            clinica, esterilizado, fecha_registro)
+                            clinica, esterilizado, fecha_input)
     print(f"✅ Gato '{nombre}' registrado correctamente.")
-    
+
 
 def quitar_gato(servicio: ServicioColonia):
     """Pide el id de un gato y borra su registro de la colonia."""
@@ -98,6 +105,7 @@ def actualizar_esterilizacion_gato(servicio: ServicioColonia):
     print("\n-- Marcar gato como esterilizado. --")
     id_gato = input("ID del gato: ")
     clinica = input("Clínica veterinaria (Enter para mantener la actual): ").strip() or None
+    # Siempre True: el dominio impide revertir una esterilización.
     servicio.actualizar_esterilizacion_gato(id_gato, True, clinica)
     print("✅ Gato marcado como esterilizado correctamente.")
 

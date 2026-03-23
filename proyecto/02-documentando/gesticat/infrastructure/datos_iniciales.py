@@ -12,16 +12,24 @@ from infrastructure.repositorio_gatos_memoria import RepositorioGatosMemoria
 
 
 def cargar_datos_iniciales():
-    """Crea y devuelve una colonia con datos de ejemplo."""
+    """Crea y devuelve una colonia de ejemplo lista para usar.
+
+    Construye una colonia con responsable, repositorio en memoria y cinco gatos
+    de muestra que representan distintos estados y situaciones reales de la colonia.
+    Se usa al arrancar la aplicación para poder probarla sin introducir datos manualmente.
+
+    Devuelve una instancia de Colonia lista para pasar a ServicioColonia.
+    """
 
     # -- REPOSITORIO --
+    # Repositorio en memoria: los datos no persisten al cerrar la aplicación.
     repositorio = RepositorioGatosMemoria()
 
     # -- RESPONSABLE --
     responsable = PersonaFisica(
-        nombre="Siboney Pérez",
+        nombre="Siboney Apellido",
         telefono="612345678",
-        email="siboney_perez@email.com",
+        email="siboney_apellido@email.com",
         identificacion="12345678A",
         fecha_nacimiento="10/10/1986"
     )
@@ -30,6 +38,7 @@ def cargar_datos_iniciales():
     colonia = Colonia("Colonia Sur", responsable, repositorio)
 
     # -- GATOS --
+    # Gatos de ejemplo con distintos estados: en colonia, en acogida, fallecido.
     # Las fechas de registro son históricas (anteriores al sistema),
     # por eso se pasan explícitamente en lugar de usar la fecha de hoy.
     gatos = [
