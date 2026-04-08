@@ -1,0 +1,4 @@
+# Gestión automática de saltos de línea entre sistemas operativos.
+# Git normaliza los archivos de texto a LF en el repositorio
+# y los convierte al formato del sistema operativo al hacer checkout.
+* text=auto
