@@ -6,15 +6,15 @@ correctamente de forma independiente.
 
 ## Cómo ejecutar los tests
 
-Desde la carpeta `gesticat/`:
+Desde la carpeta que contiene el paquete `gesticat/`:
 
 ```bash
-python3 -m test_gato
-python3 -m test_responsable
-python3 -m test_colonia
-python3 -m test_repo_memoria
-python3 -m test_contrato
-python3 -m test_servicio
+python3 -m gesticat.test_gato
+python3 -m gesticat.test_responsable
+python3 -m gesticat.test_colonia
+python3 -m gesticat.test_repo_memoria
+python3 -m gesticat.test_contrato
+python3 -m gesticat.test_servicio
 ```
 
 ## Qué valida cada test
@@ -81,12 +81,12 @@ Valida `ServicioColonia` a través de sus casos de uso:
 
 ## Qué test ejecutar según qué modifiques
 
-| Si modificas...                        | Ejecuta...                              |
-|----------------------------------------|-----------------------------------------|
-| `domain/gato.py`                       | `test_gato`, `test_colonia`, `test_servicio` |
-| `domain/responsable.py`                | `test_responsable`, `test_servicio`     |
-| `domain/colonia.py`                    | `test_colonia`, `test_servicio`         |
-| `domain/repositorio_gatos.py`          | `test_contrato`, `test_repo_memoria`    |
-| `infrastructure/repositorio_gatos_memoria.py` | `test_repo_memoria`, `test_servicio` |
-| `application/servicio_colonia.py`      | `test_servicio`                         |
-| `infrastructure/datos_iniciales.py`    | Ejecutar el menú y comprobar manualmente|
+| Si modificas...                               | Ejecuta...                                   |
+|-----------------------------------------------|----------------------------------------------|
+| `domain/gato.py`                              | `test_gato`, `test_colonia`, `test_servicio` |
+| `domain/responsable.py`                       | `test_responsable`, `test_servicio`          |
+| `domain/colonia.py`                           | `test_colonia`, `test_servicio`              |
+| `domain/repositorio_gatos.py`                 | `test_contrato`, `test_repo_memoria`         |
+| `infrastructure/repositorio_gatos_memoria.py` | `test_repo_memoria`, `test_servicio`         |
+| `application/servicio_colonia.py`             | `test_servicio`                              |
+| `infrastructure/datos_iniciales.py`           | Ejecutar el menú y comprobar manualmente     |

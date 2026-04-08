@@ -4,10 +4,10 @@ Sistema de gestión y censo de colonias felinas urbanas de Las Palmas de Gran Ca
 
 ## Quickstart
 
-Desde la carpeta `gesticat/`:
+Desde la carpeta que contiene el paquete gesticat/:
 
 ```bash
-python3 -m presentation.menu
+python3 -m gesticat.presentation.menu
 ```
 
 ## Propósito del proyecto
@@ -27,21 +27,22 @@ python3 -m presentation.menu
 ## Estructura del proyecto
 
 ```
-gesticat/
-  domain/
-    gato.py
-    responsable.py
-    colonia.py
-    repositorio_gatos.py
-  infrastructure/
-    repositorio_gatos_memoria.py
-    datos_iniciales.py
-  application/
-    servicio_colonia.py
-  presentation/
-    menu.py
-  docs/
-  test_*.py
+02-documentando/
+  gesticat/
+    domain/
+      gato.py
+      responsable.py
+      colonia.py
+      repositorio_gatos.py
+    infrastructure/
+      repositorio_gatos_memoria.py
+      datos_iniciales.py
+    application/
+      servicio_colonia.py
+    presentation/
+      menu.py
+    docs/
+    test_*.py
 ```
 
 - `presentation/menu.py`: interfaz de consola que solo pide datos y muestra resultados.
@@ -60,13 +61,13 @@ Consulta la documentación detallada del proyecto en `docs/`
 
 ## Tests
 
-Desde la carpeta `gesticat/`:
+Desde la carpeta `02-documentando/`:
 
 ```bash
-python3 -m test_gato
-python3 -m test_responsable
-python3 -m test_colonia
-python3 -m test_repo_memoria
-python3 -m test_contrato
-python3 -m test_servicio
+python3 -m gesticat.test_gato
+python3 -m gesticat.test_responsable
+python3 -m gesticat.test_colonia
+python3 -m gesticat.test_repo_memoria
+python3 -m gesticat.test_contrato
+python3 -m gesticat.test_servicio
 ```

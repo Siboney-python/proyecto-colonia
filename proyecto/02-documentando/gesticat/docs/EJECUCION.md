@@ -9,30 +9,29 @@
 ## Clonar el repositorio
 
 ```bash
-git clone git@github-python:Siboney-python/proyecto-colonia.git
-cd proyecto-colonia/proyecto/02-documentando/gesticat
+git clone git@github.com:Siboney-python/proyecto-colonia.git
 ```
 
 ## Ejecutar el menú
 
-Desde la carpeta `gesticat/`:
+Desde la carpeta que contiene el paquete `gesticat/`:
 
 ```bash
-cd proyecto/02-documentando/gesticat
-python3 -m presentation.menu
+cd proyecto-colonia/proyecto/02-documentando
+python3 -m gesticat.presentation.menu
 ```
 
 ## Ejecutar los tests
 
-Desde la misma carpeta `gesticat/`:
+Desde la misma carpeta:
 
 ```bash
-python3 -m test_gato
-python3 -m test_responsable
-python3 -m test_colonia
-python3 -m test_repo_memoria
-python3 -m test_contrato
-python3 -m test_servicio
+python3 -m gesticat.test_gato
+python3 -m gesticat.test_responsable
+python3 -m gesticat.test_colonia
+python3 -m gesticat.test_repo_memoria
+python3 -m gesticat.test_contrato
+python3 -m gesticat.test_servicio
 ```
 
 ## Flujo rápido de ejemplo

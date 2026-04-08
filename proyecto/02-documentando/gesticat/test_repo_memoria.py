@@ -1,7 +1,7 @@
 """Pruebas manuales de validación para RepositorioGatosMemoria."""
 
-from domain.gato import Gato, Sexo, EstadoGato
-from infrastructure.repositorio_gatos_memoria import RepositorioGatosMemoria
+from gesticat.domain.gato import Gato, Sexo, EstadoGato
+from gesticat.infrastructure.repositorio_gatos_memoria import RepositorioGatosMemoria
 
 repo = RepositorioGatosMemoria()
 

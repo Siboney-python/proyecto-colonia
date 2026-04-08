@@ -15,8 +15,8 @@ Reglas de negocio:
 from enum import Enum
 from datetime import date
 
-from domain.gato import Gato, Sexo, EstadoGato
-from domain.responsable import Responsable
+from gesticat.domain.gato import Gato, Sexo, EstadoGato
+from gesticat.domain.responsable import Responsable
 
 
 # -- ENUMS --

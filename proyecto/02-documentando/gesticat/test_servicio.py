@@ -6,11 +6,11 @@ esterilización, asignación de responsable, tramitación de anexos y reportes.
 
 from datetime import date
 
-from domain.colonia import Colonia, EstadoColonia
-from domain.gato import Sexo, EstadoGato
-from domain.responsable import PersonaFisica, Protectora
-from infrastructure.repositorio_gatos_memoria import RepositorioGatosMemoria
-from application.servicio_colonia import ServicioColonia
+from gesticat.domain.colonia import Colonia, EstadoColonia
+from gesticat.domain.gato import Sexo, EstadoGato
+from gesticat.domain.responsable import PersonaFisica, Protectora
+from gesticat.infrastructure.repositorio_gatos_memoria import RepositorioGatosMemoria
+from gesticat.application.servicio_colonia import ServicioColonia
 
 responsable = PersonaFisica("Ana García", "612345678", "ana@email.com",
                              "12345678A", "15/06/1985")

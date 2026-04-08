@@ -5,10 +5,10 @@ búsquedas, actualización de gatos y generación de reportes.
 """
 
 from datetime import date
-from domain.colonia import Colonia, EstadoColonia
-from domain.gato import Gato, Sexo, EstadoGato
-from domain.responsable import PersonaFisica
-from infrastructure.repositorio_gatos_memoria import RepositorioGatosMemoria
+from gesticat.domain.colonia import Colonia, EstadoColonia
+from gesticat.domain.gato import Gato, Sexo, EstadoGato
+from gesticat.domain.responsable import PersonaFisica
+from gesticat.infrastructure.repositorio_gatos_memoria import RepositorioGatosMemoria
 
 responsable = PersonaFisica("Ana García", "612345678", "ana@email.com",
                              "12345678A", "15/06/1985")

@@ -5,11 +5,11 @@ Este módulo muestra el menú principal y gestiona la interacción con el usuari
 No contiene lógica de negocio — delega toda la lógica en el servicio.
 """
 
-from application.servicio_colonia import ServicioColonia
-from domain.colonia import EstadoColonia
-from domain.gato import EstadoGato, Sexo
-from domain.responsable import PersonaFisica, Protectora
-from infrastructure.datos_iniciales import cargar_datos_iniciales
+from gesticat.application.servicio_colonia import ServicioColonia
+from gesticat.domain.colonia import EstadoColonia
+from gesticat.domain.gato import EstadoGato, Sexo
+from gesticat.domain.responsable import PersonaFisica, Protectora
+from gesticat.infrastructure.datos_iniciales import cargar_datos_iniciales
 
 
 # -- MENÚ --

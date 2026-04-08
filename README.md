@@ -19,7 +19,7 @@ que las gestionan.
 Clonar el repositorio:
 
 ```bash
-git clone git@github-python:Siboney-python/proyecto-colonia.git
+git clone git@github.com:Siboney-python/proyecto-colonia.git
 ```
 
 Acceder a la carpeta de la fase y ejecutar desde dentro de `gesticat/`:
@@ -30,8 +30,8 @@ cd proyecto-colonia/proyecto/01-diseno-capas/gesticat
 python3 -m presentation.menu
 
 # Fase 02
-cd proyecto-colonia/proyecto/02-documentando/gesticat
-python3 -m presentation.menu
+cd proyecto-colonia/proyecto/02-documentando
+python3 -m gesticat.presentation.menu
 ```
 
 ## Fases del proyecto

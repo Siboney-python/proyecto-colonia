@@ -6,9 +6,9 @@ orquestando los casos de uso sin contener lógica de negocio — esa
 responsabilidad pertenece exclusivamente al dominio.
 """
 
-from domain.colonia import Colonia, EstadoColonia
-from domain.gato import Gato, EstadoGato, Sexo
-from domain.responsable import Responsable
+from gesticat.domain.colonia import Colonia, EstadoColonia
+from gesticat.domain.gato import Gato, EstadoGato, Sexo
+from gesticat.domain.responsable import Responsable
 
 
 class ServicioColonia:

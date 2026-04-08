@@ -4,6 +4,25 @@ Todos los cambios relevantes del proyecto, organizados por versión y fase.
 
 ---
 
+## [0.2.1] - 2026-04-08 (Fase 02: correcciones)
+
+Versión disponible en `proyecto/02-documentando/`
+
+### Fixed
+- Corregida URL del repositorio en `docs/EJECUCION.md` —
+  `github-python` sustituido por `github.com`.
+- Corregido directorio de ejecución en `README.md`, `docs/EJECUCION.md`
+  y `docs/TESTS_Y_PASOS.md` — hay que ejecutar desde la carpeta que
+  contiene `gesticat/`, no desde dentro de ella.
+
+### Refactor
+- Imports relativos (`from domain.gato import Gato`) convertidos a imports
+  absolutos (`from gesticat.domain.gato import Gato`) en todos los módulos
+  del proyecto. Permite ejecutar desde la carpeta padre y es compatible con
+  herramientas externas como `pytest` y `coverage`.
+
+---
+
 ## [0.2.0] - 2026-04-01 (Fase 02: documentación)
 
 Versión disponible en `proyecto/02-documentando/`

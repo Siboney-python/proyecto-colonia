@@ -6,7 +6,7 @@ futuros repositorios con persistencia real) que olvide implementar algún métod
 recibirá un error claro en lugar de un comportamiento silencioso inesperado.
 """
 
-from domain.repositorio_gatos import RepositorioGatos
+from gesticat.domain.repositorio_gatos import RepositorioGatos
 
 repo = RepositorioGatos()
 

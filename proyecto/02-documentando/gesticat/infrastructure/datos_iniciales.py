@@ -5,10 +5,10 @@ Este módulo carga una colonia con un responsable y varios gatos de ejemplo
 para poder probar el sistema manualmente al arrancar la aplicación.
 """
 
-from domain.gato import Gato, Sexo, EstadoGato
-from domain.colonia import Colonia
-from domain.responsable import PersonaFisica
-from infrastructure.repositorio_gatos_memoria import RepositorioGatosMemoria
+from gesticat.domain.gato import Gato, Sexo, EstadoGato
+from gesticat.domain.colonia import Colonia
+from gesticat.domain.responsable import PersonaFisica
+from gesticat.infrastructure.repositorio_gatos_memoria import RepositorioGatosMemoria
 
 
 def cargar_datos_iniciales():

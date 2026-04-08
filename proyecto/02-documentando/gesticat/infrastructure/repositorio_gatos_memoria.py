@@ -5,7 +5,7 @@ Almacena los gatos en un diccionario mientras la aplicación está en ejecución
 Los datos no persisten al cerrar el programa.
 """
 
-from domain.repositorio_gatos import RepositorioGatos
+from gesticat.domain.repositorio_gatos import RepositorioGatos
 
 
 class RepositorioGatosMemoria(RepositorioGatos):

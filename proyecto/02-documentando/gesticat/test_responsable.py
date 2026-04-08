@@ -4,7 +4,7 @@ Cubre los casos válidos e inválidos de cada campo, la normalización
 de identificación a mayúsculas y la representación legible de cada subclase.
 """
 
-from domain.responsable import PersonaFisica, Protectora
+from gesticat.domain.responsable import PersonaFisica, Protectora
 
 
 # -- CASOS VÁLIDOS --

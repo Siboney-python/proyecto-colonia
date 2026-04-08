@@ -5,7 +5,7 @@ sobre esterilización y las validaciones de fecha de registro.
 """
 
 from datetime import date
-from domain.gato import Gato, Sexo, EstadoGato
+from gesticat.domain.gato import Gato, Sexo, EstadoGato
 
 
 # -- CASO VÁLIDO --
