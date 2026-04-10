@@ -28,16 +28,7 @@ class EstadoGato(Enum):
     ADOP = "Adoptado"
     FALL = "Fallecido"
     DESA = "Desaparecido"
-    # TODO: Registrar fecha cuando el estado pase a ADOP, FALL o DESA.
-
-
-# TODO:
-# class MarcaEsterilizacion(Enum):
-#     """Marca física de esterilización en las orejas."""
-#     SIN_MARCA = "Sin marcar"
-#     IZQUIERDA = "Oreja izquierda"
-#     DERECHA = "Oreja derecha"
-
+    
 
 # -- CLASE PRINCIPAL --
 

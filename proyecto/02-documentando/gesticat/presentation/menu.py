@@ -35,10 +35,6 @@ def mostrar_menu():
 
 # -- OPCIONES DE GATOS --
 
-# TODO: Aplicar try/except en cada función de input para repetir solo el campo
-# incorrecto sin salir al menú principal con return. Actualmente, cualquier
-# input inválido aborta toda la función y vuelve al bucle principal.
-
 def registrar_gato(servicio: ServicioColonia):
     """Pide los datos de un gato y lo registra en la colonia.
 
@@ -51,8 +47,8 @@ def registrar_gato(servicio: ServicioColonia):
     if not id_gato.isdigit() or len(id_gato) != 3:
         print("❌ El ID debe ser exactamente 3 dígitos.")
         return
-    nombre = input("Nombre: ")
-    color = input("Color: ")
+    nombre = input("Nombre: ").strip()
+    color = input("Color: ").strip()
     print("Sexo: H=Hembra, M=Macho, ?=Desconocido")
     sexo_input = input("Sexo: ").strip().upper()
     conversion = {"H": Sexo.HEMBRA, "M": Sexo.MACHO, "?": Sexo.DESCONOCIDO}
@@ -81,7 +77,7 @@ def registrar_gato(servicio: ServicioColonia):
 def quitar_gato(servicio: ServicioColonia):
     """Pide el id de un gato y borra su registro de la colonia."""
     print("\n-- Borrar registro del gato. --")
-    id_gato = input("ID del gato: ")
+    id_gato = input("ID del gato: ").strip()
     servicio.quitar_gato(id_gato)
     print("✅ Registro del gato borrado correctamente.")
 
@@ -89,7 +85,7 @@ def quitar_gato(servicio: ServicioColonia):
 def actualizar_estado_gato(servicio: ServicioColonia):
     """Pide el id de un gato y actualiza su estado."""
     print("\n-- Actualizar estado del gato. --")
-    id_gato = input("ID del gato: ")
+    id_gato = input("ID del gato: ").strip()
     print("Estado: COL=En colonia, ACOG=En acogida, ADOP=Adoptado, FALL=Fallecido, DESA=Desaparecido")
     estado_input = input("Nuevo estado: ").strip().upper()
     if estado_input not in EstadoGato.__members__:
@@ -103,7 +99,7 @@ def actualizar_estado_gato(servicio: ServicioColonia):
 def actualizar_esterilizacion_gato(servicio: ServicioColonia):
     """Pide el id de un gato y lo marca como esterilizado."""
     print("\n-- Marcar gato como esterilizado. --")
-    id_gato = input("ID del gato: ")
+    id_gato = input("ID del gato: ").strip()
     clinica = input("Clínica veterinaria (Enter para mantener la actual): ").strip() or None
     # Siempre True: el dominio impide revertir una esterilización.
     servicio.actualizar_esterilizacion_gato(id_gato, True, clinica)

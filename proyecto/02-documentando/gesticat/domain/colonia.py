@@ -188,7 +188,6 @@ class Colonia:
             "desconocidos": desconocidos,
             "esterilizados": esterilizados,
             "no_esterilizados": no_esterilizados,
-            # TODO: Añadir desglose de esterilizados por sexo.
         }
 
     def reporte_colonia(self):
