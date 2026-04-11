@@ -46,10 +46,12 @@ class Responsable(ABC):
 
     @nombre.setter
     def nombre(self, valor):
-        """Elimina espacios laterales y exige que el nombre no quede vacío."""
-        texto = (valor or "").strip()
-        if not texto:
+        """Exige que el nombre no esté vacío ni tenga espacios laterales."""
+        texto = valor or ""
+        if not texto.strip():
             raise ValueError("El nombre no puede estar vacío.")
+        if texto != texto.strip():
+            raise ValueError("El nombre no puede tener espacios laterales.")
         self._nombre = texto
 
     @property
@@ -59,8 +61,11 @@ class Responsable(ABC):
 
     @telefono.setter
     def telefono(self, valor):
-        """Exige exactamente 9 dígitos numéricos."""
-        dato = (valor or "").strip()
+        """Exige exactamente 9 dígitos numéricos sin espacios laterales."""
+        dato = valor or ""
+        if dato != dato.strip():
+            raise ValueError("El teléfono no puede tener espacios laterales.")
+        dato = dato.strip()
         if not dato.isdigit() or len(dato) != 9:
             raise ValueError("El teléfono debe tener exactamente 9 dígitos.")
         self._telefono = dato
@@ -72,9 +77,11 @@ class Responsable(ABC):
 
     @email.setter
     def email(self, valor):
-        """Valida el formato del email con una expresión regular básica."""
-        dato = (valor or "").strip()
-        # Comprobación mínima de formato: texto@texto.dominio
+        """Exige formato válido sin espacios laterales."""
+        dato = valor or ""
+        if dato != dato.strip():
+            raise ValueError("El email no puede tener espacios laterales.")
+        dato = dato.strip()
         if not re.match(r"^[\w\.-]+@[\w\.-]+\.\w{2,}$", dato):
             raise ValueError("El email no tiene un formato válido.")
         self._email = dato
@@ -86,8 +93,11 @@ class Responsable(ABC):
 
     @identificacion.setter
     def identificacion(self, valor):
-        """Elimina espacios laterales, normaliza a mayúsculas y exige que no quede vacío."""
-        dato = (valor or "").strip().upper()
+        """Exige que no esté vacía ni tenga espacios laterales. Normaliza a mayúsculas."""
+        dato = valor or ""
+        if dato != dato.strip():
+            raise ValueError("La identificación no puede tener espacios laterales.")
+        dato = dato.strip().upper()
         if not dato:
             raise ValueError("La identificación no puede estar vacía.")
         self._identificacion = dato
@@ -162,12 +172,14 @@ class Protectora(Responsable):
 
     @numero_registro.setter
     def numero_registro(self, valor):
-        """Elimina espacios laterales, normaliza a mayúsculas y exige que no quede vacío."""
-        dato = (valor or "").strip().upper()
+        dato = valor or ""
+        if dato != dato.strip():
+            raise ValueError("El número de registro no puede tener espacios laterales.")
+        dato = dato.strip().upper()
         if not dato:
             raise ValueError("El número de registro no puede estar vacío.")
         self._numero_registro = dato
-
+        
     def __str__(self):
         """Representación legible de la protectora."""
         return f"{self._nombre} - CIF: {self._identificacion} - Reg: {self._numero_registro}"
