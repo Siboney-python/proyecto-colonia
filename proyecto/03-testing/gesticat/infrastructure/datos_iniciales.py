@@ -1,8 +1,9 @@
 """
 Infraestructura/datos_iniciales: Datos de ejemplo para el proyecto GestiCat.
 
-Este módulo carga una colonia con un responsable y varios gatos de ejemplo
-para poder probar el sistema manualmente al arrancar la aplicación.
+Este módulo proporciona funciones para crear una colonia de ejemplo con
+responsable y gatos precargados, y un servicio listo para usar. Se utiliza
+tanto para arrancar la aplicación manualmente como para pruebas y demos.
 """
 
 from gesticat.domain.gato import Gato, Sexo, EstadoGato
@@ -11,21 +12,18 @@ from gesticat.domain.responsable import PersonaFisica
 from gesticat.infrastructure.repositorio_gatos_memoria import RepositorioGatosMemoria
 
 
-def cargar_datos_iniciales():
+def crear_colonia_con_datos():
     """Crea y devuelve una colonia de ejemplo lista para usar.
 
     Construye una colonia con responsable, repositorio en memoria y cinco gatos
     de muestra que representan distintos estados y situaciones reales de la colonia.
-    Se usa al arrancar la aplicación para poder probarla sin introducir datos manualmente.
+    Las fechas de registro son históricas y se pasan explícitamente para
+    preservarlas en lugar de usar la fecha de hoy.
 
     Devuelve una instancia de Colonia lista para pasar a ServicioColonia.
     """
-
-    # -- REPOSITORIO --
-    # Repositorio en memoria: los datos no persisten al cerrar la aplicación.
     repositorio = RepositorioGatosMemoria()
 
-    # -- RESPONSABLE --
     responsable = PersonaFisica(
         nombre="Siboney Apellido",
         telefono="612345678",
@@ -34,13 +32,8 @@ def cargar_datos_iniciales():
         fecha_nacimiento="10/10/1986"
     )
 
-    # -- COLONIA --
     colonia = Colonia("Colonia Sur", responsable, repositorio)
 
-    # -- GATOS --
-    # Gatos de ejemplo con distintos estados: en colonia, en acogida, fallecido.
-    # Las fechas de registro son históricas (anteriores al sistema),
-    # por eso se pasan explícitamente en lugar de usar la fecha de hoy.
     gatos = [
         Gato("001", "Miguelito", "Gris", Sexo.MACHO, EstadoGato.COL,
              "Clínica Sur", True, "10/01/2024"),
@@ -58,3 +51,17 @@ def cargar_datos_iniciales():
         colonia.agregar_gato(gato)
 
     return colonia
+
+
+def crear_servicio():
+    """Crea y devuelve un ServicioColonia listo para usar.
+
+    Construye el grafo completo de objetos — repositorio, colonia con datos
+    de ejemplo y servicio — y lo devuelve listo para usar desde el menú
+    o desde pruebas de integración.
+
+    Devuelve una instancia de ServicioColonia lista para usar.
+    """
+    from gesticat.application.servicio_colonia import ServicioColonia
+    colonia = crear_colonia_con_datos()
+    return ServicioColonia(colonia)

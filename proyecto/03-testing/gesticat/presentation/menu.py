@@ -9,7 +9,7 @@ from gesticat.application.servicio_colonia import ServicioColonia
 from gesticat.domain.colonia import EstadoColonia
 from gesticat.domain.gato import EstadoGato, Sexo
 from gesticat.domain.responsable import PersonaFisica, Protectora
-from gesticat.infrastructure.datos_iniciales import cargar_datos_iniciales
+from gesticat.infrastructure.datos_iniciales import crear_colonia_con_datos
 
 
 # -- MENÚ --
@@ -189,7 +189,7 @@ def mostrar_reporte_colonia(servicio: ServicioColonia):
 
 def main():
     """Punto de entrada del menú interactivo."""
-    colonia = cargar_datos_iniciales()
+    colonia = crear_colonia_con_datos()
     servicio = ServicioColonia(colonia)
     while True:
         mostrar_menu()
