@@ -58,9 +58,11 @@ class Colonia:
 
     @nombre.setter
     def nombre(self, valor):
-        """Elimina espacios laterales y exige que el nombre no quede vacío."""
-        texto = (valor or "").strip()
-        if not texto:
+        """Exige que el nombre no esté vacío ni tenga espacios laterales."""
+        texto = valor or ""
+        if texto != texto.strip():
+            raise ValueError("El nombre de la colonia no puede tener espacios laterales.")
+        if not texto.strip():
             raise ValueError("El nombre de la colonia no puede estar vacío.")
         self._nombre = texto
 
