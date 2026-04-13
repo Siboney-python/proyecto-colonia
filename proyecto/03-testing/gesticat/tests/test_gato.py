@@ -102,6 +102,11 @@ class TestGato(unittest.TestCase):
         with self.assertRaises(ValueError):
             Gato("002", "Luna", "Blanca", Sexo.HEMBRA, EstadoGato.COL,
                 " Clínica Sur", False, "10/01/2024")
+            
+    def test_esterilizado_no_bool_lanza_typeerror(self):
+        with self.assertRaises(TypeError):
+            Gato("002", "Luna", "Blanca", Sexo.HEMBRA, EstadoGato.COL,
+                None, "si", "10/01/2024")
 
     def test_esterilizado_sin_clinica_lanza_valueerror(self):
         with self.assertRaises(ValueError):
@@ -137,6 +142,10 @@ class TestGato(unittest.TestCase):
             Gato("002", "Luna", "Blanca", Sexo.HEMBRA, EstadoGato.COL,
                 None, False, "   ")
 
+    def test_fecha_registro_tipo_invalido_lanza_typeerror(self):
+        with self.assertRaises(TypeError):
+            Gato("002", "Luna", "Blanca", Sexo.HEMBRA, EstadoGato.COL,
+                None, False, 20240110)
 
 if __name__ == "__main__":
     unittest.main()

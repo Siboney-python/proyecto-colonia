@@ -1,6 +1,8 @@
 """Tests unitarios para la entidad Colonia."""
 
 import unittest
+from datetime import date
+
 from gesticat.domain.colonia import Colonia, EstadoColonia
 from gesticat.domain.gato import Gato, Sexo, EstadoGato
 from gesticat.domain.responsable import PersonaFisica
@@ -68,6 +70,14 @@ class TestColonia(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.colonia.agregar_gato("no es un gato")
 
+    def test_actualizar_gato(self):
+        gato = Gato("001", "Miguelito", "Gris", Sexo.MACHO, EstadoGato.COL,
+                    None, False, "10/01/2024")
+        self.colonia.agregar_gato(gato)
+        gato.estado = EstadoGato.ACOG
+        self.colonia.actualizar_gato(gato)
+        self.assertEqual(self.colonia.buscar_por_id("001").estado, EstadoGato.ACOG)
+
     def test_quitar_gato(self):
         gato = Gato("001", "Miguelito", "Gris", Sexo.MACHO, EstadoGato.COL,
                     None, False, "10/01/2024")
@@ -106,6 +116,9 @@ class TestColonia(unittest.TestCase):
 
     def test_necesita_actualizacion_recien_creada(self):
         self.assertFalse(self.colonia.necesita_actualizacion())
+
+    def test_ultima_actualizacion_es_fecha_de_hoy(self):
+        self.assertEqual(self.colonia.ultima_actualizacion, date.today())
 
 
     # -- REPORTES --
@@ -157,6 +170,25 @@ class TestColonia(unittest.TestCase):
         sin_esterilizar = self.colonia.listar_sin_esterilizar()
         self.assertEqual(len(sin_esterilizar), 0)
 
+
+    # -- REPOSITORIO EN MEMORIA --
+
+    def test_repositorio_insertar_duplicado_lanza_valueerror(self):
+        gato = Gato("001", "Miguelito", "Gris", Sexo.MACHO, EstadoGato.COL,
+                    None, False, "10/01/2024")
+        self.repo.insertar(gato)
+        with self.assertRaises(ValueError):
+            self.repo.insertar(gato)
+
+    def test_repositorio_actualizar_inexistente_lanza_valueerror(self):
+        gato = Gato("001", "Miguelito", "Gris", Sexo.MACHO, EstadoGato.COL,
+                    None, False, "10/01/2024")
+        with self.assertRaises(ValueError):
+            self.repo.actualizar(gato)
+
+    def test_repositorio_quitar_inexistente_lanza_valueerror(self):
+        with self.assertRaises(ValueError):
+            self.repo.quitar("999")
 
 if __name__ == "__main__":
     unittest.main()

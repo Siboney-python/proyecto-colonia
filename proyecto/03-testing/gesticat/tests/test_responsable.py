@@ -111,6 +111,11 @@ class TestResponsable(unittest.TestCase):
         with self.assertRaises(ValueError):
             PersonaFisica("Ana García", "612345678", "ana@email.com", "12345678A", "1985-06-15")
 
+    def test_fecha_nacimiento_tipo_invalido_lanza_typeerror(self):
+        with self.assertRaises(TypeError):
+            PersonaFisica("Ana García", "612345678", "ana@email.com",
+                        "12345678A", 19850615)
+
 
     # -- NUMERO REGISTRO --
 
