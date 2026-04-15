@@ -93,7 +93,6 @@ de negocio. Ambos son válidos — bottom-up encaja mejor cuando las reglas de
 negocio son conocidas y complejas desde el principio, como en GestiCat.
 
 ### FUTURE_IMPROVEMENTS.md — por qué existe este documento
-
 Durante el desarrollo es habitual dejar comentarios `# TODO` en el código
 para marcar ideas pendientes. El problema es que en una entrega o revisión
 esos comentarios ensucian el código y dan la impresión de trabajo inacabado.
@@ -107,6 +106,83 @@ ordenada y visible, fuera del código. Sirve para tres cosas:
 
 La regla es simple: cuando un `# TODO` no se va a implementar en la fase
 actual, se mueve a este documento con su contexto y se elimina del código.
+
+### strftime — formatear fechas como texto
+Método del objeto `date` (y `datetime`) de Python que convierte una fecha
+en un string con el formato que le indiques.
+Se usa en los tests cuando necesitas comparar una fecha (`date`) con un
+string, porque Python no puede comparar directamente tipos distintos.
+Sin `strftime`, `assertEqual(gato.fecha_registro, "10/01/2024")` fallaría
+aunque la fecha sea correcta.
+Documentación oficial: https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior
+
+### setUp — preparador de tests en unittest
+
+Método especial de `unittest.TestCase` que se ejecuta automáticamente
+antes de cada test. No empieza por `test_` pero `unittest` lo reconoce
+por su nombre exacto.
+
+Se usa para preparar el estado necesario antes de cada test: crear objetos,
+inicializar datos, configurar dependencias. Evita repetir el código de
+preparación en cada método de test.
+
+**Clave:** se ejecuta antes de *cada* test, no una sola vez. Esto garantiza
+que cada test empieza desde un estado limpio e independiente del resto.
+Sin `setUp`, un test que modifique el estado podría afectar a los siguientes.
+
+Documentación oficial: https://docs.python.org/3/library/unittest.html#unittest.TestCase.setUp
+
+### Aislamiento en tests unitarios
+
+En tests unitarios, cada test debe controlar exactamente su estado y no
+depender de datos externos. Hay dos enfoques para construir el estado
+inicial en `setUp`:
+
+- Tests **unitarios** → **Construir desde cero**: crear todos los objetos necesarios directamente
+  en `setUp`. Los tests son completamente independientes — si cambia
+  `datos_iniciales.py`, los tests no se ven afectados.
+
+- Tests de **integración** → **Usar datos iniciales**: delegar la construcción a una función de
+  `datos_iniciales.py`. El `setUp` es más limpio pero los tests dependen
+  de datos externos — si alguien modifica los datos iniciales, los tests
+  pueden fallar sin que el código haya cambiado.
+
+
+### Conversión silenciosa vs prohibición explícita en setters
+Dos formas de manejar datos con formato incorrecto en los setters del dominio:
+- **Conversión silenciosa**: el setter corrige el dato automáticamente.
+  Apropiado cuando es una normalización de formato intencionada y esperada
+  (mayúsculas, eliminar guiones...).
+- **Prohibición explícita**: el setter lanza un error y obliga a corregirlo.
+  Apropiado cuando el dato mal formado es probablemente un error del usuario.
+
+La regla es: si es una normalización conocida → conversión silenciosa.
+Si es un posible error → prohibición explícita con mensaje claro.
+La misma regla debe aplicarse de forma consistente en todo el dominio.
+
+**Importante:** los espacios laterales solo se comprueban en campos de
+texto libre donde se escribe directamente. En campos con formato
+estructurado (fechas, emails) el propio parser detecta el error de formato
+y no es necesaria una comprobación adicional de espacios.
+
+### Coverage
+
+Herramienta de Python que mide qué líneas del código se ejecutan al correr
+los tests. El resultado se expresa como porcentaje. Útil para detectar
+partes del código sin tests, pero un 100% de cobertura no garantiza calidad
+— un test puede ejecutar una línea sin verificar nada útil.
+
+Documentación oficial: https://coverage.readthedocs.io
+
+### Parser / Parsear
+Leer un dato en bruto y convertirlo a una estructura que el programa
+puede usar.
+Si el formato no es el esperado, el parser falla y lanza un error.
+Por eso en campos con formato estructurado (fechas, emails) no hace falta
+comprobar espacios laterales por separado — el parser ya los detecta.
+
+Ejemplos cotidianos: `int("42")` convierte un string a entero.
+El navegador parsea HTML y lo convierte en la página visible.
 
 ### Buena práctica — longitud máxima de línea
 PEP 8 recomienda máximo 79 caracteres por línea de código y 72 para docstrings
@@ -179,12 +255,6 @@ arquitectura del proyecto y las dependencias entre capas.
 
 ## Mejoras futuras
 
-### Imports absolutos (fase 03)
-Cambiar imports relativos (`from domain.gato import Gato`) por imports
-absolutos (`from gesticat.domain.gato import Gato`) para poder ejecutar
-desde la carpeta padre `02-documentando/` en lugar de desde dentro de
-`gesticat/`. Más correcto y compatible con herramientas externas.
-
 ### Gestión de múltiples colonias
 Añadir `RepositorioColonias` y `ServicioColonias` para gestionar múltiples
 colonias. La entidad `Colonia` ya está diseñada para ello sin necesidad de
@@ -225,9 +295,6 @@ Está marcado como `TODO` en el enum `EstadoGato`.
 Añadir al reporte de censo el desglose de gatos esterilizados por sexo.
 Está marcado como `TODO` en `reporte_censo()` de `Colonia`.
 
-### Tests adicionales pendientes (antes de fase 03)
-Revisar y añadir tests que faltan, entre ellos `test_datos_iniciales.py`.
-Revisar cobertura completa de casos de uso antes de empezar la fase 03.
 
 ---
 
@@ -246,3 +313,19 @@ Revisar cobertura completa de casos de uso antes de empezar la fase 03.
 - **Presentation (presentación)** — es la ventana al usuario. Muestra el menú,
   recoge lo que escribe el usuario y muestra los resultados. No sabe nada de
   cómo funciona el sistema por dentro — solo habla con el coordinador.
+
+---
+
+### Conventional Commits
+
+Convención para escribir mensajes de commit descriptivos y consistentes.
+Cada commit empieza con un prefijo que indica el tipo de cambio:
+
+- `feat:` — nueva funcionalidad
+- `fix:` — corrección de un bug
+- `refactor:` — cambio de código que no añade funcionalidad ni corrige bug
+- `docs:` — cambios en documentación
+- `test:` — añadir o modificar tests
+- `chore:` — tareas de mantenimiento (dependencias, configuración...)
+
+Referencia: https://www.conventionalcommits.org
