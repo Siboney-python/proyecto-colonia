@@ -100,15 +100,15 @@ Reorganizar y ampliar los tests usando `unittest` y medir la cobertura con `cove
 <details open>
 <summary>Fase 03 — Testing ⬜</summary>
 
-- [ ] Copiar en `03-testing/` el estado base de `02-documentando/`.
-- [ ] Reorganizar las pruebas en la subcarpeta `tests/`.
-- [ ] Crear y mantener tests para, al menos, dos clases del dominio.
-- [ ] Verificar que todos los tests pasan con `python3 -m unittest`.
-- [ ] Añadir `coverage` como dependencia en `requirements.txt`.
-- [ ] Ejecutar cobertura con `coverage run -m unittest` y revisar reporte con `coverage report`.
-- [ ] Documentar la ejecución de tests y coverage en `docs/TESTS_Y_PASOS.md`.
-- [ ] Actualizar `docs/EJECUCION.md` con pasos completos desde clonado hasta ejecución.
-- [ ] Revisar y corregir documentos desactualizados de `docs/` para reflejar la fase 03.
+- [x] Copiar en `03-testing/` el estado base de `02-documentando/`.
+- [x] Reorganizar las pruebas en la subcarpeta `tests/`.
+- [x] Crear y mantener tests para, al menos, dos clases del dominio.
+- [x] Verificar que todos los tests pasan con `python3 -m unittest`.
+- [x] Añadir `coverage` como dependencia en `requirements.txt`.
+- [x] Ejecutar cobertura con `coverage run -m unittest` y revisar reporte con `coverage report`.
+- [x] Documentar la ejecución de tests y coverage en `docs/TESTS_Y_PASOS.md`.
+- [x] Actualizar `docs/EJECUCION.md` con pasos completos desde clonado hasta ejecución.
+- [x] Revisar y corregir documentos desactualizados de `docs/` para reflejar la fase 03.
 - [ ] Registrar los cambios de fase en `CHANGELOG.md` (versión `0.3.0`).
 - [ ] Actualizar `README.md` para reflejar estructura y comandos actuales.
 

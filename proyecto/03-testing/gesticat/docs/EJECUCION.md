@@ -10,29 +10,61 @@
 
 ```bash
 git clone git@github.com:Siboney-python/proyecto-colonia.git
+cd proyecto-colonia/proyecto/03-testing
+```
+
+## Preparación del entorno
+
+Desde la carpeta `03-testing/`:
+
+```bash
+python3 -m venv .venv
+```
+
+Activar el entorno virtual:
+
+```bash
+# Linux y macOS
+source .venv/bin/activate
+
+# Windows GitBash
+source .venv/Scripts/activate
+
+# Windows PowerShell
+source .venv/Scripts/Activate.ps1
+```
+
+Instalar dependencias:
+
+```bash
+pip install -r gesticat/requirements.txt
 ```
 
 ## Ejecutar el menú
 
-Desde la carpeta que contiene el paquete `gesticat/`:
+Desde la carpeta `03-testing/`:
 
 ```bash
-cd proyecto-colonia/proyecto/02-documentando
 python3 -m gesticat.presentation.menu
 ```
 
 ## Ejecutar los tests
 
-Desde la misma carpeta:
+Desde la carpeta `03-testing/`:
 
 ```bash
-python3 -m gesticat.test_gato
-python3 -m gesticat.test_responsable
-python3 -m gesticat.test_colonia
-python3 -m gesticat.test_repo_memoria
-python3 -m gesticat.test_contrato
-python3 -m gesticat.test_servicio
+python3 -m unittest
 ```
+
+## Cobertura
+
+```bash
+coverage run -m unittest
+coverage report
+coverage html
+```
+
+El reporte HTML se consulta en `htmlcov/index.html`.
 
 ## Flujo rápido de ejemplo
 
