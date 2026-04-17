@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" width="1400" height="700">
+  <defs>
+    <style>
+      .table-header { fill: #2c3e50; }
+      .pk-row { fill: #fff9e6; stroke: #ddd; stroke-width: 1; }
+      .fk-row { fill: #ffe6e6; stroke: #ddd; stroke-width: 1; }
+      .normal-row { fill: #f8f8f8; stroke: #ddd; stroke-width: 1; }
+      .optional-row { fill: #eaf4ff; stroke: #ddd; stroke-width: 1; }
+      .text-white { fill: white; font-weight: bold; font-size: 14px; }
+      .text-black { fill: black; font-size: 11px; font-family: 'Monaco', monospace; }
+      .rel-line { stroke: #3498db; stroke-width: 2.5; fill: none; }
+      .rel-label { fill: #2c3e50; font-size: 11px; font-weight: bold; }
+      .legend-label { fill: black; font-size: 12px; }
+    </style>
+    <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#3498db"/>
+    </marker>
+  </defs>
+
+  <text x="700" y="32" font-size="22" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    GestiCat - Diagrama Relacional SQLite
+  </text>
+
+  <!-- RESPONSABLES -->
+  <rect x="40" y="80" width="380" height="32" class="table-header"/>
+  <text x="230" y="102" text-anchor="middle" class="text-white">responsables</text>
+  <rect x="40" y="112" width="380" height="26" class="pk-row"/>
+  <text x="50" y="130" class="text-black">* identificacion TEXT PRIMARY KEY</text>
+  <rect x="40" y="138" width="380" height="26" class="normal-row"/>
+  <text x="50" y="156" class="text-black">nombre TEXT NOT NULL</text>
+  <rect x="40" y="164" width="380" height="26" class="normal-row"/>
+  <text x="50" y="182" class="text-black">telefono TEXT NOT NULL</text>
+  <rect x="40" y="190" width="380" height="26" class="normal-row"/>
+  <text x="50" y="208" class="text-black">email TEXT NOT NULL</text>
+  <rect x="40" y="216" width="380" height="26" class="normal-row"/>
+  <text x="50" y="234" class="text-black">tipo TEXT NOT NULL (discriminador)</text>
+  <rect x="40" y="242" width="380" height="26" class="optional-row"/>
+  <text x="50" y="260" class="text-black">fecha_nacimiento TEXT (solo PERSONA_FISICA)</text>
+  <rect x="40" y="268" width="380" height="26" class="optional-row"/>
+  <text x="50" y="286" class="text-black">numero_registro TEXT (solo PROTECTORA)</text>
+
+  <!-- COLONIAS -->
+  <rect x="540" y="190" width="360" height="32" class="table-header"/>
+  <text x="720" y="212" text-anchor="middle" class="text-white">colonias</text>
+  <rect x="540" y="222" width="360" height="26" class="pk-row"/>
+  <text x="550" y="240" class="text-black">* nombre TEXT PRIMARY KEY</text>
+  <rect x="540" y="248" width="360" height="26" class="fk-row"/>
+  <text x="550" y="266" class="text-black">responsable_identificacion (FK -&gt; responsables)</text>
+  <rect x="540" y="274" width="360" height="26" class="normal-row"/>
+  <text x="550" y="292" class="text-black">estado TEXT NOT NULL</text>
+  <rect x="540" y="300" width="360" height="26" class="normal-row"/>
+  <text x="550" y="318" class="text-black">ultima_actualizacion TEXT NOT NULL</text>
+
+  <!-- GATOS -->
+  <rect x="1020" y="100" width="360" height="32" class="table-header"/>
+  <text x="1200" y="122" text-anchor="middle" class="text-white">gatos</text>
+  <rect x="1020" y="132" width="360" height="26" class="pk-row"/>
+  <text x="1030" y="150" class="text-black">* id_gato TEXT PRIMARY KEY</text>
+  <rect x="1020" y="158" width="360" height="26" class="fk-row"/>
+  <text x="1030" y="176" class="text-black">colonia_nombre TEXT (FK -&gt; colonias)</text>
+  <rect x="1020" y="184" width="360" height="26" class="normal-row"/>
+  <text x="1030" y="202" class="text-black">nombre TEXT NOT NULL</text>
+  <rect x="1020" y="210" width="360" height="26" class="normal-row"/>
+  <text x="1030" y="228" class="text-black">color TEXT NOT NULL</text>
+  <rect x="1020" y="236" width="360" height="26" class="normal-row"/>
+  <text x="1030" y="254" class="text-black">sexo TEXT NOT NULL</text>
+  <rect x="1020" y="262" width="360" height="26" class="normal-row"/>
+  <text x="1030" y="280" class="text-black">estado TEXT NOT NULL</text>
+  <rect x="1020" y="288" width="360" height="26" class="optional-row"/>
+  <text x="1030" y="306" class="text-black">clinica_veterinaria TEXT (puede ser NULL)</text>
+  <rect x="1020" y="314" width="360" height="26" class="normal-row"/>
+  <text x="1030" y="332" class="text-black">esterilizado INTEGER NOT NULL</text>
+  <rect x="1020" y="340" width="360" height="26" class="normal-row"/>
+  <text x="1030" y="358" class="text-black">fecha_registro TEXT NOT NULL</text>
+
+  <!-- RELACIONES -->
+  <!-- responsables -> colonias -->
+  <path d="M 420 200 Q 480 210 540 235" class="rel-line" marker-end="url(#arrow-end)"/>
+  <text x="475" y="195" text-anchor="middle" class="rel-label">1:N</text>
+  <!-- colonias -> gatos -->
+  <path d="M 900 210 Q 960 190 1020 170" class="rel-line" marker-end="url(#arrow-end)"/>
+  <text x="955" y="195" text-anchor="middle" class="rel-label">1:N</text>
+
+  <!-- LEYENDA -->
+  <rect x="40" y="580" width="1340" height="80" fill="#f0f0f0" stroke="#999" stroke-width="1" rx="5"/>
+  <rect x="60" y="595" width="20" height="20" class="pk-row" stroke="#333" stroke-width="1"/>
+  <text x="90" y="610" class="legend-label">* PK (identifica fila)</text>
+  <rect x="60" y="620" width="20" height="20" class="fk-row" stroke="#333" stroke-width="1"/>
+  <text x="90" y="635" class="legend-label">FK (vincula a otra tabla)</text>
+  <rect x="60" y="645" width="20" height="20" class="optional-row" stroke="#333" stroke-width="1"/>
+  <text x="90" y="660" class="legend-label">Columna que puede ser NULL (discriminador o opcional)</text>
+  <text x="500" y="610" class="legend-label">1:N = Una a muchos (clave foránea directa)</text>
+  <text x="500" y="635" class="legend-label">Herencia de Responsable (PersonaFisica/Protectora) se resuelve</text>
+  <text x="500" y="660" class="legend-label">con columna discriminadora 'tipo' en la tabla responsables.</text>
+  <text x="1000" y="610" class="legend-label">3 tablas del sistema:</text>
+  <text x="1000" y="635" class="legend-label">responsables, colonias, gatos.</text>
+</svg>
