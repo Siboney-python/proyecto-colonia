@@ -531,16 +531,16 @@ Marcamos con [x] los apartados que **este documento cubre** y con [ ] los que so
 
 ### Diseño e implementación del esquema de base de datos
 
-- [ ] Copiar en `04-sqlite` el estado base de `03-testing` (o crear rama específica para la fase 04) — *Responsabilidad tuya (aún no creada)*
+- [x] Copiar en `04-sqlite` el estado base de `03-testing` (o crear rama específica para la fase 04) — *Responsabilidad tuya (aún no creada)*
 - [x] Diseñar las tablas SQL mapeando cada entidad de dominio a tablas con sus columnas, tipos y restricciones — **Fases 1-4 de este documento**
 - [x] Usar nombres de columnas en snake_case — **Fase 4 de este documento**
 
 ### Script de inicialización de base de datos
 
-- [ ] Crear script que cree el esquema de la BD e inserte datos iniciales de prueba — **Fase 6 de este documento**
-  - [ ] Debe poder ejecutarse varias veces sin error — **Fase 6**
-  - [ ] Crea todas las tablas respetando dependencias de claves foráneas — **Fases 5-6**
-  - [ ] Inserta datos iniciales para probar la aplicación — **Fase 6**
+- [x] Crear script que cree el esquema de la BD e inserte datos iniciales de prueba — **Fase 6 de este documento**
+  - [x] Debe poder ejecutarse varias veces sin error — **Fase 6**
+  - [x] Crea todas las tablas respetando dependencias de claves foráneas — **Fases 5-6**
+  - [x] Inserta datos iniciales para probar la aplicación — **Fase 6**
 
 ### Excepciones de dominio para persistencia
 
