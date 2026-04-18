@@ -4,6 +4,37 @@ Todos los cambios relevantes del proyecto, organizados por versión y fase.
 
 ---
 
+## [0.3.0] - 2026-04-18 (Fase 03: testing)
+
+Versión disponible en `proyecto/03-testing/`
+
+### Added
+- Paquete de pruebas `tests/` con `test_gato.py`, `test_responsable.py`
+  y `test_colonia.py` usando `unittest`.
+- `requirements.txt` con `coverage` como dependencia.
+- `.gitignore` para excluir `.venv/`, `htmlcov/` y `.coverage`.
+- `docs/FUTURE_IMPROVEMENTS.md` con ideas de desarrollo pendientes. (También añadido en la fase 02)
+
+### Changed
+- `docs/TESTS_Y_PASOS.md` actualizado con los nuevos comandos de unittest
+  y coverage.
+- `docs/EJECUCION.md` actualizado con pasos de preparación del entorno
+  virtual e instalación de dependencias.
+- `README.md` actualizado con estructura y comandos actuales.
+- `infrastructure/datos_iniciales.py` refactorizado: `cargar_datos_iniciales()`
+  renombrado a `crear_colonia_con_datos()` y añadida `crear_servicio()`.
+
+### Fixed
+- Setters de `nombre`, `telefono`, `email` e `identificacion` en
+  `responsable.py` corregidos para prohibir espacios laterales
+  explícitamente en lugar de eliminarlos silenciosamente.
+- Setter de `nombre` en `colonia.py` corregido por el mismo motivo.
+- `RepositorioGatos` convertido a `ABC` con `@abstractmethod`.
+
+### Removed
+- Tests por pasos en la raiz del paquete (`test_*.py`) reemplazados por la estructura de pruebas en `tests/`.
+
+
 ## [0.2.1] - 2026-04-08 (Fase 02: correcciones)
 
 Versión disponible en `proyecto/02-documentando/`
