@@ -1,4 +1,4 @@
-# Documentación de GestiCat LPGC — Fase 02
+# Documentación de GestiCat LPGC — Fase 03
 
 Índice de la documentación técnica del proyecto. Se recomienda leer
 los documentos en el orden indicado para una comprensión progresiva
@@ -16,9 +16,12 @@ del sistema.
 8. [DATOS_INICIALES.md](DATOS_INICIALES.md) — Datos de ejemplo cargados al arrancar.
 9. [TESTS_Y_PASOS.md](TESTS_Y_PASOS.md) — Cómo ejecutar los tests y qué valida cada uno.
 10. [TROUBLESHOOTING.md](TROUBLESHOOTING.md) — Errores comunes y cómo resolverlos.
+11. [FUTURE_IMPROVEMENTS.md](FUTURE_IMPROVEMENTS.md) — Ideas de desarrollo pendientes.
 
 ## Notas
 
 - Si se amplía el proyecto (persistencia real, interfaz web o móvil,
   múltiples colonias), actualizar primero `DESCRIPCION_Y_ALCANCE.md`
   y `REGLAS_DE_NEGOCIO.md`.
+- Los tests unitarios están en `tests/` y se ejecutan con `python3 -m unittest`.
+  Consulta `TESTS_Y_PASOS.md` para instrucciones completas.

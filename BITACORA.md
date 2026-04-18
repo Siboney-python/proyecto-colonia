@@ -107,6 +107,22 @@ ordenada y visible, fuera del código. Sirve para tres cosas:
 La regla es simple: cuando un `# TODO` no se va a implementar en la fase
 actual, se mueve a este documento con su contexto y se elimina del código.
 
+### README.md raíz vs docs/README.md
+
+En un proyecto bien documentado conviven dos archivos README con propósitos
+distintos:
+
+- **`README.md` raíz**: carta de presentación del proyecto. Lo primero que
+  ve cualquier persona que llega al repositorio. Explica qué es el proyecto,
+  cómo instalarlo y cómo ejecutarlo. Está pensado para cualquier audiencia.
+
+- **`docs/README.md`**: índice de la documentación técnica. Solo lo lee
+  quien quiere profundizar en el diseño, las reglas de negocio o la
+  arquitectura. Está pensado para quien ya está dentro del proyecto.
+
+La regla: el README raíz es para entrar, el README de docs es para
+profundizar.
+
 ### strftime — formatear fechas como texto
 Método del objeto `date` (y `datetime`) de Python que convierte una fecha
 en un string con el formato que le indiques.

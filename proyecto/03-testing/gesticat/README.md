@@ -2,14 +2,6 @@
 
 Sistema de gestión y censo de colonias felinas urbanas de Las Palmas de Gran Canaria.
 
-## Quickstart
-
-Desde la carpeta que contiene el paquete gesticat/:
-
-```bash
-python3 -m gesticat.presentation.menu
-```
-
 ## Propósito del proyecto
 
 - Digitalizar la gestión de una colonia de gatos callejeros del municipio.
@@ -18,16 +10,72 @@ python3 -m gesticat.presentation.menu
 - Permitir la incorporación de mejoras futuras (base de datos, interfaz móvil,
   múltiples colonias) sin romper el núcleo del sistema.
 
+## Estado de la fase
+Esta carpeta corresponde a la fase `03-testing`.
+
 ## Requisitos
 
 - Python 3.10+.
-- No requiere dependencias externas.
+- Dependencias en `gesticat/requirements.txt`.
 - Compatible con Linux, macOS y Windows.
+
+## Quickstart
+
+Desde la carpeta que contiene el paquete `gesticat/`:
+
+```bash
+python3 -m venv .venv
+
+source .venv/bin/activate # Linux y macOS
+source .venv/Scripts/activate # Windows GitBash
+source .venv/Scripts/Activate.ps1 # Windows PowerShell
+
+pip install -r gesticat/requirements.txt
+python3 -m gesticat.presentation.menu
+```
+
+## Uso (menú de consola)
+
+Ejecuta desde la carpeta `03-testing/`:
+
+```bash
+python3 -m gesticat.presentation.menu
+```
+
+El menú permite: registrar y borrar gatos, actualizar estado y esterilización,
+listar gatos sin esterilizar, asignar responsable, tramitar anexos municipales
+y consultar reportes de censo y colonia.
+
+## Tests
+
+Desde la carpeta `03-testing/`:
+
+```bash
+python3 -m unittest
+```
+
+Para ejecutar un archivo concreto:
+
+```bash
+python3 -m unittest gesticat.tests.test_gato
+python3 -m unittest gesticat.tests.test_responsable
+python3 -m unittest gesticat.tests.test_colonia
+```
+
+## Cobertura
+
+```bash
+coverage run -m unittest
+coverage report
+coverage html
+```
+
+El reporte HTML queda en `htmlcov/index.html`.
 
 ## Estructura del proyecto
 
 ```
-02-documentando/
+03-testing/
   gesticat/
     domain/
       gato.py
@@ -41,8 +89,12 @@ python3 -m gesticat.presentation.menu
       servicio_colonia.py
     presentation/
       menu.py
+    tests/
+      test_gato.py
+      test_responsable.py
+      test_colonia.py
     docs/
-    test_*.py
+    requirements.txt
 ```
 
 - `presentation/menu.py`: interfaz de consola que solo pide datos y muestra resultados.
@@ -52,22 +104,12 @@ python3 -m gesticat.presentation.menu
   validaciones y el contrato `RepositorioGatos`.
 - `infrastructure/`: contiene los datos iniciales y el repositorio en memoria
   (`RepositorioGatosMemoria`).
-- `test_*.py`: pruebas manuales que validan cada componente por separado.
+- `tests/`: pruebas unitarias con `unittest`.
 
 ## Documentación
 
 Consulta la documentación detallada del proyecto en `docs/`
 (índice en [docs/README.md](docs/README.md)).
 
-## Tests
-
-Desde la carpeta `02-documentando/`:
-
-```bash
-python3 -m gesticat.test_gato
-python3 -m gesticat.test_responsable
-python3 -m gesticat.test_colonia
-python3 -m gesticat.test_repo_memoria
-python3 -m gesticat.test_contrato
-python3 -m gesticat.test_servicio
-```
+## Changelog
+Historial de cambios en `CHANGELOG.md`.
