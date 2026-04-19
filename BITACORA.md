@@ -190,6 +190,51 @@ partes del código sin tests, pero un 100% de cobertura no garantiza calidad
 
 Documentación oficial: https://coverage.readthedocs.io
 
+### PRAGMA
+
+Mecanismo propio de SQLite (no es SQL estándar) para leer o cambiar
+configuraciones del motor en tiempo de ejecución. Sintaxis:
+
+```sql
+PRAGMA nombre = valor;   -- cambiar configuración
+PRAGMA nombre;           -- leer valor actual
+```
+
+En proyectos normales solo necesitas uno:
+
+```sql
+PRAGMA foreign_keys = ON;
+```
+
+SQLite tiene las claves foráneas **desactivadas por defecto**. Sin este PRAGMA,
+puedes insertar un gato con una `colonia_nombre` que no existe y SQLite lo
+acepta sin error. Con él activado, esa inserción falla como debe fallar.
+
+Hay que activarlo en **cada conexión** — no persiste entre sesiones.
+
+Documentación oficial: https://www.sqlite.org/pragma.html
+
+### Excepciones de dominio vs excepciones técnicas
+
+Cuando un repositorio falla (duplicado, no encontrado, error de base de datos),
+puede lanzar dos tipos de excepciones:
+
+- **Excepciones técnicas**: las que lanza el motor directamente.
+  `sqlite3.IntegrityError`, `psycopg2.IntegrityError`, `KeyError`...
+  Son específicas del motor o tecnología que estás usando.
+
+- **Excepciones de dominio**: las que define tu aplicación con significado
+  de negocio. `GatoYaExisteError`, `GatoNoEncontradoError`...
+  No saben nada del motor — solo describen qué salió mal en términos
+  del problema que resuelve el sistema.
+
+El repositorio captura las excepciones técnicas y las convierte en excepciones
+de dominio. Las capas superiores (aplicación y presentación) solo ven las de
+dominio y nunca importan `sqlite3` ni ningún otro motor.
+
+Beneficio: si mañana se cambia de SQLite a PostgreSQL por ejemplo, solo cambia el repositorio.
+El servicio, el menú y los tests siguen funcionando sin tocarlos.
+
 ### Parser / Parsear
 Leer un dato en bruto y convertirlo a una estructura que el programa
 puede usar.

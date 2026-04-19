@@ -1,4 +1,17 @@
-"""Script para crear la base de datos de GestiCat con datos iniciales."""
+"""
+GestiCat/crear_bd: Script para crear la base de datos SQLite de GestiCat.
+
+Crea las tres tablas del esquema (responsables, colonias, gatos) en el orden
+correcto respetando las claves foráneas, e inserta los datos iniciales de ejemplo.
+
+Si la base de datos ya existe, la elimina y la recrea desde cero. Útil durante
+el desarrollo para resetear el estado de la aplicación a un punto de partida limpio.
+
+Se ejecuta desde la carpeta que contiene el paquete gesticat/, antes de arrancar
+la aplicación:
+
+    python3 -m gesticat.crear_bd
+"""
 
 import sqlite3
 from pathlib import Path

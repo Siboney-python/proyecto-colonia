@@ -544,9 +544,9 @@ Marcamos con [x] los apartados que **este documento cubre** y con [ ] los que so
 
 ### Excepciones de dominio para persistencia
 
-- [ ] (*opcional*) Crear fichero de excepciones (`infrastructure/errores.py`) — **Fase 7 de este documento (código de ejemplo)**
-  - [ ] Clase base para todas las excepciones de persistencia — **Fase 7**
-  - [ ] Excepciones por cada tipo de error (duplicado, no encontrado, etc.) — **Fase 7**
+- [x] (*opcional*) Crear fichero de excepciones (`infrastructure/errores.py`) — **Fase 7 de este documento (código de ejemplo)**
+  - [x] Clase base para todas las excepciones de persistencia — **Fase 7**
+  - [x] Excepciones por cada tipo de error (duplicado, no encontrado, etc.) — **Fase 7**
 
 ### Implementación del repositorio SQLite
 

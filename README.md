@@ -22,7 +22,7 @@ Clonar el repositorio:
 git clone git@github.com:Siboney-python/proyecto-colonia.git
 ```
 
-Acceder a la carpeta de la fase y ejecutar desde dentro de `gesticat/`:
+Acceder a la carpeta de la fase y ejecutar desde la carpeta que contiene `gesticat/` (en fase 01 desde gesticat/`):
 
 ```bash
 # Fase 01
@@ -32,6 +32,11 @@ python3 -m presentation.menu
 # Fase 02
 cd proyecto-colonia/proyecto/02-documentando
 python3 -m gesticat.presentation.menu
+
+# Fase 03
+cd proyecto-colonia/proyecto/03-testing
+python3 -m gesticat.presentation.menu
+
 ```
 
 ## Fases del proyecto
@@ -109,8 +114,8 @@ Reorganizar y ampliar los tests usando `unittest` y medir la cobertura con `cove
 - [x] Documentar la ejecución de tests y coverage en `docs/TESTS_Y_PASOS.md`.
 - [x] Actualizar `docs/EJECUCION.md` con pasos completos desde clonado hasta ejecución.
 - [x] Revisar y corregir documentos desactualizados de `docs/` para reflejar la fase 03.
-- [ ] Registrar los cambios de fase en `CHANGELOG.md` (versión `0.3.0`).
-- [ ] Actualizar `README.md` para reflejar estructura y comandos actuales.
+- [x] Registrar los cambios de fase en `CHANGELOG.md` (versión `0.3.0`).
+- [x] Actualizar `README.md` para reflejar estructura y comandos actuales.
 
 </details>
 
@@ -125,16 +130,16 @@ Reorganizar y ampliar los tests usando `unittest` y medir la cobertura con `cove
 
 ### Script de inicialización de base de datos
 
-- [ ] Crear script que cree el esquema de la BD e inserte datos iniciales de prueba
-  - [ ] Debe poder ejecutarse varias veces sin error
-  - [ ] Crea todas las tablas respetando dependencias de claves foráneas
-  - [ ] Inserta datos iniciales para probar la aplicación
+- [x] Crear script que cree el esquema de la BD e inserte datos iniciales de prueba
+  - [x] Debe poder ejecutarse varias veces sin error
+  - [x] Crea todas las tablas respetando dependencias de claves foráneas
+  - [x] Inserta datos iniciales para probar la aplicación
 
 ### Excepciones de dominio para persistencia
 
-- [ ] (*opcional*) Crear fichero de excepciones (`infrastructure/errores.py`) con las excepciones que el repositorio SQLite lanza al usuario
-  - [ ] Clase base para todas las excepciones de persistencia
-  - [ ] Excepciones por cada tipo de error que puede ocurrir (duplicado, no encontrado, etc.)
+- [x] (*opcional*) Crear fichero de excepciones (`infrastructure/errores.py`) con las excepciones que el repositorio SQLite lanza al usuario
+  - [x] Clase base para todas las excepciones de persistencia
+  - [x] Excepciones por cada tipo de error que puede ocurrir (duplicado, no encontrado, etc.)
 
 ### Implementación del repositorio SQLite
 

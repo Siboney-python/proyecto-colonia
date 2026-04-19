@@ -37,3 +37,23 @@ qué archivo las originó y qué habría que implementar.
 - **Por qué no está implementado**: esta mejora tiene más sentido cuando el
   proyecto migre a una interfaz web (Flask), donde la validación de formularios
   funciona de forma distinta y este patrón queda obsoleto.
+
+---
+
+## Gestión de múltiples colonias y responsables
+
+- **Origen**: `infrastructure/datos_iniciales.py`, `application/servicio_colonia.py`
+- **Idea**: el sistema actualmente gestiona una única colonia con un único
+  responsable. Para dar soporte a múltiples colonias habría que:
+  - Crear `RepositorioColoniasSQLite` e implementar su contrato.
+  - Crear `RepositorioResponsablesSQLite` e implementar su contrato.
+  - Ampliar `ServicioColonia` o crear un `ServicioGestion` que permita
+    listar, crear y seleccionar colonias.
+  - Adaptar el menú para que el usuario elija con qué colonia trabajar
+    antes de operar.
+  - La base de datos ya está preparada para ello: las tablas `colonias`
+    y `responsables` con sus claves foráneas soportan múltiples registros
+    desde el diseño actual.
+- **Por qué no está implementado**: el alcance actual del proyecto es
+  una sola colonia. La arquitectura por capas y el esquema SQLite están
+  diseñados para facilitar esta ampliación en el futuro.
