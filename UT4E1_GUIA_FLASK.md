@@ -128,7 +128,7 @@ def listar_gatos(self):
 
 ---
 
-## Puntos de atención
+## Advertencias
 
 ### Instancia única del servicio
 
