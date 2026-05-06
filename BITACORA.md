@@ -16,6 +16,28 @@ cerradas como estados, sexos o tipos, evitando el uso de strings o números
 valor asociado (`Sexo.HEMBRA = "H"`).
 Documentación oficial: https://docs.python.org/3/library/enum.html
 
+### Conversión de enums a SQLite y viceversa
+
+SQLite no tiene tipo ENUM. Para guardar un enum de Python hay que
+convertirlo a texto o número. Al recuperarlo, hay que convertirlo
+de vuelta al enum.
+
+Hay dos formas según cómo esté definido el enum:
+
+**Por valor** — cuando el valor ya es un string corto y estable:
+
+
+**Por nombre** — cuando el valor es largo o podría cambiar:
+
+
+La diferencia entre paréntesis y corchetes:
+- `Sexo("M")` busca el miembro cuyo `.value` es `"M"`
+- `EstadoGato["COL"]` busca el miembro cuyo `.name` es `"COL"`
+
+Usar `.name` es más seguro para enums cuyos valores pueden cambiar,
+porque el nombre del miembro en el código es más estable que su
+descripción textual.
+
 ### Fail fast
 Principio de diseño que dice que un sistema debe detectar y reportar errores
 lo antes posible, en lugar de continuar ejecutándose con datos inválidos y
@@ -190,6 +212,7 @@ partes del código sin tests, pero un 100% de cobertura no garantiza calidad
 
 Documentación oficial: https://coverage.readthedocs.io
 
+##SQLite y bd
 ### PRAGMA
 
 Mecanismo propio de SQLite (no es SQL estándar) para leer o cambiar
@@ -214,6 +237,17 @@ Hay que activarlo en **cada conexión** — no persiste entre sesiones.
 
 Documentación oficial: https://www.sqlite.org/pragma.html
 
+
+### cursor.rowcount — filas afectadas por la última operación
+
+Después de ejecutar un `UPDATE` o `DELETE`, SQLite no lanza error si
+no encuentra ninguna fila — simplemente no hace nada.
+
+`cursor.rowcount` indica cuántas filas afectó la última operación:
+- `1` → encontró y modificó la fila
+- `0` → no encontró ninguna fila
+
+
 ### Excepciones de dominio vs excepciones técnicas
 
 Cuando un repositorio falla (duplicado, no encontrado, error de base de datos),
@@ -234,6 +268,17 @@ dominio y nunca importan `sqlite3` ni ningún otro motor.
 
 Beneficio: si mañana se cambia de SQLite a PostgreSQL por ejemplo, solo cambia el repositorio.
 El servicio, el menú y los tests siguen funcionando sin tocarlos.
+
+### Decisión: gesticat.db en el repositorio
+
+En proyectos reales, los ficheros de base de datos no deben subirse al
+repositorio porque se regeneran automáticamente, cambian con el uso y
+pueden contener datos sensibles.
+
+En GestiCat lo mantengo en el repositorio para que pueda verse sin necesidad de ejecutar.
+
+En un proyecto real se añadiría al `.gitignore`.
+
 
 ### Parser / Parsear
 Leer un dato en bruto y convertirlo a una estructura que el programa

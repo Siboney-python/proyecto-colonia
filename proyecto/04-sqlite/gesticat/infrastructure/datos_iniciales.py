@@ -6,23 +6,22 @@ responsable y gatos precargados, y un servicio listo para usar. Se utiliza
 tanto para arrancar la aplicación manualmente como para pruebas y demos.
 """
 
-from gesticat.domain.gato import Gato, Sexo, EstadoGato
 from gesticat.domain.colonia import Colonia
 from gesticat.domain.responsable import PersonaFisica
-from gesticat.infrastructure.repositorio_gatos_memoria import RepositorioGatosMemoria
+from gesticat.infrastructure.repositorio_gatos_sqlite import RepositorioGatosSQLite
 
 
 def crear_colonia_con_datos():
-    """Crea y devuelve una colonia de ejemplo lista para usar.
+    """Crea y devuelve una colonia lista para usar con el repositorio SQLite.
 
-    Construye una colonia con responsable, repositorio en memoria y cinco gatos
-    de muestra que representan distintos estados y situaciones reales de la colonia.
-    Las fechas de registro son históricas y se pasan explícitamente para
-    preservarlas en lugar de usar la fecha de hoy.
+    Construye la colonia con su responsable y conecta el repositorio SQLite donde
+    ya están cargados los gatos iniciales. Los datos de los gatos vienen de la 
+    base de datos creada por crear_bd.py.
+
 
     Devuelve una instancia de Colonia lista para pasar a ServicioColonia.
     """
-    repositorio = RepositorioGatosMemoria()
+    repositorio = RepositorioGatosSQLite()
 
     responsable = PersonaFisica(
         nombre="Siboney Apellido",
@@ -33,22 +32,6 @@ def crear_colonia_con_datos():
     )
 
     colonia = Colonia("Colonia Sur", responsable, repositorio)
-
-    gatos = [
-        Gato("001", "Miguelito", "Gris", Sexo.MACHO, EstadoGato.COL,
-             "Clínica Sur", True, "10/01/2024"),
-        Gato("002", "Kiwi", "Blanca", Sexo.HEMBRA, EstadoGato.ACOG,
-             "Clínica Sur", True, "15/02/2024"),
-        Gato("003", "GordiLuis", "Pardo", Sexo.MACHO, EstadoGato.FALL,
-             "Clínica Norte", True, "20/03/2024"),
-        Gato("004", "Sombra", "Negro", Sexo.HEMBRA, EstadoGato.COL,
-             None, False, "05/04/2024"),
-        Gato("005", "Nieve", "Blanco", Sexo.DESCONOCIDO, EstadoGato.COL,
-             None, False, "01/06/2024"),
-    ]
-
-    for gato in gatos:
-        colonia.agregar_gato(gato)
 
     return colonia
 

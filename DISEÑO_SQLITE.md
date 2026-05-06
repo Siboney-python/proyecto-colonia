@@ -550,11 +550,11 @@ Marcamos con [x] los apartados que **este documento cubre** y con [ ] los que so
 
 ### Implementación del repositorio SQLite
 
-- [ ] Crear clase(s) de repositorio que implementen persistencia en SQLite — **Fase 7 de este documento (código de ejemplo)**
-- [ ] Usar consultas SQL parametrizadas (parámetros `?`) para prevenir inyección SQL — **Fase 7**
-- [ ] Capturar excepciones SQLite y transformarlas en excepciones de dominio — **Fase 7**
-- [ ] Activar `PRAGMA foreign_keys = ON` al conectar — **Fase 7**
-- [ ] **El flujo principal (menú) debe usar SOLO el repositorio SQLite** — *Responsabilidad tuya*
+- [x] Crear clase(s) de repositorio que implementen persistencia en SQLite — **Fase 7 de este documento (código de ejemplo)**
+- [x] Usar consultas SQL parametrizadas (parámetros `?`) para prevenir inyección SQL — **Fase 7**
+- [x] Capturar excepciones SQLite y transformarlas en excepciones de dominio — **Fase 7**
+- [x] Activar `PRAGMA foreign_keys = ON` al conectar — **Fase 7**
+- [x] **El flujo principal (menú) debe usar SOLO el repositorio SQLite** — *Responsabilidad tuya*
 
 ### Repositorio en memoria (referencia, no en uso)
 
