@@ -558,8 +558,8 @@ Marcamos con [x] los apartados que **este documento cubre** y con [ ] los que so
 
 ### Repositorio en memoria (referencia, no en uso)
 
-- [ ] (**opcional**) Mantener el código del repositorio en memoria como referencia — *Responsabilidad tuya*
-- [ ] (**opcional**) Modificar el repositorio en memoria para lanzar las mismas excepciones de dominio — *Responsabilidad tuya*
+- [x] (**opcional**) Mantener el código del repositorio en memoria como referencia — *Responsabilidad tuya*
+- [x] (**opcional**) Modificar el repositorio en memoria para lanzar las mismas excepciones de dominio — *Responsabilidad tuya*
 
 ### Integración con SQLite en la capa de presentación
 
