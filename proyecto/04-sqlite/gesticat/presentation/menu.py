@@ -10,6 +10,7 @@ from gesticat.domain.colonia import EstadoColonia
 from gesticat.domain.gato import EstadoGato, Sexo
 from gesticat.domain.responsable import PersonaFisica, Protectora
 from gesticat.infrastructure.datos_iniciales import crear_colonia_con_datos
+from gesticat.infrastructure.errores import ErrorRepositorio
 
 
 # -- MENÚ --
@@ -218,7 +219,7 @@ def main():
                 mostrar_reporte_colonia(servicio)
             else:
                 print("❌ Opción no válida.")
-        except ValueError as e:
+        except ErrorRepositorio as e:
             print("❌ " + str(e))
 
 

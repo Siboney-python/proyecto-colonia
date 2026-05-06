@@ -7,6 +7,7 @@ from gesticat.domain.colonia import Colonia, EstadoColonia
 from gesticat.domain.gato import Gato, Sexo, EstadoGato
 from gesticat.domain.responsable import PersonaFisica
 from gesticat.infrastructure.repositorio_gatos_memoria import RepositorioGatosMemoria
+from gesticat.infrastructure.errores import GatoYaExisteError, GatoNoEncontradoError
 
 
 class TestColonia(unittest.TestCase):
@@ -177,17 +178,17 @@ class TestColonia(unittest.TestCase):
         gato = Gato("001", "Miguelito", "Gris", Sexo.MACHO, EstadoGato.COL,
                     None, False, "10/01/2024")
         self.repo.insertar(gato)
-        with self.assertRaises(ValueError):
+        with self.assertRaises(GatoYaExisteError):
             self.repo.insertar(gato)
 
     def test_repositorio_actualizar_inexistente_lanza_valueerror(self):
         gato = Gato("001", "Miguelito", "Gris", Sexo.MACHO, EstadoGato.COL,
                     None, False, "10/01/2024")
-        with self.assertRaises(ValueError):
+        with self.assertRaises(GatoNoEncontradoError):
             self.repo.actualizar(gato)
 
     def test_repositorio_quitar_inexistente_lanza_valueerror(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(GatoNoEncontradoError):
             self.repo.quitar("999")
 
 if __name__ == "__main__":

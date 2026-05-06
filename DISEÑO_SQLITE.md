@@ -563,15 +563,15 @@ Marcamos con [x] los apartados que **este documento cubre** y con [ ] los que so
 
 ### Integración con SQLite en la capa de presentación
 
-- [ ] Modificar la presentación para cargar datos desde la BD — *Responsabilidad tuya*
-- [ ] Capturar excepciones de dominio, no de `sqlite3` — *Responsabilidad tuya*
+- [x] Modificar la presentación para cargar datos desde la BD — *Responsabilidad tuya*
+- [x] Capturar excepciones de dominio, no de `sqlite3` — *Responsabilidad tuya*
 - [ ] (*opcional*) Mostrar mensajes amigables al usuario — *Responsabilidad tuya*
-- [ ] No hacer imports de `sqlite3` directamente en la presentación — *Responsabilidad tuya*
+- [x] No hacer imports de `sqlite3` directamente en la presentación — *Responsabilidad tuya*
 
 ### Actualización de los tests
 
-- [ ] *(opcional)* Actualizar tests existentes para esperar excepciones de dominio — *Responsabilidad tuya*
-- [ ] Verificar que `python -m unittest` pasa con todos los tests en verde — *Responsabilidad tuya*
+- [x] *(opcional)* Actualizar tests existentes para esperar excepciones de dominio — *Responsabilidad tuya*
+- [x] Verificar que `python -m unittest` pasa con todos los tests en verde — *Responsabilidad tuya*
 - [ ] *(opcional)* Crear tests específicos para el repositorio SQLite — *Responsabilidad tuya*
 
 ### Documentación

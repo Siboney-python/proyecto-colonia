@@ -143,28 +143,28 @@ Reorganizar y ampliar los tests usando `unittest` y medir la cobertura con `cove
 
 ### Implementación del repositorio SQLite
 
-- [ ] Crear clase(s) de repositorio que implementen persistencia en SQLite (realizando las mismas operaciones que el repositorio en memoria: guardar, obtener, actualizar, eliminar, etc.)
-- [ ] Usar consultas SQL parametrizadas (parámetros `?`) para prevenir inyección SQL
-- [ ] Capturar excepciones SQLite (`sqlite3.IntegrityError`, `sqlite3.OperationalError`, etc.) y transformarlas en excepciones de dominio
-- [ ] Activar `PRAGMA foreign_keys = ON` al conectar para garantizar integridad referencial
-- [ ] **El flujo principal de la aplicación (menú) debe usar SOLO el repositorio SQLite para persistencia** (no usar en memoria)
+- [x] Crear clase(s) de repositorio que implementen persistencia en SQLite (realizando las mismas operaciones que el repositorio en memoria: guardar, obtener, actualizar, eliminar, etc.)
+- [x] Usar consultas SQL parametrizadas (parámetros `?`) para prevenir inyección SQL
+- [x] Capturar excepciones SQLite (`sqlite3.IntegrityError`, `sqlite3.OperationalError`, etc.) y transformarlas en excepciones de dominio
+- [x] Activar `PRAGMA foreign_keys = ON` al conectar para garantizar integridad referencial
+- [x] **El flujo principal de la aplicación (menú) debe usar SOLO el repositorio SQLite para persistencia** (no usar en memoria)
 
 ### Repositorio en memoria (referencia, no en uso)
 
-- [ ] (**opcional**) Mantener el código del repositorio en memoria como referencia de implementación y contrato
-- [ ] (**opcional**) Modificar `infrastructure/repositorio_memoria.py` para lanzar las **mismas excepciones de dominio** que el repositorio SQLite (útil para tests sin persistencia)
+- [x] (**opcional**) Mantener el código del repositorio en memoria como referencia de implementación y contrato
+- [x] (**opcional**) Modificar `infrastructure/repositorio_memoria.py` para lanzar las **mismas excepciones de dominio** que el repositorio SQLite (útil para tests sin persistencia)
 
 ### Integración con SQLite en la capa de presentación
 
-- [ ] Modificar la capa de presentación para cargar datos iniciales desde la BD en lugar de desde memoria (al iniciar la aplicación)
-- [ ] Capturar excepciones de dominio, no excepciones de `sqlite3`
+- [x] Modificar la capa de presentación para cargar datos iniciales desde la BD en lugar de desde memoria (al iniciar la aplicación)
+- [x] Capturar excepciones de dominio, no excepciones de `sqlite3`
 - [ ] (*opcional*) Mostrar mensajes amigables al usuario cuando ocurran errores de persistencia
-- [ ] No hacer imports de `sqlite3` directamente en la presentación.
+- [x] No hacer imports de `sqlite3` directamente en la presentación.
 
 ### Actualización de los tests
 
-- [ ] *(opcional)* Actualizar tests existentes para esperar excepciones de dominio en lugar de excepciones genéricas de Python
-- [ ] Verificar que `python -m unittest` pasa con todos los tests en verde
+- [x] *(opcional)* Actualizar tests existentes para esperar excepciones de dominio en lugar de excepciones genéricas de Python
+- [x] Verificar que `python -m unittest` pasa con todos los tests en verde
 - [ ] *(opcional)* Crear tests específicos para el repositorio SQLite
 
 ### Documentación
