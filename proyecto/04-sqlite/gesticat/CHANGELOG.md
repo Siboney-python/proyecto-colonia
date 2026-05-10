@@ -4,6 +4,24 @@ Todos los cambios relevantes del proyecto, organizados por versión y fase.
 
 ---
 
+## [0.4.0] - 2026-05-06 (Fase 04: persistencia con SQLite)
+
+### Added
+- `crear_bd.py`: script para crear el esquema e insertar datos iniciales.
+- `infrastructure/errores.py`: ErrorRepositorio, GatoYaExisteError, GatoNoEncontradoError, ColoniaYaExisteError, ColoniaNoEncontradaError, ResponsableYaExisteError, ResponsableNoEncontradaError y ErrorPersistencia.
+- `infrastructure/repositorio_gatos_sqlite.py`: `RepositorioGatosSQLite` con `insertar`, `obtener`, `actualizar`, `listar` y `quitar`.
+- `infrastructure/datos_iniciales.py`:  `crear_servicio_sqlite()` servicio (SQLite).
+- `gesticat.db`: base de datos SQLite con los datos iniciales.
+- `docs/DISEÑO_BD.md`: diseño de tablas, relaciones y esquema de la base de datos.
+
+### Changed
+- `infrastructure/repositorio_gatos_memoria.py`: excepciones estandarizadas (`GatoYaExisteError`, `GatoNoEncontradoError`).
+- `infrastructure/datos_iniciales.py`: separadas `crear_servicio()` (memoria) y `crear_servicio_sqlite()` (SQLite). El menú usa SQLite por defecto.
+- `presentation/menu.py`: usa `crear_servicio_sqlite()` y captura `ErrorRepositorio` además de `ValueError`.
+- `tests/test_colonia.py`: actualizado para esperar excepciones de dominio en lugar de `ValueError`.
+- `docs/CONTRATO_REPOSITORIO.md`: actualizado con excepciones de dominio e implementaciones disponibles.
+
+
 ## [0.3.0] - 2026-04-18 (Fase 03: testing)
 
 Versión disponible en `proyecto/03-testing/`

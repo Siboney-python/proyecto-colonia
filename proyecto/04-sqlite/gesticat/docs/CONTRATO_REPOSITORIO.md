@@ -12,12 +12,12 @@ mínimas que cualquier implementación debe proporcionar:
 ### `insertar(gato)`
 - **Recibe**: una instancia de `Gato`.
 - **Efecto**: almacena el gato en el repositorio.
-- **Error**: `ValueError` si ya existe un gato con el mismo ID.
+- **Error**: `GatoYaExisteError` si ya existe un gato con el mismo ID.
 
 ### `actualizar(gato)`
 - **Recibe**: una instancia de `Gato` ya existente.
 - **Efecto**: sobreescribe el gato con ese ID en el repositorio.
-- **Error**: `ValueError` si no existe un gato con ese ID.
+- **Error**: `GatoNoEncontradoError` si no existe un gato con ese ID.
 - **Nota**: necesario para que repositorios con persistencia real
   (SQLite, JSON, API...) reflejen los cambios. En memoria no es
   estrictamente necesario porque Python trabaja con referencias,
@@ -36,48 +36,42 @@ mínimas que cualquier implementación debe proporcionar:
 ### `quitar(id_gato)`
 - **Recibe**: el ID del gato (string de 3 dígitos).
 - **Efecto**: elimina el gato con ese ID del repositorio.
-- **Error**: `ValueError` si no existe un gato con ese ID.
+- **Error**: `GatoNoEncontradoError` si no existe un gato con ese ID.
 
 ---
 
-## Implementación actual: RepositorioGatosMemoria
+## Implementaciones disponibles
 
-Definida en `infrastructure/repositorio_gatos_memoria.py`. Implementa
-el contrato usando un diccionario interno con el ID del gato como clave.
+- `RepositorioGatosMemoria` (`infrastructure/repositorio_gatos_memoria.py`):
+  almacena en un diccionario en memoria. Solo para tests rápidos y desarrollo.
+- `RepositorioGatosSQLite` (`infrastructure/repositorio_gatos_sqlite.py`):
+  persiste en `gesticat.db`. Implementación de producción.
+  
+## Cómo elegir la implementación
 
-- Los datos solo existen mientras la aplicación está en ejecución.
-- No hay persistencia real — al cerrar el programa los datos se pierden.
-- Útil para desarrollo, pruebas y demos.
+Desde `infrastructure/datos_iniciales.py`:
+
+- `crear_servicio()` — usa `RepositorioGatosMemoria`. Para desarrollo y demos.
+- `crear_servicio_sqlite()` — usa `RepositorioGatosSQLite`. Para producción.
+
+En `presentation/menu.py` se elige cuál usar:
+```python
+servicio = crear_servicio_sqlite()  # producción
+# servicio = crear_servicio()       # desarrollo
+```
 
 ---
+## Excepciones de dominio (`infrastructure/errores.py`)
 
-## Cómo sustituir por otra implementación
+- `ErrorRepositorio`: base de todas las excepciones del repositorio.
+- `GatoYaExisteError`: id duplicado al guardar un gato.
+- `GatoNoEncontradoError`: id no encontrado al obtener un gato.
+- `ErrorPersistencia`: error inesperado del motor de base de datos.
+- `ColoniaYaExisteError`: id duplicado al guardar una colonia (aún no disponible).
+- `ColoniaNoEncontradoError`: id no encontrado al obtener una colonia.
+- `ResponsableYaExisteError`: id duplicado al guardar una responsable (aún no disponible)..
+- `ResponsableNoEncontradoError`: id no encontrado al obtener un responsable.
 
-Para añadir persistencia real (base de datos, archivo JSON, API remota...):
 
-1. Crear una nueva clase que herede de `RepositorioGatos`:
-   ```python
-   from domain.repositorio_gatos import RepositorioGatos
 
-   class RepositorioGatosSQLite(RepositorioGatos):
-       def insertar(self, gato): ...
-       def actualizar(self, gato): ...
-       def obtener(self, id_gato): ...
-       def listar(self): ...
-       def quitar(self, id_gato): ...
-   ```
-
-2. Implementar los cinco métodos del contrato respetando las mismas
-   garantías: qué devuelve cada uno y qué errores lanza.
-
-3. Sustituir en `infrastructure/datos_iniciales.py` la línea:
-   ```python
-   repositorio = RepositorioGatosMemoria()
-   ```
-   por:
-   ```python
-   repositorio = RepositorioGatosSQLite()
-   ```
-
-El resto del sistema — `Colonia`, `ServicioColonia` y `menu.py` —
-no necesita ningún cambio.
+  
