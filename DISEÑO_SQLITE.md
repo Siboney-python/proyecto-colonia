@@ -572,20 +572,20 @@ Marcamos con [x] los apartados que **este documento cubre** y con [ ] los que so
 
 - [x] *(opcional)* Actualizar tests existentes para esperar excepciones de dominio — *Responsabilidad tuya*
 - [x] Verificar que `python -m unittest` pasa con todos los tests en verde — *Responsabilidad tuya*
-- [ ] *(opcional)* Crear tests específicos para el repositorio SQLite — *Responsabilidad tuya*
+- [x] *(opcional)* Crear tests específicos para el repositorio SQLite — *Responsabilidad tuya*
 
 ### Documentación
 
-- [ ] Actualizar `CHANGELOG.md` (versión `0.4.0`) con los cambios principales — *Responsabilidad tuya*
-- [ ] Actualizar `README.md` con instrucciones de `crear_bd.py` — *Responsabilidad tuya*
-- [ ] Documentar el diseño de la BD en `docs/DISEÑO_BD.md` — *Este documento es base para completarlo*
+- [x] Actualizar `CHANGELOG.md` (versión `0.4.0`) con los cambios principales — *Responsabilidad tuya*
+- [x] Actualizar `README.md` con instrucciones de `crear_bd.py` — *Responsabilidad tuya*
+- [x] Documentar el diseño de la BD en `docs/DISEÑO_BD.md` — *Este documento es base para completarlo*
 - [ ] (*opcional*) Documentar el contrato de excepciones en `docs/CONTRATO_EXCEPCIONES.md` — *Responsabilidad tuya*
 
 ### Verificación final
 
-- [ ] La aplicación funciona igual desde el punto de vista del usuario — *Responsabilidad tuya*
-- [ ] Los datos persisten entre ejecuciones — *Responsabilidad tuya*
-- [ ] Los tests pasan todos sin cambios de lógica de dominio — *Responsabilidad tuya*
+- [x] La aplicación funciona igual desde el punto de vista del usuario — *Responsabilidad tuya*
+- [x] Los datos persisten entre ejecuciones — *Responsabilidad tuya*
+- [x] Los tests pasan todos sin cambios de lógica de dominio — *Responsabilidad tuya*
 
 
 ## Próximos pasos

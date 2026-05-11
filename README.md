@@ -14,7 +14,7 @@ que las gestionan.
 
 ## Instrucciones para ejecutar el proyecto
 
-### Fase 01 y 02
+### TODAS LAS FASES
 
 Clonar el repositorio:
 
@@ -28,15 +28,30 @@ Acceder a la carpeta de la fase y ejecutar desde la carpeta que contiene `gestic
 # Fase 01
 cd proyecto-colonia/proyecto/01-diseno-capas/gesticat
 python3 -m presentation.menu
+```
 
+```
 # Fase 02
 cd proyecto-colonia/proyecto/02-documentando
 python3 -m gesticat.presentation.menu
+```
 
+```
 # Fase 03
 cd proyecto-colonia/proyecto/03-testing
 python3 -m gesticat.presentation.menu
 
+python3 -m unittest
+
+coverage run -m unittest
+coverage report
+```
+
+```
+# Fase 04
+cd proyecto-colonia/proyecto/04-sqlite
+python3 -m gesticat.crear_bd
+python3 -m gesticat.presentation.menu
 ```
 
 ## Fases del proyecto
@@ -51,6 +66,11 @@ la documentación externa del proyecto en `docs/`.
 
 ### Fase 03 — Testing
 Reorganizar y ampliar los tests usando `unittest` y medir la cobertura con `coverage`.
+
+### Fase 04 - Persistencia con SQLite
+Añadir persistencia real con SQLite: diseño del esquema de base de datos,
+script de inicialización, repositorio SQLite, excepciones de dominio
+y tests específicos para el repositorio.
 
 ---
 
@@ -103,7 +123,7 @@ Reorganizar y ampliar los tests usando `unittest` y medir la cobertura con `cove
 </details>
 
 <details>
-<summary>Fase 03 — Testing ⬜</summary>
+<summary>Fase 03 — Testing ✅</summary>
 
 - [x] Copiar en `03-testing/` el estado base de `02-documentando/`.
 - [x] Reorganizar las pruebas en la subcarpeta `tests/`.
@@ -120,7 +140,7 @@ Reorganizar y ampliar los tests usando `unittest` y medir la cobertura con `cove
 </details>
 
 <details open>
-  <summary>Fase 04 - persistencia con SQLite</summary>
+  <summary>Fase 04 - Persistencia con SQLite ✅</summary>
 
 ### Diseño e implementación del esquema de base de datos
 
@@ -165,20 +185,20 @@ Reorganizar y ampliar los tests usando `unittest` y medir la cobertura con `cove
 
 - [x] *(opcional)* Actualizar tests existentes para esperar excepciones de dominio en lugar de excepciones genéricas de Python
 - [x] Verificar que `python -m unittest` pasa con todos los tests en verde
-- [ ] *(opcional)* Crear tests específicos para el repositorio SQLite
+- [x] *(opcional)* Crear tests específicos para el repositorio SQLite
 
 ### Documentación
 
-- [ ] Actualizar `CHANGELOG.md` (versión `0.4.0`) con los cambios principales
-- [ ] Actualizar `README.md` con instrucciones de cómo ejecutar el script de inicialización
-- [ ] Documentar el diseño de la BD en `docs/DISEÑO_BD.md`:
+- [x] Actualizar `CHANGELOG.md` (versión `0.4.0`) con los cambios principales
+- [x] Actualizar `README.md` con instrucciones de cómo ejecutar el script de inicialización
+- [x] Documentar el diseño de la BD en `docs/DISEÑO_BD.md`:
 - [ ] (*opcional*) Documentar el contrato de excepciones en `docs/CONTRATO_EXCEPCIONES.md`:
 
 ### Verificación final
 
-- [ ] La aplicación funciona igual desde el punto de vista del usuario (mismo menú, mismas operaciones)
-- [ ] Los datos persisten entre ejecuciones (cierra y reabre la app, verifica que los datos están)
-- [ ] Los tests pasan todos sin cambios de lógica de dominio
+- [X] La aplicación funciona igual desde el punto de vista del usuario (mismo menú, mismas operaciones)
+- [x] Los datos persisten entre ejecuciones (cierra y reabre la app, verifica que los datos están)
+- [x] Los tests pasan todos sin cambios de lógica de dominio
 
 </details>
 
