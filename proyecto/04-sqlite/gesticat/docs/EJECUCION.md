@@ -10,12 +10,12 @@
 
 ```bash
 git clone git@github.com:Siboney-python/proyecto-colonia.git
-cd proyecto-colonia/proyecto/03-testing
+cd proyecto-colonia/proyecto/04-sqlite
 ```
 
 ## Preparación del entorno
 
-Desde la carpeta `03-testing/`:
+Desde la carpeta `04-sqlite/`:
 
 ```bash
 python3 -m venv .venv
@@ -40,9 +40,17 @@ Instalar dependencias:
 pip install -r gesticat/requirements.txt
 ```
 
+## Crear base de datos
+
+Desde la carpeta `04-sqlite/`:
+
+```bash
+python3 -m gesticat.crear_bd
+```
+
 ## Ejecutar el menú
 
-Desde la carpeta `03-testing/`:
+Desde la carpeta `04-sqlite/`:
 
 ```bash
 python3 -m gesticat.presentation.menu
@@ -50,7 +58,7 @@ python3 -m gesticat.presentation.menu
 
 ## Ejecutar los tests
 
-Desde la carpeta `03-testing/`:
+Desde la carpeta `04-sqlite/`:
 
 ```bash
 python3 -m unittest
@@ -68,9 +76,9 @@ El reporte HTML se consulta en `htmlcov/index.html`.
 
 ## Flujo rápido de ejemplo
 
-Al arrancar la aplicación se cargan automáticamente cinco gatos de ejemplo
-y una colonia con responsable asignado. Puedes probar el sistema sin
-introducir datos manualmente:
+Al arrancar la aplicación se conecta a la base de datos `gesticat.db` con
+cinco gatos de ejemplo y una colonia con responsable asignado. Si aún no
+has ejecutado `crear_bd.py`, hazlo primero.
 
 ```
 Opción 9 → Reporte de colonia   (ver el estado inicial)

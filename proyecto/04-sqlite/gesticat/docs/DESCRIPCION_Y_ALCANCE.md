@@ -13,13 +13,13 @@ que puede registrar altas y bajas de gatos, marcar esterilizaciones, tramitar
 cambios de estado ante el ayuntamiento y consultar el censo actualizado en
 cualquier momento.
 
-## Objetivos de la fase 02
+## Objetivos de la fase 04
 
-- Mejorar la documentación inline del código: docstrings en módulos, clases
-  y métodos, y comentarios centrados en el "por qué" de las decisiones de diseño.
-- Crear la carpeta `docs/` con la documentación completa del proyecto.
-- Registrar la evolución del proyecto en `CHANGELOG.md`.
-- Aplicar las buenas prácticas de nomenclatura y estilo recogidas en PEP 8.
+- Añadir persistencia real con SQLite mediante `RepositorioGatosSQLite`.
+- Crear el script de inicialización de la base de datos (`crear_bd.py`).
+- Definir excepciones de dominio para la capa de persistencia (`errores.py`).
+- Mantener el repositorio en memoria como alternativa para desarrollo y tests.
+- Documentar el diseño de la base de datos en `docs/DISEÑO_BD.md`.
 
 ## Alcance
 
@@ -34,9 +34,8 @@ cualquier momento.
 - Pruebas manuales por componente (`test_*.py`).
 
 ### No incluye
-- Persistencia real (base de datos, archivos, API remota).
 - Interfaz gráfica o web.
-- Gestión de múltiples colonias.
+- Gestión de múltiples colonias o múltiples responsables simultáneos.
 - Módulo de adopciones ni seguimiento veterinario detallado.
 - Autenticación ni control de acceso.
 
@@ -47,4 +46,4 @@ cualquier momento.
 - Los estados del gato y de la colonia son cerrados y se definen mediante enums.
 - La esterilización es irreversible una vez aplicada.
 - Las fechas se manejan en formato `dd/mm/aaaa` o como objetos `date` de Python.
-- Los datos no persisten al cerrar la aplicación (repositorio en memoria).
+- Los datos persisten entre ejecuciones mediante SQLite (`gesticat.db`).

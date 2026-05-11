@@ -11,7 +11,7 @@ Sistema de gestión y censo de colonias felinas urbanas de Las Palmas de Gran Ca
   múltiples colonias) sin romper el núcleo del sistema.
 
 ## Estado de la fase
-Esta carpeta corresponde a la fase `03-testing`.
+Esta carpeta corresponde a la fase `04-sqlite/`.
 
 ## Requisitos
 
@@ -31,12 +31,25 @@ source .venv/Scripts/activate # Windows GitBash
 source .venv/Scripts/Activate.ps1 # Windows PowerShell
 
 pip install -r gesticat/requirements.txt
+
+python3 -m gesticat.crear_bd
 python3 -m gesticat.presentation.menu
 ```
 
+## Base de datos
+La aplicación usa SQLite para persistencia. El fichero `gesticat.db` se crea
+ejecutando el script de inicialización:
+
+```bash
+python3 -m gesticat.crear_bd
+```
+
+Esto crea las tablas (`responsables`, `colonias`, `gatos`) e inserta los datos
+iniciales. Si la BD ya existe, la elimina y la recrea desde cero.
+
 ## Uso (menú de consola)
 
-Ejecuta desde la carpeta `03-testing/`:
+Ejecuta desde la carpeta `04-sqlite/`:
 
 ```bash
 python3 -m gesticat.presentation.menu
@@ -48,7 +61,7 @@ y consultar reportes de censo y colonia.
 
 ## Tests
 
-Desde la carpeta `03-testing/`:
+Desde la carpeta `04-sqlite/`:
 
 ```bash
 python3 -m unittest
@@ -60,6 +73,7 @@ Para ejecutar un archivo concreto:
 python3 -m unittest gesticat.tests.test_gato
 python3 -m unittest gesticat.tests.test_responsable
 python3 -m unittest gesticat.tests.test_colonia
+python3 -m unittest gesticat.tests.test_repositorio_sqlite
 ```
 
 ## Cobertura
@@ -75,7 +89,7 @@ El reporte HTML queda en `htmlcov/index.html`.
 ## Estructura del proyecto
 
 ```
-03-testing/
+04-sqlite/
   gesticat/
     domain/
       gato.py
@@ -84,7 +98,9 @@ El reporte HTML queda en `htmlcov/index.html`.
       repositorio_gatos.py
     infrastructure/
       repositorio_gatos_memoria.py
+      repositorio_gatos_sqlite.py
       datos_iniciales.py
+      errores.py
     application/
       servicio_colonia.py
     presentation/
@@ -93,23 +109,39 @@ El reporte HTML queda en `htmlcov/index.html`.
       test_gato.py
       test_responsable.py
       test_colonia.py
+      test_repositorio_sqlite.py
     docs/
+	  ARQUITECTURA_POR_CAPAS.md
+      CASOS_DE_USO.md
+      CONTRATO_REPOSITORIO.md
+      DATOS_INICIALES.md
+      DESCRIPCION_Y_ALCANCE.md
+      DISEÑO_BD.md
+      EJECUCION.md
+      FUTURE_IMPROVEMENTS.md
+      MODELO_DE_DOMINIO.md
+      README.md
+      REGLAS_DE_NEGOCIO.md
+      TESTS_Y_PASOS.md
+      TROUBLESHOOTING.md
     requirements.txt
+    crear_bd.py
+    gesticat.db    
 ```
 
-- `presentation/menu.py`: interfaz de consola que solo pide datos y muestra resultados.
-- `application/servicio_colonia.py`: coordina los casos de uso sobre la `Colonia`
-  sin exponer la lógica interna.
-- `domain/`: alberga las entidades (`Gato`, `Colonia`, `Responsable`), las
-  validaciones y el contrato `RepositorioGatos`.
-- `infrastructure/`: contiene los datos iniciales y el repositorio en memoria
-  (`RepositorioGatosMemoria`).
-- `tests/`: pruebas unitarias con `unittest`.
+- `infrastructure/repositorio_gatos_sqlite.py`: repositorio con persistencia real
+  en SQLite. Usado por el flujo principal de la aplicación.
+- `infrastructure/repositorio_gatos_memoria.py`: repositorio en memoria para
+  desarrollo, demos y tests de dominio.
+- `infrastructure/errores.py`: excepciones de dominio para la capa de persistencia.
+- `infrastructure/crear_bd.py`: script para crear el esquema e insertar datos iniciales.
+- `tests/`: pruebas unitarias con `unittest`, incluyendo tests específicos para
+  el repositorio SQLite.
 
 ## Documentación
 
-Consulta la documentación detallada del proyecto en `docs/`
-(índice en [docs/README.md](docs/README.md)).
+Consulta la documentación detallada del proyecto en
+[gesticat/docs/README.md](gesticat/docs/README.md).
 
 ## Changelog
 Historial de cambios en `CHANGELOG.md`.

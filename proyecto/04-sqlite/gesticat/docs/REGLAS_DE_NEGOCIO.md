@@ -86,7 +86,7 @@ reales de gestión de una colonia felina urbana.
 
 ## Reglas del repositorio
 
-- `insertar()` falla si ya existe un gato con el mismo ID.
-- `actualizar()` falla si no existe un gato con ese ID.
-- `quitar()` falla si no existe un gato con ese ID.
+- `insertar()` lanza `GatoYaExisteError` si ya existe un gato con el mismo ID.
+- `actualizar()` lanza `GatoNoEncontradoError` si no existe un gato con ese ID.
+- `quitar()` lanza `GatoNoEncontradoError` si no existe un gato con ese ID.
 - `obtener()` devuelve `None` si el ID no existe — no lanza error.
