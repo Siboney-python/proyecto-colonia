@@ -5,7 +5,7 @@ cada una.
 
 ## Cómo ejecutar los tests
 
-Desde la carpeta que contiene el paquete `gesticat/` (en este caso `03-testing/`):
+Desde la carpeta que contiene el paquete `gesticat/` (en este caso `04-sqlite/`):
 
 ```bash
 python3 -m unittest
@@ -17,6 +17,7 @@ Para ejecutar un archivo concreto:
 python3 -m unittest gesticat.tests.test_gato
 python3 -m unittest gesticat.tests.test_responsable
 python3 -m unittest gesticat.tests.test_colonia
+python3 -m unittest gesticat.tests.test_repositorio_sqlite
 ```
 
 ## Qué valida cada test
@@ -53,9 +54,23 @@ Valida la entidad `Colonia` y el repositorio en memoria:
 - Listado de gatos sin esterilizar, incluyendo exclusión de inactivos.
 - Repositorio en memoria: inserción duplicada, actualización y borrado inexistentes.
 
+### `tests/test_repositorio_sqlite.py`
+Valida `RepositorioGatosSQLite`:
+- `insertar()` persiste el gato correctamente.
+- `insertar()` persiste la clínica veterinaria y esterilización.
+- `insertar()` duplicado lanza `GatoYaExisteError`.
+- `obtener()` devuelve `None` si el gato no existe.
+- `listar()` devuelve todos los gatos de la colonia.
+- `listar()` devuelve lista vacía si no hay gatos.
+- `actualizar()` persiste los cambios correctamente.
+- `actualizar()` inexistente lanza `GatoNoEncontradoError`.
+- `quitar()` elimina el gato correctamente.
+- `quitar()` inexistente lanza `GatoNoEncontradoError`.
+- El mensaje de la excepción incluye el id del gato.
+
 ## Cobertura
 
-Desde la carpeta que contiene el paquete `gesticat/` (en este caso `03-testing/`):
+Desde la carpeta que contiene el paquete `gesticat/` (en este caso `04-sqlite/`):
 
 ```bash
 coverage run -m unittest

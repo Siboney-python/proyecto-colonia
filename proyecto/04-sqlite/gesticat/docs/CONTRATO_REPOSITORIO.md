@@ -73,5 +73,12 @@ servicio = crear_servicio_sqlite()  # producción
 - `ResponsableNoEncontradoError`: id no encontrado al obtener un responsable.
 
 
+## Tests
 
+- `tests/test_repositorio_sqlite.py`: cubre `insertar`, `obtener`, `actualizar`,
+  `listar`, `quitar` y excepciones del repositorio SQLite.
+
+```bash
+python3 -m unittest gesticat.tests.test_repositorio_sqlite
+```
   
