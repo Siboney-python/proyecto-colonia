@@ -54,6 +54,15 @@ python3 -m gesticat.crear_bd
 python3 -m gesticat.presentation.menu
 ```
 
+```
+# Fase 05
+cd proyecto-colonia/proyecto/05-flask-01
+python3 -m gesticat.crear_bd
+python3 -m gesticat.presentation.app
+
+# Abre `http://localhost:5000` en el navegador.
+```
+
 ## Fases del proyecto
 
 ### Fase 01 — Diseño por capas
@@ -71,6 +80,11 @@ Reorganizar y ampliar los tests usando `unittest` y medir la cobertura con `cove
 Añadir persistencia real con SQLite: diseño del esquema de base de datos,
 script de inicialización, repositorio SQLite, excepciones de dominio
 y tests específicos para el repositorio.
+
+### Fase 05 — Interfaz web con Flask (parte 1)
+Añadir Flask como segunda capa de presentación. Todas las operaciones del
+menú de consola expuestas como routes de una API web. El menú de consola
+sigue funcionando sin cambios.
 
 ---
 
@@ -139,7 +153,7 @@ y tests específicos para el repositorio.
 
 </details>
 
-<details open>
+<details>
   <summary>Fase 04 - Persistencia con SQLite ✅</summary>
 
 ### Diseño e implementación del esquema de base de datos
@@ -202,6 +216,24 @@ y tests específicos para el repositorio.
 
 </details>
 
+<details open>
+  <summary>Fase 05 — Interfaz web con Flask (parte 1) 🚧</summary>
+
+- [ ] Carpeta `05-flask-01/` creada con el contenido de `04-sqlite/` como base.
+- [ ] `requirements.txt` incluye `flask`.
+- [ ] `presentation/app.py` ejecutable con `python -m gesticat.presentation.app`.
+- [ ] Route `/` con mensaje de bienvenida y enlaces a las rutas principales.
+- [ ] Routes de lectura: `/gatos`, `/gatos/<id_gato>`, `/gatos/sin-esterilizar`, `/colonia`, `/colonia/censo`.
+- [ ] Routes de escritura: registrar, eliminar, cambiar estado, esterilizar, tramitar anexo, asignar responsable.
+- [ ] Parámetros tipados con converters (`<int:id>`, `<float:precio>`…) donde aplica.
+- [ ] Routes que modifican datos redirigen con `redirect(url_for(...))`.
+- [ ] Excepciones de dominio capturadas con código HTTP apropiado (404, 409, 400).
+- [ ] `presentation/menu.py` sigue funcionando sin cambios.
+- [ ] `CHANGELOG.md` con entrada nueva (`0.5.0`).
+- [ ] `README.md` y `docs/EJECUCION.md` actualizados.
+- [ ] `docs/ARQUITECTURA_POR_CAPAS.md` actualizado con `app.py`.
+
+</details>
 ---
 
 ## Aspectos a tener en cuenta durante el desarrollo

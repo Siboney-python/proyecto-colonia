@@ -1,2 +1,12 @@
 __pycache__/
 *.pyc
+
+# Entornos virtuales
+.venv/
+
+# Base de datos SQLite
+*.db
+
+# Coverage
+.coverage
+htmlcov/
