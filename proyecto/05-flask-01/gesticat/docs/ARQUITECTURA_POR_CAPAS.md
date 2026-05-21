@@ -35,12 +35,13 @@ pertenece exclusivamente al dominio.
 - Usa el repositorio a través del contrato definido en el dominio.
 
 ### Presentation
-Interfaz de consola. Solo pide datos al usuario y muestra resultados.
-No contiene validaciones de negocio ni lógica de dominio.
+Interfaz de usuario. Solo pide datos y muestra resultados. No contiene
+validaciones de negocio ni lógica de dominio. El proyecto tiene dos
+interfaces de presentación independientes que comparten el mismo servicio:
 
-- Recoge inputs del usuario.
-- Llama al servicio de aplicación.
-- Muestra los resultados o errores al usuario.
+- `menu.py` — interfaz de consola.
+- `app.py` — interfaz web con Flask. Expone las mismas operaciones como
+  routes HTTP. Devuelve texto plano en esta fase.
 
 ## Dependencias permitidas
 
@@ -68,11 +69,17 @@ gesticat/
     colonia.py                  → entidad Colonia y enum EstadoColonia
     repositorio_gatos.py        → contrato RepositorioGatos
   infrastructure/
-    repositorio_gatos_memoria.py → implementación en memoria del contrato
-    datos_iniciales.py           → datos de ejemplo para arrancar la aplicación
+    repositorio_gatos_memoria.py  → implementación en memoria del contrato
+    repositorio_gatos_sqlite.py   → implementación SQLite del contrato
+    errores.py                    → excepciones de dominio para persistencia
+    datos_iniciales.py            → datos de ejemplo para arrancar la aplicación
   application/
-    servicio_colonia.py          → casos de uso de ServicioColonia
+    servicio_colonia.py           → casos de uso de ServicioColonia
   presentation/
-    menu.py                      → interfaz de consola
-  test_*.py                      → pruebas manuales por componente
+    menu.py                       → interfaz de consola
+    app.py                        → interfaz web con Flask
+  tests/
+    test_gato.py                  → tests de la entidad Gato
+    test_responsable.py           → tests de la entidad Responsable
+    test_colonia.py               → tests de la entidad Colonia
 ```

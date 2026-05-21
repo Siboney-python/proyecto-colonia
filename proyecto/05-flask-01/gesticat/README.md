@@ -11,12 +11,12 @@ Sistema de gestión y censo de colonias felinas urbanas de Las Palmas de Gran Ca
   múltiples colonias) sin romper el núcleo del sistema.
 
 ## Estado de la fase
-Esta carpeta corresponde a la fase `04-sqlite/`.
+Esta carpeta corresponde a la fase `05-flask-01/`.
 
 ## Requisitos
 
 - Python 3.10+.
-- Dependencias en `gesticat/requirements.txt`.
+- Dependencias en `gesticat/requirements.txt` (incluye `coverage` y `flask`).
 - Compatible con Linux, macOS y Windows.
 
 ## Quickstart
@@ -58,6 +58,34 @@ python3 -m gesticat.presentation.menu
 El menú permite: registrar y borrar gatos, actualizar estado y esterilización,
 listar gatos sin esterilizar, asignar responsable, tramitar anexos municipales
 y consultar reportes de censo y colonia.
+
+## Uso (interfaz web)
+
+Ejecuta desde la carpeta que contiene `gesticat/`:
+
+```bash
+python3 -m gesticat.presentation.app
+```
+
+Abre `http://localhost:5000` en el navegador. Rutas disponibles:
+
+**Lectura:**
+- `/` - bienvenida con enlaces a las rutas principales.
+- `/gatos` - lista todos los gatos de la colonia.
+- `/gatos/{id_gato}` - detalle de un gato (404 si no existe).
+- `/gatos/sin-esterilizar` - gatos activos sin esterilizar.
+- `/colonia` - reporte general de la colonia.
+- `/colonia/censo` - reporte de censo (estadísticas).
+
+**Escritura:**
+- `/gatos/nuevo/{id}/{nombre}/{color}/{sexo}/{estado}/{clinica}/{esterilizado}` 
+  - registrar gato.
+- `/gatos/{id_gato}/eliminar` - eliminar gato.
+- `/gatos/{id_gato}/estado/{nuevo_estado}` - cambiar estado.
+- `/gatos/{id_gato}/esterilizar/{clinica}` - marcar como esterilizado.
+- `/colonia/estado/{nuevo_estado}` - tramitar anexo.
+- `/colonia/responsable/{tipo}/{nombre}/{telefono}/{email}/{identificacion}/{campo_extra}` 
+  - asignar responsable.
 
 ## Tests
 

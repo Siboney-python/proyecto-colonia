@@ -3,19 +3,19 @@
 ## Requisitos
 
 - Python 3.10+.
-- No requiere dependencias externas (solo librería estándar).
+- Dependencias en `requirements.txt` (incluye `coverage` y `flask`).
 - Compatible con Linux, macOS y Windows.
 
 ## Clonar el repositorio
 
 ```bash
 git clone git@github.com:Siboney-python/proyecto-colonia.git
-cd proyecto-colonia/proyecto/04-sqlite
+cd proyecto-colonia/proyecto/05-flask-01
 ```
 
 ## Preparación del entorno
 
-Desde la carpeta `04-sqlite/`:
+Desde la carpeta `05-flask-01/`:
 
 ```bash
 python3 -m venv .venv
@@ -37,20 +37,34 @@ source .venv/Scripts/Activate.ps1
 Instalar dependencias:
 
 ```bash
-pip install -r gesticat/requirements.txt
+pip install -r gesticat/requirements.txt 
 ```
 
 ## Crear base de datos
 
-Desde la carpeta `04-sqlite/`:
+Desde la carpeta `05-flask-01/`:
 
 ```bash
 python3 -m gesticat.crear_bd
 ```
 
+## Ejecutar la interfaz web (Flask)
+
+Desde la carpeta `05-flask-01/`:
+
+```bash
+python3 -m gesticat.presentation.app
+```
+
+Abre `http://localhost:5000` en el navegador.
+
+La interfaz web y el menú de consola son independientes y comparten
+el mismo `ServicioColonia`. Para usar el menú simultáneamente abre
+otra terminal.
+
 ## Ejecutar el menú
 
-Desde la carpeta `04-sqlite/`:
+Desde la carpeta `05-flask-01/`:
 
 ```bash
 python3 -m gesticat.presentation.menu
@@ -58,7 +72,7 @@ python3 -m gesticat.presentation.menu
 
 ## Ejecutar los tests
 
-Desde la carpeta `04-sqlite/`:
+Desde la carpeta `05-flask-01/`:
 
 ```bash
 python3 -m unittest
@@ -74,7 +88,7 @@ coverage html
 
 El reporte HTML se consulta en `htmlcov/index.html`.
 
-## Flujo rápido de ejemplo
+## Flujo rápido de ejemplo con menu.py
 
 Al arrancar la aplicación se conecta a la base de datos `gesticat.db` con
 cinco gatos de ejemplo y una colonia con responsable asignado. Si aún no
@@ -86,7 +100,7 @@ Opción 8 → Reporte de censo     (ver población activa)
 Opción 5 → Listar sin esterilizar
 ```
 
-## Flujo completo de ejemplo
+## Flujo completo de ejemplo con menu.py
 
 1. Opción 9: Ver el reporte de colonia — estado, responsable y total de gatos.
 2. Opción 1: Registrar un gato nuevo (ej. ID=006, nombre=Canela, color=Naranja,
@@ -112,3 +126,5 @@ Opción 5 → Listar sin esterilizar
   esterilización es irreversible.
 - `❌ No se puede volver al estado SOLICITADA` — el estado inicial de la
   colonia no puede recuperarse una vez tramitado un anexo.
+  
+

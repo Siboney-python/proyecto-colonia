@@ -4,22 +4,49 @@ Todos los cambios relevantes del proyecto, organizados por versión y fase.
 
 ---
 
+## [0.5.0] - 2026-05-21 (Fase 05: interfaz web con Flask)
+
+### Added
+- `presentation/app.py`: interfaz web con Flask. Expone todas las
+  operaciones del dominio como routes HTTP.
+- Route `/`: bienvenida con enlaces a las rutas principales de lectura.
+- Routes de lectura: `/`, `/gatos`, `/gatos/{id_gato}`,
+  `/gatos/sin-esterilizar`, `/colonia`, `/colonia/censo`.
+- Routes de escritura: `/gatos/nuevo/...`, `/gatos/{id_gato}/eliminar`,
+  `/gatos/{id_gato}/estado/{nuevo_estado}`,
+  `/gatos/{id_gato}/esterilizar/{clinica}`,
+  `/colonia/estado/{nuevo_estado}`, `/colonia/responsable/{tipo}/...`.
+- `requirements.txt`: añadida dependencia `flask`.
+
+### Changed
+- `domain/colonia.py`: añadido `listar_gatos()`.
+- `application/servicio_colonia.py`: añadidos `listar_gatos()` y
+  `obtener_gato()`.
+
 ## [0.4.0] - 2026-05-06 (Fase 04: persistencia con SQLite)
 
 ### Added
 - `crear_bd.py`: script para crear el esquema e insertar datos iniciales.
-- `infrastructure/errores.py`: ErrorRepositorio, GatoYaExisteError, GatoNoEncontradoError, ColoniaYaExisteError, ColoniaNoEncontradaError, ResponsableYaExisteError, ResponsableNoEncontradaError y ErrorPersistencia.
-- `infrastructure/repositorio_gatos_sqlite.py`: `RepositorioGatosSQLite` con `insertar`, `obtener`, `actualizar`, `listar` y `quitar`.
+- `infrastructure/errores.py`: ErrorRepositorio, GatoYaExisteError, 
+  GatoNoEncontradoError, ColoniaYaExisteError, ColoniaNoEncontradaError, 
+  ResponsableYaExisteError, ResponsableNoEncontradaError y ErrorPersistencia.
+- `infrastructure/repositorio_gatos_sqlite.py`: `RepositorioGatosSQLite` 
+  con `insertar`, `obtener`, `actualizar`, `listar` y `quitar`.
 - `infrastructure/datos_iniciales.py`:  `crear_servicio_sqlite()` servicio (SQLite).
 - `gesticat.db`: base de datos SQLite con los datos iniciales.
 - `docs/DISEÑO_BD.md`: diseño de tablas, relaciones y esquema de la base de datos.
 
 ### Changed
-- `infrastructure/repositorio_gatos_memoria.py`: excepciones estandarizadas (`GatoYaExisteError`, `GatoNoEncontradoError`).
-- `infrastructure/datos_iniciales.py`: separadas `crear_servicio()` (memoria) y `crear_servicio_sqlite()` (SQLite). El menú usa SQLite por defecto.
-- `presentation/menu.py`: usa `crear_servicio_sqlite()` y captura `ErrorRepositorio` además de `ValueError`.
-- `tests/test_colonia.py`: actualizado para esperar excepciones de dominio en lugar de `ValueError`.
-- `docs/CONTRATO_REPOSITORIO.md`: actualizado con excepciones de dominio e implementaciones disponibles.
+- `infrastructure/repositorio_gatos_memoria.py`: excepciones estandarizadas 
+  (`GatoYaExisteError`, `GatoNoEncontradoError`).
+- `infrastructure/datos_iniciales.py`: separadas `crear_servicio()` (memoria) 
+  y `crear_servicio_sqlite()` (SQLite). El menú usa SQLite por defecto.
+- `presentation/menu.py`: usa `crear_servicio_sqlite()` y captura 
+  `ErrorRepositorio` además de `ValueError`.
+- `tests/test_colonia.py`: actualizado para esperar excepciones de 
+  dominio en lugar de `ValueError`.
+- `docs/CONTRATO_REPOSITORIO.md`: actualizado con excepciones de dominio 
+  e implementaciones disponibles.
 
 
 ## [0.3.0] - 2026-04-18 (Fase 03: testing)
@@ -50,7 +77,8 @@ Versión disponible en `proyecto/03-testing/`
 - `RepositorioGatos` convertido a `ABC` con `@abstractmethod`.
 
 ### Removed
-- Tests por pasos en la raiz del paquete (`test_*.py`) reemplazados por la estructura de pruebas en `tests/`.
+- Tests por pasos en la raiz del paquete (`test_*.py`) reemplazados por 
+  la estructura de pruebas en `tests/`.
 
 
 ## [0.2.1] - 2026-04-08 (Fase 02: correcciones)

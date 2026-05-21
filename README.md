@@ -219,19 +219,19 @@ sigue funcionando sin cambios.
 <details open>
   <summary>Fase 05 — Interfaz web con Flask (parte 1) 🚧</summary>
 
-- [ ] Carpeta `05-flask-01/` creada con el contenido de `04-sqlite/` como base.
-- [ ] `requirements.txt` incluye `flask`.
-- [ ] `presentation/app.py` ejecutable con `python -m gesticat.presentation.app`.
-- [ ] Route `/` con mensaje de bienvenida y enlaces a las rutas principales.
-- [ ] Routes de lectura: `/gatos`, `/gatos/<id_gato>`, `/gatos/sin-esterilizar`, `/colonia`, `/colonia/censo`.
-- [ ] Routes de escritura: registrar, eliminar, cambiar estado, esterilizar, tramitar anexo, asignar responsable.
-- [ ] Parámetros tipados con converters (`<int:id>`, `<float:precio>`…) donde aplica.
-- [ ] Routes que modifican datos redirigen con `redirect(url_for(...))`.
-- [ ] Excepciones de dominio capturadas con código HTTP apropiado (404, 409, 400).
-- [ ] `presentation/menu.py` sigue funcionando sin cambios.
-- [ ] `CHANGELOG.md` con entrada nueva (`0.5.0`).
-- [ ] `README.md` y `docs/EJECUCION.md` actualizados.
-- [ ] `docs/ARQUITECTURA_POR_CAPAS.md` actualizado con `app.py`.
+- [x] Carpeta `05-flask-01/` creada con el contenido de `04-sqlite/` como base.
+- [x] `requirements.txt` incluye `flask`.
+- [x] `presentation/app.py` ejecutable con `python -m gesticat.presentation.app`.
+- [x] Route `/` con mensaje de bienvenida y enlaces a las rutas principales.
+- [x] Routes de lectura: `/gatos`, `/gatos/<id_gato>`, `/gatos/sin-esterilizar`, `/colonia`, `/colonia/censo`.
+- [x] Routes de escritura: registrar, eliminar, cambiar estado, esterilizar, tramitar anexo, asignar responsable.
+- [x] Parámetros tipados con converters (`<int:id>`, `<float:precio>`…) donde aplica.
+- [x] Routes que modifican datos redirigen con `redirect(url_for(...))`.
+- [x] Excepciones de dominio capturadas con código HTTP apropiado (404, 409, 400).
+- [x] `presentation/menu.py` sigue funcionando sin cambios.
+- [x] `CHANGELOG.md` con entrada nueva (`0.5.0`).
+- [x] `README.md` y `docs/EJECUCION.md` actualizados.
+- [x] `docs/ARQUITECTURA_POR_CAPAS.md` actualizado con `app.py`.
 
 </details>
 ---
