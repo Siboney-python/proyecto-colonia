@@ -217,7 +217,7 @@ sigue funcionando sin cambios.
 </details>
 
 <details open>
-  <summary>Fase 05 — Interfaz web con Flask (parte 1) 🚧</summary>
+  <summary>Fase 05 — Interfaz web con Flask (parte 1) ✅</summary>
 
 - [x] Carpeta `05-flask-01/` creada con el contenido de `04-sqlite/` como base.
 - [x] `requirements.txt` incluye `flask`.

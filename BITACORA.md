@@ -16,27 +16,25 @@ cerradas como estados, sexos o tipos, evitando el uso de strings o números
 valor asociado (`Sexo.HEMBRA = "H"`).
 Documentación oficial: https://docs.python.org/3/library/enum.html
 
-### Conversión de enums a SQLite y viceversa
+#### Buscar un miembro: `[]` vs `()`
+Dos formas de obtener un miembro de un enum en Python:
+- `Enum("valor")` — busca por **value**. Usar cuando lo que llega (por URL
+  o desde SQLite) coincide con el value del enum. Ejemplo: `Sexo("H")` porque
+  `Sexo.HEMBRA = "H"`. Lanza `ValueError` si no encuentra coincidencia.
+- `Enum["NOMBRE"]` — busca por **name**. Usar cuando lo que llega coincide
+  con el name del enum. Ejemplo: `EstadoGato["ACOG"]` porque el value es
+  `"En acogida"`, no `"ACOG"`. Lanza `KeyError` si no encuentra coincidencia.
 
-SQLite no tiene tipo ENUM. Para guardar un enum de Python hay que
-convertirlo a texto o número. Al recuperarlo, hay que convertirlo
-de vuelta al enum.
+Usar `.name` es más seguro para enums cuyos valores pueden cambiar, porque
+el nombre del miembro en el código es más estable que su descripción textual.
 
-Hay dos formas según cómo esté definido el enum:
-
-**Por valor** — cuando el valor ya es un string corto y estable:
-
-
-**Por nombre** — cuando el valor es largo o podría cambiar:
-
-
-La diferencia entre paréntesis y corchetes:
-- `Sexo("M")` busca el miembro cuyo `.value` es `"M"`
-- `EstadoGato["COL"]` busca el miembro cuyo `.name` es `"COL"`
-
-Usar `.name` es más seguro para enums cuyos valores pueden cambiar,
-porque el nombre del miembro en el código es más estable que su
-descripción textual.
+#### Enums en SQLite
+SQLite no tiene tipo ENUM. Para guardar un enum hay que convertirlo a texto
+al escribir, y convertirlo de vuelta al enum al leer:
+- **Por valor** — cuando el value ya es un string corto y estable:
+  guardar `sexo.value` (`"H"`), recuperar con `Sexo("H")`.
+- **Por nombre** — cuando el value es largo o podría cambiar:
+  guardar `estado.name` (`"COL"`), recuperar con `EstadoGato["COL"]`.
 
 ### Fail fast
 Principio de diseño que dice que un sistema debe detectar y reportar errores
@@ -279,6 +277,39 @@ En GestiCat lo mantengo en el repositorio para que pueda verse sin necesidad de 
 
 En un proyecto real se añadiría al `.gitignore`.
 
+
+## Flask
+### Route
+Equivalente web del `if opcion == "1":` del menú de consola. El decorador
+`@app.route("/gatos")` le dice a Flask: "cuando el navegador pida `/gatos`,
+ejecuta esta función". Lo que la función devuelve es lo que el navegador muestra.
+
+### Converters en rutas Flask
+Permiten validar y convertir el tipo de un parámetro directamente en la URL.
+`<int:id>` solo acepta enteros, `<float:precio>` solo acepta decimales. Si el
+valor no coincide con el tipo, Flask devuelve 404 automáticamente sin llegar
+a ejecutar la función.
+
+### `redirect` + `url_for`
+Patrón "actúa → redirige" para rutas que modifican datos. Tras una acción
+de escritura (eliminar, cambiar estado, esterilizar...) se redirige al recurso
+afectado en lugar de devolver texto directamente. Evita que al recargar la
+página se repita la acción. `url_for("nombre_funcion")` genera la URL a partir
+del nombre de la función, sin hardcodear rutas.
+
+### Códigos de estado HTTP
+Indican el resultado de una petición. Los más usados en GestiCat:
+- `200 OK` — lectura correcta (es el valor por defecto en Flask).
+- `201 Created` — recurso creado correctamente.
+- `400 Bad Request` — datos inválidos o validación fallida.
+- `404 Not Found` — recurso no encontrado.
+- `409 Conflict` — conflicto de estado (por ejemplo, gato duplicado).
+
+### `git rm --cached`
+Elimina un archivo del índice de git sin borrarlo del disco. Útil para dejar
+de rastrear archivos que no deberían estar en el repositorio (como `*.db` o
+`.venv/`) pero que ya habían sido añadidos por error en un commit anterior.
+Después de ejecutarlo hay que hacer commit para que el cambio quede registrado.
 
 ### Parser / Parsear
 Leer un dato en bruto y convertirlo a una estructura que el programa
