@@ -8,18 +8,18 @@ de una colonia felina urbana. Permite registrar gatos con sus datos básicos
 responsable de la colonia, controlar el estado administrativo mediante anexos
 municipales y obtener reportes de población.
 
-El sistema está pensado para ser usado por la persona responsable de la colonia,
-que puede registrar altas y bajas de gatos, marcar esterilizaciones, tramitar
-cambios de estado ante el ayuntamiento y consultar el censo actualizado en
-cualquier momento.
+El sistema dispone de dos interfaces de usuario independientes que comparten
+el mismo dominio y la misma base de datos SQLite:
+- **Menú de consola** (`presentation/menu.py`) — interfaz interactiva por terminal.
+- **API web con Flask** (`presentation/app.py`) — interfaz HTTP accesible desde
+  el navegador.
 
-## Objetivos de la fase 04
+## Objetivos de la fase actual
 
-- Añadir persistencia real con SQLite mediante `RepositorioGatosSQLite`.
-- Crear el script de inicialización de la base de datos (`crear_bd.py`).
-- Definir excepciones de dominio para la capa de persistencia (`errores.py`).
-- Mantener el repositorio en memoria como alternativa para desarrollo y tests.
-- Documentar el diseño de la base de datos en `docs/DISEÑO_BD.md`.
+- Añadir Flask como segunda capa de presentación sin modificar el dominio.
+- Exponer todas las operaciones del menú de consola como routes HTTP.
+- Añadir observabilidad global: manejadores de error 404 y 500, ruta `/ayuda`
+  con introspección de routes, y logging de peticiones en `gesticat.log`.
 
 ## Alcance
 
@@ -27,14 +27,16 @@ cualquier momento.
 - Entidades y reglas del dominio (`domain/gato.py`, `domain/colonia.py`,
   `domain/responsable.py`).
 - Contrato del repositorio (`domain/repositorio_gatos.py`).
+- Implementación SQLite del repositorio (`infrastructure/repositorio_gatos_sqlite.py`).
 - Implementación en memoria del repositorio y datos de ejemplo
   (`infrastructure/repositorio_gatos_memoria.py`, `infrastructure/datos_iniciales.py`).
+- Excepciones de dominio para persistencia (`infrastructure/errores.py`).
 - Servicio de aplicación (`application/servicio_colonia.py`).
 - Menú de consola (`presentation/menu.py`).
-- Pruebas manuales por componente (`test_*.py`).
+- Interfaz web con Flask (`presentation/app.py`).
+- Pruebas unitarias con `unittest` (`tests/`).
 
 ### No incluye
-- Interfaz gráfica o web.
 - Gestión de múltiples colonias o múltiples responsables simultáneos.
 - Módulo de adopciones ni seguimiento veterinario detallado.
 - Autenticación ni control de acceso.

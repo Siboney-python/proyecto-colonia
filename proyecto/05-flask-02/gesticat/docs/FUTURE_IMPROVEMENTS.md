@@ -40,20 +40,35 @@ qué archivo las originó y qué habría que implementar.
 
 ---
 
-## Gestión de múltiples colonias y responsables
+## Gestión de múltiples colonias, responsables y autenticación
 
-- **Origen**: `infrastructure/datos_iniciales.py`, `application/servicio_colonia.py`
-- **Idea**: el sistema actualmente gestiona una única colonia con un único
-  responsable. Para dar soporte a múltiples colonias habría que:
-  - Crear `RepositorioColoniasSQLite` e implementar su contrato.
-  - Crear `RepositorioResponsablesSQLite` e implementar su contrato.
+- **Origen**: `infrastructure/datos_iniciales.py`, `application/servicio_colonia.py`,
+  `presentation/app.py`, `domain/responsable.py`
+- **Idea**: ampliar el sistema para gestionar múltiples colonias con sus
+  responsables, y convertir estos en usuarios autenticados de la interfaz web.
+  Las operaciones de lectura serían públicas, pero las de escritura requerirían
+  estar autenticado. Cada responsable solo podría gestionar su propia colonia.
+- **Lo que implicaría**:
+  - Crear `RepositorioResponsables` con su contrato e implementación SQLite
+    — mismo patrón que `RepositorioGatos`.
+  - Crear `RepositorioColonias` con su contrato e implementación SQLite
+    para gestionar múltiples colonias.
   - Ampliar `ServicioColonia` o crear un `ServicioGestion` que permita
     listar, crear y seleccionar colonias.
   - Adaptar el menú para que el usuario elija con qué colonia trabajar
     antes de operar.
-  - La base de datos ya está preparada para ello: las tablas `colonias`
-    y `responsables` con sus claves foráneas soportan múltiples registros
-    desde el diseño actual.
-- **Por qué no está implementado**: el alcance actual del proyecto es
-  una sola colonia. La arquitectura por capas y el esquema SQLite están
-  diseñados para facilitar esta ampliación en el futuro.
+  - Añadir campos `usuario` y `contraseña` (hasheada) a la entidad
+    `Responsable` o crear una entidad `Usuario` separada vinculada al
+    responsable.
+  - Implementar el flujo de login/logout en `app.py` con sesiones Flask.
+  - Proteger los routes de escritura con un decorador que compruebe
+    si hay sesión activa.
+  - Filtrar los datos por colonia según el responsable autenticado —
+    un responsable no podría ver ni modificar la colonia de otro.
+  - Adaptar el esquema SQLite para almacenar las credenciales y las
+    relaciones entre usuarios, responsables y colonias.
+- **Por qué no está implementado**: el alcance actual es una sola colonia.
+  La arquitectura por capas y el esquema SQLite están diseñados para
+  facilitar esta ampliación. Requiere además el módulo de autenticación
+  de Flask (flask-login o sesiones nativas), previsto para fases posteriores.
+
