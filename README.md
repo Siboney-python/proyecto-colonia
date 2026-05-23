@@ -216,22 +216,71 @@ sigue funcionando sin cambios.
 
 </details>
 
-<details open>
-  <summary>Fase 05 — Interfaz web con Flask (parte 1) ✅</summary>
+<details>
+  <summary>Fase 05 - Flask como nueva capa de presentación (parte 1) ✅</summary>
+
+### Preparación
 
 - [x] Carpeta `05-flask-01/` creada con el contenido de `04-sqlite/` como base.
 - [x] `requirements.txt` incluye `flask`.
+
+### Aplicación Flask
+
 - [x] `presentation/app.py` ejecutable con `python -m gesticat.presentation.app`.
 - [x] Route `/` con mensaje de bienvenida y enlaces a las rutas principales.
 - [x] Routes de lectura: `/gatos`, `/gatos/<id_gato>`, `/gatos/sin-esterilizar`, `/colonia`, `/colonia/censo`.
 - [x] Routes de escritura: registrar, eliminar, cambiar estado, esterilizar, tramitar anexo, asignar responsable.
 - [x] Parámetros tipados con converters (`<int:id>`, `<float:precio>`…) donde aplica.
 - [x] Routes que modifican datos redirigen con `redirect(url_for(...))`.
+
+### Gestión de errores
+
 - [x] Excepciones de dominio capturadas con código HTTP apropiado (404, 409, 400).
+
+### Integridad de capas
+
 - [x] `presentation/menu.py` sigue funcionando sin cambios.
+
+### Documentación
+
 - [x] `CHANGELOG.md` con entrada nueva (`0.5.0`).
 - [x] `README.md` y `docs/EJECUCION.md` actualizados.
 - [x] `docs/ARQUITECTURA_POR_CAPAS.md` actualizado con `app.py`.
+
+</details>
+
+<details open>
+  <summary>Fase 05 - Observabilidad: manejadores de error, introspección y logging (parte 2) 🚧</summary>
+
+### Preparación
+
+- [ ] Carpeta `05-flask-02/` creada con el contenido de `05-flask-01/` como base.
+
+### Manejadores globales de error
+
+- [ ] `@app.errorhandler(404)` registrado y devuelve HTML personalizado al visitar una URL inexistente.
+- [ ] `@app.errorhandler(500)` registrado y devuelve HTML personalizado. Probado provocando una excepción no controlada.
+
+### Introspección
+
+- [ ] Ruta `/ayuda` que itera `app.url_map.iter_rules()`, filtra `static` y muestra todas las rutas registradas. Al añadir o quitar rutas, `/ayuda` refleja el cambio sin tocar su código.
+
+### Logging
+
+- [ ] `logging.basicConfig(...)` configurado al inicio de `app.py` con nombre de fichero `gesticat.log`.
+- [ ] Hook `@app.before_request` registra cada petición con método y ruta.
+- [ ] El fichero `.log` aparece en disco al hacer peticiones, con timestamp y una línea por petición.
+- [ ] `.gitignore` incluye `*.log` y el fichero de log no se versiona.
+
+### Integridad de capas y coexistencia
+
+- [ ] Coexistencia menu↔web verificada: un alta hecha desde la web aparece en el menú y viceversa.
+- [ ] `presentation/menu.py` sigue funcionando sin cambios.
+
+### Documentación
+
+- [ ] `CHANGELOG.md` con entrada nueva `0.6.0`.
+- [ ] `README.md` y `docs/EJECUCION.md` actualizados (mencionan `/ayuda`, el fichero `.log` y cómo reconfigurar el logging).
 
 </details>
 ---
