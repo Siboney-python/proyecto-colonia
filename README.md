@@ -254,33 +254,33 @@ sigue funcionando sin cambios.
 
 ### Preparación
 
-- [ ] Carpeta `05-flask-02/` creada con el contenido de `05-flask-01/` como base.
+- [x] Carpeta `05-flask-02/` creada con el contenido de `05-flask-01/` como base.
 
 ### Manejadores globales de error
 
-- [ ] `@app.errorhandler(404)` registrado y devuelve HTML personalizado al visitar una URL inexistente.
-- [ ] `@app.errorhandler(500)` registrado y devuelve HTML personalizado. Probado provocando una excepción no controlada.
+- [x] `@app.errorhandler(404)` registrado y devuelve HTML personalizado al visitar una URL inexistente.
+- [x] `@app.errorhandler(500)` registrado y devuelve HTML personalizado. Probado provocando una excepción no controlada.
 
 ### Introspección
 
-- [ ] Ruta `/ayuda` que itera `app.url_map.iter_rules()`, filtra `static` y muestra todas las rutas registradas. Al añadir o quitar rutas, `/ayuda` refleja el cambio sin tocar su código.
+- [x] Ruta `/ayuda` que itera `app.url_map.iter_rules()`, filtra `static` y muestra todas las rutas registradas. Al añadir o quitar rutas, `/ayuda` refleja el cambio sin tocar su código.
 
 ### Logging
 
-- [ ] `logging.basicConfig(...)` configurado al inicio de `app.py` con nombre de fichero `gesticat.log`.
-- [ ] Hook `@app.before_request` registra cada petición con método y ruta.
-- [ ] El fichero `.log` aparece en disco al hacer peticiones, con timestamp y una línea por petición.
-- [ ] `.gitignore` incluye `*.log` y el fichero de log no se versiona.
+- [x] `logging.basicConfig(...)` configurado al inicio de `app.py` con nombre de fichero `gesticat.log`.
+- [x] Hook `@app.before_request` registra cada petición con método y ruta.
+- [x] El fichero `.log` aparece en disco al hacer peticiones, con timestamp y una línea por petición.
+- [x] `.gitignore` incluye `*.log` y el fichero de log no se versiona.
 
 ### Integridad de capas y coexistencia
 
-- [ ] Coexistencia menu↔web verificada: un alta hecha desde la web aparece en el menú y viceversa.
-- [ ] `presentation/menu.py` sigue funcionando sin cambios.
+- [x] Coexistencia menu↔web verificada: un alta hecha desde la web aparece en el menú y viceversa.
+- [x] `presentation/menu.py` sigue funcionando sin cambios.
 
 ### Documentación
 
-- [ ] `CHANGELOG.md` con entrada nueva `0.6.0`.
-- [ ] `README.md` y `docs/EJECUCION.md` actualizados (mencionan `/ayuda`, el fichero `.log` y cómo reconfigurar el logging).
+- [x] `CHANGELOG.md` con entrada nueva `0.6.0`.
+- [x] `README.md` y `docs/EJECUCION.md` actualizados (mencionan `/ayuda`, el fichero `.log` y cómo reconfigurar el logging).
 
 </details>
 ---

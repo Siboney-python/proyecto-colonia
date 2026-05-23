@@ -4,7 +4,29 @@ Todos los cambios relevantes del proyecto, organizados por versión y fase.
 
 ---
 
-## [0.5.0] - 2026-05-21 (Fase 05: interfaz web con Flask)
+## [0.6.0] - 2026-05-23 (Fase 05.2: observabilidad global y manejadores globales)
+
+### Added
+- `presentation/app.py`: manejadores globales `@app.errorhandler(404)` y
+  `@app.errorhandler(500)` con respuesta HTML personalizada e imágenes
+  de http.cat.
+- `presentation/app.py`: route `/ayuda` que lista todas las rutas
+  registradas leyendo `app.url_map` — se actualiza solo al añadir o
+  quitar routes.
+- `presentation/app.py`: hook `@app.before_request` que registra cada
+  petición con método y ruta.
+- `presentation/app.py`: `logging.basicConfig` configurado con fichero
+  `gesticat.log`, nivel `INFO` y formato con timestamp.
+- `presentation/static/404.jpg` y `presentation/static/500.jpg`: imágenes
+  para las páginas de error.
+
+### Changed
+- `presentation/app.py`: route `registrar_gato` movido a la sección
+  de escritura. Corregido código de respuesta de `201` a `302` para
+  que el navegador siga el redirect automáticamente.
+- `.gitignore`: añadido `*.log` para no versionar el fichero de log.
+
+## [0.5.0] - 2026-05-21 (Fase 05.1: interfaz web con Flask)
 
 ### Added
 - `presentation/app.py`: interfaz web con Flask. Expone todas las
@@ -16,12 +38,12 @@ Todos los cambios relevantes del proyecto, organizados por versión y fase.
   `/gatos/{id_gato}/estado/{nuevo_estado}`,
   `/gatos/{id_gato}/esterilizar/{clinica}`,
   `/colonia/estado/{nuevo_estado}`, `/colonia/responsable/{tipo}/...`.
-- `requirements.txt`: añadida dependencia `flask`.
 
 ### Changed
 - `domain/colonia.py`: añadido `listar_gatos()`.
 - `application/servicio_colonia.py`: añadidos `listar_gatos()` y
   `obtener_gato()`.
+- `requirements.txt`: añadida dependencia `flask`.
 
 ## [0.4.0] - 2026-05-06 (Fase 04: persistencia con SQLite)
 

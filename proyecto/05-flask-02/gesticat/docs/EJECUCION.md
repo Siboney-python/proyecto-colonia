@@ -10,12 +10,12 @@
 
 ```bash
 git clone git@github.com:Siboney-python/proyecto-colonia.git
-cd proyecto-colonia/proyecto/05-flask-01
+cd proyecto-colonia/proyecto/05-flask-02
 ```
 
 ## Preparación del entorno
 
-Desde la carpeta `05-flask-01/`:
+Desde la carpeta `05-flask-02/`:
 
 ```bash
 python3 -m venv .venv
@@ -42,7 +42,7 @@ pip install -r gesticat/requirements.txt
 
 ## Crear base de datos
 
-Desde la carpeta `05-flask-01/`:
+Desde la carpeta `05-flask-02/`:
 
 ```bash
 python3 -m gesticat.crear_bd
@@ -50,7 +50,7 @@ python3 -m gesticat.crear_bd
 
 ## Ejecutar la interfaz web (Flask)
 
-Desde la carpeta `05-flask-01/`:
+Desde la carpeta `05-flask-02/`:
 
 ```bash
 python3 -m gesticat.presentation.app
@@ -58,13 +58,31 @@ python3 -m gesticat.presentation.app
 
 Abre `http://localhost:5000` en el navegador.
 
-La interfaz web y el menú de consola son independientes y comparten
-el mismo `ServicioColonia`. Para usar el menú simultáneamente abre
-otra terminal.
+### Rutas de ayuda y observabilidad
+
+- `/ayuda` — lista todas las rutas registradas. Se actualiza automáticamente
+  al añadir o quitar routes sin tocar su código.
+- `gesticat.log` — fichero de log que se crea automáticamente al arrancar
+  la app. Registra cada petición con timestamp, método y ruta. No se
+  versiona en git (`*.log` está en `.gitignore`).
+
+### Verificación de coexistencia menu↔web
+
+Ambas interfaces pueden ejecutarse simultáneamente sobre la misma base de
+datos SQLite. Un alta hecha desde la web aparece inmediatamente en el menú
+de consola y viceversa:
+
+```bash
+# Terminal 1 — interfaz web
+python3 -m gesticat.presentation.app
+
+# Terminal 2 — menú de consola
+python3 -m gesticat.presentation.menu
+```
 
 ## Ejecutar el menú
 
-Desde la carpeta `05-flask-01/`:
+Desde la carpeta `05-flask-02/`:
 
 ```bash
 python3 -m gesticat.presentation.menu
@@ -72,7 +90,7 @@ python3 -m gesticat.presentation.menu
 
 ## Ejecutar los tests
 
-Desde la carpeta `05-flask-01/`:
+Desde la carpeta `05-flask-02/`:
 
 ```bash
 python3 -m unittest

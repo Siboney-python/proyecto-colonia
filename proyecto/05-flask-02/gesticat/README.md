@@ -11,7 +11,7 @@ Sistema de gestión y censo de colonias felinas urbanas de Las Palmas de Gran Ca
   múltiples colonias) sin romper el núcleo del sistema.
 
 ## Estado de la fase
-Esta carpeta corresponde a la fase `05-flask-01/`.
+Esta carpeta corresponde a la fase `05-flask-02/`.
 
 ## Requisitos
 
@@ -49,7 +49,7 @@ iniciales. Si la BD ya existe, la elimina y la recrea desde cero.
 
 ## Uso (menú de consola)
 
-Ejecuta desde la carpeta `04-sqlite/`:
+Ejecuta desde la carpeta `05-flask-02/`:
 
 ```bash
 python3 -m gesticat.presentation.menu
@@ -76,6 +76,7 @@ Abre `http://localhost:5000` en el navegador. Rutas disponibles:
 - `/gatos/sin-esterilizar` - gatos activos sin esterilizar.
 - `/colonia` - reporte general de la colonia.
 - `/colonia/censo` - reporte de censo (estadísticas).
+- `/ayuda` — lista todas las rutas disponibles de la API.
 
 **Escritura:**
 - `/gatos/nuevo/{id}/{nombre}/{color}/{sexo}/{estado}/{clinica}/{esterilizado}` 
@@ -89,7 +90,7 @@ Abre `http://localhost:5000` en el navegador. Rutas disponibles:
 
 ## Tests
 
-Desde la carpeta `04-sqlite/`:
+Desde la carpeta `05-flask-02/`:
 
 ```bash
 python3 -m unittest
@@ -117,7 +118,7 @@ El reporte HTML queda en `htmlcov/index.html`.
 ## Estructura del proyecto
 
 ```
-04-sqlite/
+05-flask-02/
   gesticat/
     domain/
       gato.py
@@ -133,6 +134,10 @@ El reporte HTML queda en `htmlcov/index.html`.
       servicio_colonia.py
     presentation/
       menu.py
+      app.py
+      static/
+        404.jpg
+        500.jpg
     tests/
       test_gato.py
       test_responsable.py
@@ -157,12 +162,15 @@ El reporte HTML queda en `htmlcov/index.html`.
     gesticat.db    
 ```
 
-- `infrastructure/repositorio_gatos_sqlite.py`: repositorio con persistencia real
-  en SQLite. Usado por el flujo principal de la aplicación.
+- `presentation/menu.py`: interfaz de consola.
+- `presentation/app.py`: interfaz web con Flask. Expone todas las
+  operaciones del dominio como routes HTTP.
+- `presentation/static/`: imágenes para las páginas de error 404 y 500.
+- `infrastructure/repositorio_gatos_sqlite.py`: repositorio con persistencia
+  real en SQLite. Usado por el flujo principal de la aplicación.
 - `infrastructure/repositorio_gatos_memoria.py`: repositorio en memoria para
   desarrollo, demos y tests de dominio.
 - `infrastructure/errores.py`: excepciones de dominio para la capa de persistencia.
-- `infrastructure/crear_bd.py`: script para crear el esquema e insertar datos iniciales.
 - `tests/`: pruebas unitarias con `unittest`, incluyendo tests específicos para
   el repositorio SQLite.
 
