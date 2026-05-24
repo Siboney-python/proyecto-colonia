@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block titulo %}Censo — GestiCat{% endblock %}
+
+{% block contenido %}
+<h2>Censo de {{ colonia['nombre'] }}</h2><table>
+    <tr><th>Total activos</th><td>{{ reporte['total'] }}</td></tr>
+    <tr><th>Machos</th><td>{{ reporte['machos'] }}</td></tr>
+    <tr><th>Hembras</th><td>{{ reporte['hembras'] }}</td></tr>
+    <tr><th>Desconocidos</th><td>{{ reporte['desconocidos'] }}</td></tr>
+    <tr><th>Esterilizados</th><td>{{ reporte['esterilizados'] }}</td></tr>
+    <tr><th>No esterilizados</th><td>{{ reporte['no_esterilizados'] }}</td></tr>
+</table>
+{% endblock %}

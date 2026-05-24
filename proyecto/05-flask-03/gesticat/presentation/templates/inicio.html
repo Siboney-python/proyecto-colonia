@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block titulo %}GestiCat LPGC — Inicio{% endblock %}
+
+{% block contenido %}
+<h2>Bienvenida</h2>
+<p>Sistema de gestión y censo de colonias felinas urbanas de Las Palmas de Gran Canaria.</p>
+<h3>Consultas</h3>
+<ul>
+    <li><a href="{{ url_for('listar_gatos') }}">Lista de gatos</a></li>
+    <li><a href="{{ url_for('listar_sin_esterilizar') }}">Gatos sin esterilizar</a></li>
+    <li><a href="{{ url_for('reporte_colonia') }}">Reporte de colonia</a></li>
+    <li><a href="{{ url_for('reporte_censo') }}">Reporte de censo</a></li>
+    <li><a href="{{ url_for('ayuda') }}">Ayuda — rutas disponibles</a></li>
+</ul>
+{% endblock %}

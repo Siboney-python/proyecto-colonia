@@ -86,6 +86,16 @@ Añadir Flask como segunda capa de presentación. Todas las operaciones del
 menú de consola expuestas como routes de una API web. El menú de consola
 sigue funcionando sin cambios.
 
+### Fase 05 — Interfaz web con Flask (parte 2)
+Añadir observabilidad global a la interfaz web: manejadores de error 404 y 500
+con HTML personalizado, ruta `/ayuda` con introspección de routes, y logging
+de peticiones en fichero `gesticat.log`.
+
+### Fase 05 — Plantillas Jinja2 (parte 3)
+Introducir plantillas Jinja2 para sacar el HTML inline de `app.py`: plantilla
+base con cabecera y navegación, plantillas hijas para cada vista de lectura,
+y plantilla común para errores 404 y 500.
+
 ---
 
 ## Checklists por fases
@@ -249,8 +259,8 @@ sigue funcionando sin cambios.
 
 </details>
 
-<details open>
-  <summary>Fase 05 - Observabilidad: manejadores de error, introspección y logging (parte 2) 🚧</summary>
+<details>
+  <summary>Fase 05 - Observabilidad: manejadores de error, introspección y logging (parte 2) ✅</summary>
 
 ### Preparación
 
@@ -281,6 +291,38 @@ sigue funcionando sin cambios.
 
 - [x] `CHANGELOG.md` con entrada nueva `0.6.0`.
 - [x] `README.md` y `docs/EJECUCION.md` actualizados (mencionan `/ayuda`, el fichero `.log` y cómo reconfigurar el logging).
+
+</details>
+
+<details open>
+  <summary>Fase 05 — Plantillas Jinja2 (parte 3) 🚧</summary>
+
+### Preparación
+- [x] Carpeta `05-flask-03/` creada con el contenido de `05-flask-02/` como base.
+- [x] Borrar el `.venv` copiado y crear uno nuevo con `python3 -m venv .venv` e `pip install -r gesticat/requirements.txt`.
+
+### Plantillas
+- [x] Plantilla base `base.html` con la estructura común y bloques.
+- [x] Plantillas hijas para las vistas de lectura, extendiendo de `base.html`.
+- [x] Sintaxis Jinja2 aplicada: inyección de valores, iteración, condicionales y filtros.
+- [x] Conversión tupla → diccionario en el route cuando el servicio devuelva tuplas.
+- [x] `url_for` en plantillas para los enlaces (no hardcodear URLs).
+- [x] Plantilla común `error.html` reutilizada por `@app.errorhandler(404)` y `@app.errorhandler(500)`.
+
+### Routes
+- [x] Se han generado plantillas para todas las rutas que muestran información del proyecto.
+- [x] Los routes de lectura usan `render_template` en lugar de devolver texto o HTML inline.
+
+### Verificación visual
+- [x] La cabecera con navegación es visible en todas las páginas, incluidas las de error 404 y 500.
+
+### Integridad de capas
+- [ ] `domain/` e `infrastructure/` sin cambios. `application/` solo añade métodos de delegación pura si hace falta.
+- [ ] `presentation/menu.py` sigue funcionando sin cambios.
+
+### Documentación
+- [ ] `CHANGELOG.md` con entrada nueva `0.7.0`.
+- [ ] `README.md` y `docs/EJECUCION.md` actualizados (mencionan `presentation/templates/` y el patrón de herencia con `base.html`).
 
 </details>
 ---

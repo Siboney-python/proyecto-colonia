@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{ gato.nombre }} — GestiCat{% endblock %}
+
+{% block contenido %}
+<h2>{{ gato.nombre }}</h2>
+<table>
+    <tr><th>ID</th><td>{{ gato.id_gato }}</td></tr>
+    <tr><th>Color</th><td>{{ gato.color }}</td></tr>
+    <tr><th>Sexo</th><td>{{ gato.sexo.value }}</td></tr>
+    <tr><th>Estado</th><td>{{ gato.estado.value }}</td></tr>
+    <tr><th>Clínica</th><td>{{ gato.clinica_veterinaria or "Sin clínica" }}</td></tr>
+    <tr><th>Esterilizado</th><td>{{ "Sí" if gato.esterilizado else "No" }}</td></tr>
+    <tr><th>Fecha registro</th><td>{{ gato.fecha_registro.strftime('%d/%m/%Y') }}</td></tr>
+    <tr><th>Colonia</th><td>{{ colonia['nombre'] }}</td></tr>
+</table>
+<p><a href="{{ url_for('listar_gatos') }}">← Volver a la lista</a></p>
+{% endblock %}

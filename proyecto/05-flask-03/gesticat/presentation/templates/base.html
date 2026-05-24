@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem;
+            font-family: sans-serif;
+            text-align: center;
+
+        }
+        table {
+            margin: 0 auto;
+            text-align: left;
+        }
+        ul {
+            display: inline-block;
+            text-align: left;
+        }
+    </style>
+
+    <title>{% block titulo %}GestiCat{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1><a href="{{ url_for('inicio') }}">😺 GestiCat LPGC 🏠</a></h1>
+        <nav>
+            <a href="{{ url_for('listar_gatos') }}">Gatos</a> ·
+            <a href="{{ url_for('listar_sin_esterilizar') }}">Sin esterilizar</a> ·
+            <a href="{{ url_for('reporte_colonia') }}">Colonia</a> ·
+            <a href="{{ url_for('reporte_censo') }}">Censo</a> ·
+            <a href="{{ url_for('ayuda') }}">Ayuda</a>
+        </nav>
+        <hr>
+    </header>
+    <main>
+        {% block contenido %}{% endblock %}
+    </main>
+</body>
+</html>
