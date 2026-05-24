@@ -5,7 +5,7 @@ cada una.
 
 ## Cómo ejecutar los tests
 
-Desde la carpeta que contiene el paquete `gesticat/` (en este caso `04-sqlite/`):
+Desde la carpeta que contiene el paquete `gesticat/` (en este caso `05-flask-03/`):
 
 ```bash
 python3 -m unittest
@@ -70,7 +70,7 @@ Valida `RepositorioGatosSQLite`:
 
 ## Cobertura
 
-Desde la carpeta que contiene el paquete `gesticat/` (en este caso `04-sqlite/`):
+Desde la carpeta que contiene el paquete `gesticat/` (en este caso `05-flask-03/`):
 
 ```bash
 coverage run -m unittest

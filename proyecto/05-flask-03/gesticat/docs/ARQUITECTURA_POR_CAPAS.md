@@ -41,7 +41,7 @@ interfaces de presentación independientes que comparten el mismo servicio:
 
 - `menu.py` — interfaz de consola.
 - `app.py` — interfaz web con Flask. Expone las mismas operaciones como
-  routes HTTP. Incluye manejadores globales, ruta /ayuda y logging.
+  routes HTTP. Incluye manejadores globales, ruta /ayuda, logging y templates.
 
 ## Dependencias permitidas
 
@@ -75,12 +75,22 @@ gesticat/
     datos_iniciales.py            → datos de ejemplo para arrancar la aplicación
   application/
     servicio_colonia.py           → casos de uso de ServicioColonia
-presentation/
+  presentation/
     menu.py                       → interfaz de consola
     app.py                        → interfaz web con Flask
     static/
       404.jpg                     → imagen para página de error 404
       500.jpg                     → imagen para página de error 500
+    templates/
+      base.html                   → plantilla base con cabecera y navegación
+      inicio.html                 → página de bienvenida
+      gatos.html                  → listado de gatos
+      gato_detalle.html           → detalle de un gato
+      sin_esterilizar.html        → gatos sin esterilizar
+      colonia.html                → reporte general de la colonia
+      censo.html                  → reporte de censo
+      ayuda.html                  → rutas disponibles
+      error.html                  → plantilla común para errores 404 y 500
   tests/
     test_gato.py                  → tests de la entidad Gato
     test_responsable.py           → tests de la entidad Responsable
