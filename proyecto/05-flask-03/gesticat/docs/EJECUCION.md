@@ -10,12 +10,12 @@
 
 ```bash
 git clone git@github.com:Siboney-python/proyecto-colonia.git
-cd proyecto-colonia/proyecto/05-flask-02
+cd proyecto-colonia/proyecto/05-flask-03
 ```
 
 ## Preparación del entorno
 
-Desde la carpeta `05-flask-02/`:
+Desde la carpeta `05-flask-03/`:
 
 ```bash
 python3 -m venv .venv
@@ -42,7 +42,7 @@ pip install -r gesticat/requirements.txt
 
 ## Crear base de datos
 
-Desde la carpeta `05-flask-02/`:
+Desde la carpeta `05-flask-03/`:
 
 ```bash
 python3 -m gesticat.crear_bd
@@ -50,7 +50,7 @@ python3 -m gesticat.crear_bd
 
 ## Ejecutar la interfaz web (Flask)
 
-Desde la carpeta `05-flask-02/`:
+Desde la carpeta `05-flask-03/`:
 
 ```bash
 python3 -m gesticat.presentation.app
@@ -80,9 +80,17 @@ python3 -m gesticat.presentation.app
 python3 -m gesticat.presentation.menu
 ```
 
+### Plantillas Jinja2
+
+Las vistas de lectura usan plantillas HTML ubicadas en
+`presentation/templates/`. La plantilla base `base.html` define la
+cabecera y navegación comunes. Si añades una plantilla nueva debe
+extender de `base.html` con `{% extends "base.html" %}` para mantener
+la cabecera en todas las páginas.
+
 ## Ejecutar el menú
 
-Desde la carpeta `05-flask-02/`:
+Desde la carpeta `05-flask-03/`:
 
 ```bash
 python3 -m gesticat.presentation.menu
@@ -90,7 +98,7 @@ python3 -m gesticat.presentation.menu
 
 ## Ejecutar los tests
 
-Desde la carpeta `05-flask-02/`:
+Desde la carpeta `05-flask-03/`:
 
 ```bash
 python3 -m unittest

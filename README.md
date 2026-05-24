@@ -294,8 +294,8 @@ y plantilla común para errores 404 y 500.
 
 </details>
 
-<details open>
-  <summary>Fase 05 — Plantillas Jinja2 (parte 3) 🚧</summary>
+<details>
+  <summary>Fase 05 — Plantillas Jinja2 (parte 3) ✅</summary>
 
 ### Preparación
 - [x] Carpeta `05-flask-03/` creada con el contenido de `05-flask-02/` como base.
@@ -317,12 +317,12 @@ y plantilla común para errores 404 y 500.
 - [x] La cabecera con navegación es visible en todas las páginas, incluidas las de error 404 y 500.
 
 ### Integridad de capas
-- [ ] `domain/` e `infrastructure/` sin cambios. `application/` solo añade métodos de delegación pura si hace falta.
-- [ ] `presentation/menu.py` sigue funcionando sin cambios.
+- [x] `domain/` e `infrastructure/` sin cambios. `application/` solo añade métodos de delegación pura si hace falta.
+- [x] `presentation/menu.py` sigue funcionando sin cambios.
 
 ### Documentación
-- [ ] `CHANGELOG.md` con entrada nueva `0.7.0`.
-- [ ] `README.md` y `docs/EJECUCION.md` actualizados (mencionan `presentation/templates/` y el patrón de herencia con `base.html`).
+- [x] `CHANGELOG.md` con entrada nueva `0.7.0`.
+- [x] `README.md` y `docs/EJECUCION.md` actualizados (mencionan `presentation/templates/` y el patrón de herencia con `base.html`).
 
 </details>
 ---

@@ -4,6 +4,27 @@ Todos los cambios relevantes del proyecto, organizados por versión y fase.
 
 ---
 
+## [0.7.0] - 2026-05-24 (Fase 05.3: plantillas Jinja2)
+
+### Added
+- `presentation/templates/base.html`: plantilla base con cabecera,
+  navegación y bloques `titulo` y `contenido`.
+- `presentation/templates/inicio.html`: página de bienvenida con enlaces
+  a las rutas principales.
+- `presentation/templates/gatos.html`: listado de gatos en tabla.
+- `presentation/templates/gato_detalle.html`: detalle de un gato.
+- `presentation/templates/sin_esterilizar.html`: listado de gatos sin
+  esterilizar.
+- `presentation/templates/colonia.html`: reporte general de la colonia.
+- `presentation/templates/censo.html`: reporte de censo.
+- `presentation/templates/ayuda.html`: rutas disponibles de la API.
+- `presentation/templates/error.html`: plantilla común para errores
+  404 y 500, reutilizada por los manejadores globales.
+
+### Changed
+- `presentation/app.py`: routes de lectura y manejadores de error
+  actualizados para usar `render_template` en lugar de HTML inline.
+
 ## [0.6.0] - 2026-05-23 (Fase 05.2: observabilidad global y manejadores globales)
 
 ### Added

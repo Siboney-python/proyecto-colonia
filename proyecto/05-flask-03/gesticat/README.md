@@ -11,7 +11,7 @@ Sistema de gestión y censo de colonias felinas urbanas de Las Palmas de Gran Ca
   múltiples colonias) sin romper el núcleo del sistema.
 
 ## Estado de la fase
-Esta carpeta corresponde a la fase `05-flask-02/`.
+Esta carpeta corresponde a la fase `05-flask-03/`.
 
 ## Requisitos
 
@@ -49,7 +49,7 @@ iniciales. Si la BD ya existe, la elimina y la recrea desde cero.
 
 ## Uso (menú de consola)
 
-Ejecuta desde la carpeta `05-flask-02/`:
+Ejecuta desde la carpeta `05-flask-03/`:
 
 ```bash
 python3 -m gesticat.presentation.menu
@@ -78,6 +78,10 @@ Abre `http://localhost:5000` en el navegador. Rutas disponibles:
 - `/colonia/censo` - reporte de censo (estadísticas).
 - `/ayuda` — lista todas las rutas disponibles de la API.
 
+Las vistas de lectura usan plantillas Jinja2 (`presentation/templates/`).
+La plantilla base `base.html` define la cabecera y navegación comunes —
+todas las páginas la heredan con `{% extends "base.html" %}`.
+
 **Escritura:**
 - `/gatos/nuevo/{id}/{nombre}/{color}/{sexo}/{estado}/{clinica}/{esterilizado}` 
   - registrar gato.
@@ -90,7 +94,7 @@ Abre `http://localhost:5000` en el navegador. Rutas disponibles:
 
 ## Tests
 
-Desde la carpeta `05-flask-02/`:
+Desde la carpeta `05-flask-03/`:
 
 ```bash
 python3 -m unittest
@@ -118,7 +122,7 @@ El reporte HTML queda en `htmlcov/index.html`.
 ## Estructura del proyecto
 
 ```
-05-flask-02/
+05-flask-03/
   gesticat/
     domain/
       gato.py
@@ -138,6 +142,16 @@ El reporte HTML queda en `htmlcov/index.html`.
       static/
         404.jpg
         500.jpg
+      templates/
+        base.html
+        inicio.html
+        gatos.html
+        gato_detalle.html
+        sin_esterilizar.html
+        colonia.html
+        censo.html
+        ayuda.html
+        error.html
     tests/
       test_gato.py
       test_responsable.py
@@ -166,6 +180,7 @@ El reporte HTML queda en `htmlcov/index.html`.
 - `presentation/app.py`: interfaz web con Flask. Expone todas las
   operaciones del dominio como routes HTTP.
 - `presentation/static/`: imágenes para las páginas de error 404 y 500.
+- `presentation/templates/`: plantillas Jinja2 para las vistas de lectura.
 - `infrastructure/repositorio_gatos_sqlite.py`: repositorio con persistencia
   real en SQLite. Usado por el flujo principal de la aplicación.
 - `infrastructure/repositorio_gatos_memoria.py`: repositorio en memoria para
