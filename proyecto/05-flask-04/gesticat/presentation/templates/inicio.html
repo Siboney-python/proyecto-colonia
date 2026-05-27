@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block titulo %}GestiCat LPGC — Inicio{% endblock %}
+{% block titulo %}GestiCat LPGC - Inicio{% endblock %}
 
 {% block contenido %}
 <h2>Bienvenida</h2>
@@ -12,5 +12,9 @@
     <li><a href="{{ url_for('reporte_colonia') }}">Reporte de colonia</a></li>
     <li><a href="{{ url_for('reporte_censo') }}">Reporte de censo</a></li>
     <li><a href="{{ url_for('ayuda') }}">Ayuda — rutas disponibles</a></li>
+</ul>
+<h3>Acciones</h3>
+<ul>
+    <li><a href="{{ url_for('registrar_gato') }}">Registrar gato nuevo</a></li>
 </ul>
 {% endblock %}

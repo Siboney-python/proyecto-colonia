@@ -144,15 +144,21 @@ El reporte HTML queda en `htmlcov/index.html`.
         404.jpg
         500.jpg
       templates/
-        base.html
-        inicio.html
-        gatos.html
-        gato_detalle.html
-        sin_esterilizar.html
-        colonia.html
-        censo.html
+        asignar_responsable.html
         ayuda.html
+        base.html
+        cambiar_estado_gato.html
+        censo.html
+        colonia.html
         error.html
+        esterilizar_gato.html
+        gato_detalle.html
+        gatos.html
+        inicio.html
+        quitar_gato.html
+        registrar_gato.html
+        sin_esterilizar.html
+        tramitar_anexo.html
     tests/
       test_gato.py
       test_responsable.py

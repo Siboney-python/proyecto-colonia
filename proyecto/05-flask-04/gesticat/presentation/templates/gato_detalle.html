@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block titulo %}{{ gato.nombre }} — GestiCat{% endblock %}
+{% block titulo %}{{ gato.nombre }} - GestiCat{% endblock %}
 
 {% block contenido %}
 <h2>{{ gato.nombre }}</h2>
@@ -14,5 +14,10 @@
     <tr><th>Fecha registro</th><td>{{ gato.fecha_registro.strftime('%d/%m/%Y') }}</td></tr>
     <tr><th>Colonia</th><td>{{ colonia['nombre'] }}</td></tr>
 </table>
+<p><a href="{{ url_for('cambiar_estado_gato', id_gato=gato.id_gato) }}">Cambiar estado</a></p>
+<p><a href="{{ url_for('esterilizar_gato', id_gato=gato.id_gato) }}">Marcar como esterilizado</a></p>
+<p><a href="{{ url_for('quitar_gato', id_gato=gato.id_gato) }}">Borrar registro</a></p>
 <p><a href="{{ url_for('listar_gatos') }}">← Volver a la lista</a></p>
+
+
 {% endblock %}

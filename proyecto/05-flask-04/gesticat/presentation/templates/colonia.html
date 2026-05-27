@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block titulo %}Colonia — GestiCat{% endblock %}
+{% block titulo %}Colonia - GestiCat{% endblock %}
 
 {% block contenido %}
 <h2>{{ reporte['nombre'] }}</h2>
@@ -11,4 +11,6 @@
     <tr><th>Necesita actualización</th><td>{{ "Sí" if reporte['necesita_actualizacion'] else "No" }}</td></tr>
     <tr><th>Total gatos activos</th><td>{{ reporte['total_gatos'] }}</td></tr>
 </table>
+<p><a href="{{ url_for('tramitar_anexo') }}">Tramitar anexo</a></p>
+<p><a href="{{ url_for('asignar_responsable') }}">Asignar responsable</a></p>
 {% endblock %}

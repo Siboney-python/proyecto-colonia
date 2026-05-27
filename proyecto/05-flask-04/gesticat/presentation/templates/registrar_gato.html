@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block titulo %}Registrar gato - GestiCat{% endblock %}
+
+{% block contenido %}
+<h2>Registrar gato nuevo</h2>
+
+{% if error %}
+<p style="color: red"><strong>Error:</strong> {{ error }}</p>
+{% endif %}
+
+<form method="post" action="{{ url_for('registrar_gato') }}">
+    <label>ID (3 dígitos):
+        <input type="text" name="id_gato" value="{{ datos.id_gato or '' }}" required>
+    </label><br>
+    <label>Nombre:
+        <input type="text" name="nombre" value="{{ datos.nombre or '' }}" required>
+    </label><br>
+    <label>Color:
+        <input type="text" name="color" value="{{ datos.color or '' }}" required>
+    </label><br>
+    <label>Sexo:
+        <select name="sexo">
+            <option value="H" {{ 'selected' if datos.sexo == 'H' }}>Hembra</option>
+            <option value="M" {{ 'selected' if datos.sexo == 'M' }}>Macho</option>
+            <option value="?" {{ 'selected' if datos.sexo == '?' }}>Desconocido</option>
+        </select>
+    </label><br>
+    <label>Estado:
+        <select name="estado">
+            <option value="COL" {{ 'selected' if datos.estado == 'COL' }}>En colonia</option>
+            <option value="ACOG" {{ 'selected' if datos.estado == 'ACOG' }}>En acogida</option>
+            <option value="ADOP" {{ 'selected' if datos.estado == 'ADOP' }}>Adoptado</option>
+            <option value="FALL" {{ 'selected' if datos.estado == 'FALL' }}>Fallecido</option>
+            <option value="DESA" {{ 'selected' if datos.estado == 'DESA' }}>Desaparecido</option>
+        </select>
+    </label><br>
+    <label>Clínica veterinaria (opcional):
+        <input type="text" name="clinica" value="{{ datos.clinica or '' }}">
+    </label><br>
+    <label>Esterilizado:
+        <select name="esterilizado">
+            <option value="False" {{ 'selected' if datos.esterilizado == 'False' }}>No</option>
+            <option value="True" {{ 'selected' if datos.esterilizado == 'True' }}>Sí</option>
+        </select>
+    </label><br>
+    <label>Fecha de registro (dd/mm/aaaa, opcional):
+        <input type="text" name="fecha_registro" value="{{ datos.fecha_registro or '' }}">
+    </label><br>
+    <button type="submit">Registrar</button>
+</form>
+{% endblock %}

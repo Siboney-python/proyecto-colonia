@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block titulo %}Esterilizar gato - GestiCat{% endblock %}
+
+{% block contenido %}
+<h2>Marcar como esterilizado: {{ gato.nombre }}</h2>
+
+{% if error %}
+<p style="color: red"><strong>Error:</strong> {{ error }}</p>
+{% endif %}
+
+{% if gato.esterilizado %}
+<p>{{ gato.nombre }} ya está esterilizado.</p>
+<p><a href="{{ url_for('ver_gato', id_gato=gato.id_gato) }}">← Volver</a></p>
+{% else %}
+<form method="post" action="{{ url_for('esterilizar_gato', id_gato=gato.id_gato) }}">
+    <label>Clínica veterinaria:
+        <input type="text" name="clinica" value="{{ datos.clinica or gato.clinica_veterinaria or '' }}" required>
+    </label><br>
+    <button type="submit">Marcar como esterilizado</button>
+</form>
+<p><a href="{{ url_for('ver_gato', id_gato=gato.id_gato) }}">← Cancelar y volver</a></p>
+{% endif %}
+{% endblock %}

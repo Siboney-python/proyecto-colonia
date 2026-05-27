@@ -17,6 +17,24 @@ qué archivo las originó y qué habría que implementar.
 
 ---
 
+## Restricción de transiciones de estado del gato
+
+- **Origen**: `domain/gato.py` — setter `estado`
+- **Idea**: impedir que un gato marcado como `FALL` pueda cambiar de
+  estado. La restricción debería vivir en el dominio para que se aplique
+  independientemente de la interfaz usada (web, consola, API...).
+- **Lo que implicaría**:
+  - Añadir la validación en el setter `estado` de `Gato`.
+  - Modificar el método de reconstrucción en
+    `infrastructure/repositorio_gatos_sqlite.py` para que use el setter
+    en lugar de asignar `_estado` directamente, de forma que los gatos
+    cargados desde SQLite también respeten la restricción.
+  - Actualizar los tests del repositorio SQLite.
+- **Por qué no está implementado**: requiere modificar tanto el dominio
+  como la infraestructura y los tests. Se deja para una fase posterior.
+
+---
+
 ## Desglose de esterilizados por sexo en reporte_censo
 
 - **Origen**: `domain/colonia.py` — método `reporte_censo()`

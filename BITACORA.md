@@ -36,6 +36,20 @@ al escribir, y convertirlo de vuelta al enum al leer:
 - **Por nombre** — cuando el value es largo o podría cambiar:
   guardar `estado.name` (`"COL"`), recuperar con `EstadoGato["COL"]`.
 
+#### Enums con `<select>` en Formularios HTML (Flask)
+
+Cuando un campo del formulario corresponde a un enum, se usa `<select>`
+en lugar de `<input type="text">`. Cada `<option>` tiene un `value` con
+el dato que Flask recibe, y un texto visible para el usuario:
+
+```html
+<select name="sexo">
+    <option value="H">Hembra</option>
+    <option value="M">Macho</option>
+    <option value="?">Desconocido</option>
+</select>
+```
+
 ### Fail fast
 Principio de diseño que dice que un sistema debe detectar y reportar errores
 lo antes posible, en lugar de continuar ejecutándose con datos inválidos y

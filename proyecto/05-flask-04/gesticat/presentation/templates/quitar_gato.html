@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block titulo %}Quitar gato - GestiCat{% endblock %}
+
+{% block contenido %}
+<h2>¿Quieres borrar el registro de {{ gato.nombre }}?</h2>
+
+<table>
+    <tr><th>ID</th><td>{{ gato.id_gato }}</td></tr>
+    <tr><th>Nombre</th><td>{{ gato.nombre }}</td></tr>
+    <tr><th>Color</th><td>{{ gato.color }}</td></tr>
+    <tr><th>Estado</th><td>{{ gato.estado.value }}</td></tr>
+</table>
+
+<p>Esta acción no se puede deshacer.</p>
+
+<form method="post" action="{{ url_for('quitar_gato', id_gato=gato.id_gato) }}">
+    <button type="submit">Sí, borrar registro.</button>
+</form>
+<p><a href="{{ url_for('ver_gato', id_gato=gato.id_gato) }}">← Cancelar y volver</a></p>
+{% endblock %}

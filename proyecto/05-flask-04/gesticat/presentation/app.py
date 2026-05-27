@@ -65,62 +65,77 @@ def ver_gato(id_gato):
 
 # -- GATOS: ESCRITURA --
 
-@app.route("/gatos/nuevo/<id_gato>/<nombre>/<color>/<sexo>/<estado>/<clinica>/<esterilizado>")
-def registrar_gato(id_gato, nombre, color, sexo, estado, clinica, esterilizado):
-    try:
-        sexo_enum = Sexo(sexo)
-    except ValueError:
-        return f"Sexo no válido: '{sexo}'. Valores: H, M, ?", 400
-    try:
-        estado_enum = EstadoGato[estado]
-    except KeyError:
-        return f"Estado no válido: '{estado}'. Valores: COL, ACOG, ADOP, FALL, DESA", 400
-    clinica_val = None if clinica == "none" else clinica
-    esterilizado_bool = esterilizado == "True"
-    try:
-        servicio.registrar_gato(id_gato, nombre, color, sexo_enum,
-                                estado_enum, clinica_val, esterilizado_bool)
-    except GatoYaExisteError as e:
-        return str(e), 409
-    except ValueError as e:
-        return str(e), 400
-    return redirect(url_for("ver_gato", id_gato=id_gato))
+@app.route("/gatos/nuevo", methods=['GET', 'POST'])
+def registrar_gato():
+    if request.method == 'POST':
+        datos = request.form
+        try:
+            sexo_enum = Sexo(datos['sexo'])
+            estado_enum = EstadoGato[datos['estado']]
+            clinica = datos['clinica'].strip() or None
+            esterilizado = datos['esterilizado'] == 'True'
+            fecha = datos['fecha_registro'].strip() or None
+            servicio.registrar_gato(
+                datos['id_gato'], datos['nombre'], datos['color'],
+                sexo_enum, estado_enum, clinica, esterilizado, fecha
+            )
+        except GatoYaExisteError as e:
+            return render_template('registrar_gato.html', error=str(e), datos=datos), 409
+        except (ValueError, KeyError) as e:
+            return render_template('registrar_gato.html', error=str(e), datos=datos), 400
+        return redirect(url_for('ver_gato', id_gato=datos['id_gato']))
+    return render_template('registrar_gato.html', error=None, datos={})
 
 
-@app.route("/gatos/<id_gato>/eliminar")
+@app.route("/gatos/<id_gato>/quitar", methods=['GET', 'POST'])
 def quitar_gato(id_gato):
-    try:
-        servicio.quitar_gato(id_gato)
-    except GatoNoEncontradoError as e:
-        return str(e), 404
-    return redirect(url_for("listar_gatos"))
+    gato = servicio.obtener_gato(id_gato)
+    if gato is None:
+        return render_template("error.html", codigo=404,
+                               mensaje=f"No existe ningún gato con id '{id_gato}'."), 404
+    if request.method == 'POST':
+        try:
+            servicio.quitar_gato(id_gato)
+        except GatoNoEncontradoError as e:
+            return render_template("error.html", codigo=404, mensaje=str(e)), 404
+        return redirect(url_for('listar_gatos'))
+    return render_template('quitar_gato.html', gato=gato)
 
 
-@app.route("/gatos/<id_gato>/estado/<nuevo_estado>")
-def cambiar_estado_gato(id_gato, nuevo_estado):
-    try:
-        estado_enum = EstadoGato[nuevo_estado]
-    except KeyError:
-        return f"Estado no válido: '{nuevo_estado}'. Valores: COL, ACOG, ADOP, FALL, DESA", 400
-    try:
-        servicio.actualizar_estado_gato(id_gato, estado_enum)
-    except GatoNoEncontradoError as e:
-        return str(e), 404
-    except ValueError as e:
-        return str(e), 400
-    return redirect(url_for("ver_gato", id_gato=id_gato))
+@app.route("/gatos/<id_gato>/estado", methods=['GET', 'POST'])
+def cambiar_estado_gato(id_gato):
+    gato = servicio.obtener_gato(id_gato)
+    if gato is None:
+        return render_template("error.html", codigo=404,
+                               mensaje=f"No existe ningún gato con id '{id_gato}'."), 404
+    if request.method == 'POST':
+        datos = request.form
+        try:
+            estado_enum = EstadoGato[datos['nuevo_estado']]
+            servicio.actualizar_estado_gato(id_gato, estado_enum)
+        except (KeyError, ValueError) as e:
+            return render_template('cambiar_estado_gato.html', gato=gato,
+                                   error=str(e), datos=datos), 400
+        return redirect(url_for('ver_gato', id_gato=id_gato))
+    return render_template('cambiar_estado_gato.html', gato=gato, error=None, datos={})
 
 
-@app.route("/gatos/<id_gato>/esterilizar/<clinica>")
-def esterilizar_gato(id_gato, clinica):
-    clinica_val = None if clinica == "none" else clinica
-    try:
-        servicio.actualizar_esterilizacion_gato(id_gato, True, clinica_val)
-    except GatoNoEncontradoError as e:
-        return str(e), 404
-    except ValueError as e:
-        return str(e), 400
-    return redirect(url_for("ver_gato", id_gato=id_gato))
+@app.route("/gatos/<id_gato>/esterilizar", methods=['GET', 'POST'])
+def esterilizar_gato(id_gato):
+    gato = servicio.obtener_gato(id_gato)
+    if gato is None:
+        return render_template("error.html", codigo=404,
+                               mensaje=f"No existe ningún gato con id '{id_gato}'."), 404
+    if request.method == 'POST':
+        datos = request.form
+        try:
+            clinica = datos['clinica'].strip() or None
+            servicio.actualizar_esterilizacion_gato(id_gato, True, clinica)
+        except (ValueError, GatoNoEncontradoError) as e:
+            return render_template('esterilizar_gato.html', gato=gato,
+                                   error=str(e), datos=datos), 400
+        return redirect(url_for('ver_gato', id_gato=id_gato))
+    return render_template('esterilizar_gato.html', gato=gato, error=None, datos={})
 
 
 # -- COLONIA --
@@ -138,34 +153,44 @@ def reporte_censo():
     return render_template("censo.html", reporte=reporte, colonia=colonia)
 
 
-@app.route("/colonia/estado/<nuevo_estado>")
-def tramitar_anexo(nuevo_estado):
-    try:
-        estado_enum = EstadoColonia[nuevo_estado]
-    except KeyError:
-        return f"Estado no válido: '{nuevo_estado}'. Valores: ACTIVA, PENDIENTE, BAJA", 400
-    try:
-        servicio.tramitar_anexo(estado_enum)
-    except ValueError as e:
-        return str(e), 400
-    return redirect(url_for("reporte_colonia"))
+@app.route("/colonia/estado", methods=['GET', 'POST'])
+def tramitar_anexo():
+    colonia = servicio.reporte_colonia()
+    if request.method == 'POST':
+        datos = request.form
+        try:
+            estado_enum = EstadoColonia[datos['nuevo_estado']]
+            servicio.tramitar_anexo(estado_enum)
+        except (KeyError, ValueError) as e:
+            return render_template('tramitar_anexo.html', colonia=colonia,
+                                   error=str(e), datos=datos), 400
+        return redirect(url_for('reporte_colonia'))
+    return render_template('tramitar_anexo.html', colonia=colonia, error=None, datos={})
 
 
-@app.route("/colonia/responsable/<tipo>/<nombre>/<telefono>/<email>/<identificacion>/<campo_extra>")
-def asignar_responsable(tipo, nombre, telefono, email, identificacion, campo_extra):
-    try:
-        if tipo == "persona":
-            responsable = PersonaFisica(nombre, telefono, email,
-                                        identificacion, campo_extra)
-        elif tipo == "protectora":
-            responsable = Protectora(nombre, telefono, email,
-                                     identificacion, campo_extra)
-        else:
-            return f"Tipo no válido: '{tipo}'. Valores: persona, protectora", 400
-        servicio.asignar_responsable(responsable)
-    except ValueError as e:
-        return str(e), 400
-    return redirect(url_for("reporte_colonia"))
+@app.route("/colonia/responsable", methods=['GET', 'POST'])
+def asignar_responsable():
+    if request.method == 'POST':
+        datos = request.form
+        try:
+            if datos['tipo'] == 'persona':
+                responsable = PersonaFisica(
+                    datos['nombre'], datos['telefono'], datos['email'],
+                    datos['identificacion'], datos['campo_extra']
+                )
+            elif datos['tipo'] == 'protectora':
+                responsable = Protectora(
+                    datos['nombre'], datos['telefono'], datos['email'],
+                    datos['identificacion'], datos['campo_extra']
+                )
+            else:
+                raise ValueError("Tipo de responsable no válido.")
+            servicio.asignar_responsable(responsable)
+        except ValueError as e:
+            return render_template('asignar_responsable.html',
+                                   error=str(e), datos=datos), 400
+        return redirect(url_for('reporte_colonia'))
+    return render_template('asignar_responsable.html', error=None, datos={})
 
 @app.route("/ayuda")
 def ayuda():

@@ -337,31 +337,31 @@ Ninguna acción de escritura queda accesible por GET.
 
 ### Preparación
 - [x] Carpeta `05-flask-04/` creada con el contenido de `05-flask-03/` como base.
-- [ ] Borrar el `.venv` copiado y crear uno nuevo con `python3 -m venv .venv` e `pip install -r gesticat/requirements.txt`.
+- [x] Borrar el `.venv` copiado y crear uno nuevo con `python3 -m venv .venv` e `pip install -r gesticat/requirements.txt`.
 
 ### Formularios
-- [ ] Cada operación de escritura tiene su plantilla HTML en `presentation/templates/`, extendiendo de `base.html`.
-- [ ] Cada `<form>` tiene `method="post"` y `action="{{ url_for(...) }}"`.
-- [ ] Los campos conservan los datos tecleados al volver tras un error.
-- [ ] Mensaje de error visible en el formulario cuando el dominio lanza una excepción.
+- [x] Cada operación de escritura tiene su plantilla HTML en `presentation/templates/`, extendiendo de `base.html`.
+- [x] Cada `<form>` tiene `method="post"` y `action="{{ url_for(...) }}"`.
+- [x] Los campos conservan los datos tecleados al volver tras un error.
+- [x] Mensaje de error visible en el formulario cuando el dominio lanza una excepción.
 
 ### Routes
-- [ ] Las routes de escritura aceptan `methods=['GET', 'POST']` (o solo `['POST']` si no necesitan pantalla previa).
-- [ ] Rama `GET` renderiza el formulario vacío (o con datos actuales si es edición).
-- [ ] Rama `POST` procesa los datos y llama al servicio del dominio.
-- [ ] Tras POST con éxito: `redirect(url_for(...))` a una ruta de lectura — patrón Post/Redirect/Get.
+- [x] Las routes de escritura aceptan `methods=['GET', 'POST']` (o solo `['POST']` si no necesitan pantalla previa).
+- [x] Rama `GET` renderiza el formulario vacío (o con datos actuales si es edición).
+- [x] Rama `POST` procesa los datos y llama al servicio del dominio.
+- [x] Tras POST con éxito: `redirect(url_for(...))` a una ruta de lectura — patrón Post/Redirect/Get.
 - [ ] Tras POST con error: re-render del formulario con código HTTP coherente (400, 404, 409).
 
 ### Eliminaciones
-- [ ] `GET /gatos/<id_gato>/eliminar` muestra pantalla de confirmación con datos del gato.
-- [ ] `POST /gatos/<id_gato>/eliminar` ejecuta la baja y redirige a `/gatos`.
+- [x] `GET /gatos/<id_gato>/eliminar` muestra pantalla de confirmación con datos del gato.
+- [x] `POST /gatos/<id_gato>/eliminar` ejecuta la baja y redirige a `/gatos`.
 
 ### Verificación
-- [ ] Ninguna URL accesible por GET modifica estado del dominio.
-- [ ] Las rutas viejas de escritura con parámetros en URL (de `ut4e1`) han desaparecido o devuelven 404.
+- [x] Ninguna URL accesible por GET modifica estado del dominio.
+- [ ] Las rutas viejas de escritura con parámetros en URL han desaparecido o devuelven 404.
 
 ### Integridad de capas
-- [ ] `domain/` e `infrastructure/` sin cambios.
+- [x] `domain/` e `infrastructure/` sin cambios.
 - [ ] `application/` solo con métodos de delegación pura si hace falta.
 - [ ] `presentation/menu.py` sigue funcionando sin cambios.
 

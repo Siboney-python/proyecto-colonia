@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block titulo %}Tramitar anexo - GestiCat{% endblock %}
+
+{% block contenido %}
+<h2>Tramitar anexo</h2>
+
+{% if error %}
+<p style="color: red"><strong>Error:</strong> {{ error }}</p>
+{% endif %}
+
+<p>Estado actual: <strong>{{ colonia['estado'] }}</strong></p>
+
+<form method="post" action="{{ url_for('tramitar_anexo') }}">
+    <label>Nuevo estado:
+        <select name="nuevo_estado">
+            <option value="ACTIVA" {{ 'selected' if datos.nuevo_estado == 'ACTIVA' }}>Activa</option>
+            <option value="PENDIENTE" {{ 'selected' if datos.nuevo_estado == 'PENDIENTE' }}>Pendiente actualización</option>
+            <option value="BAJA" {{ 'selected' if datos.nuevo_estado == 'BAJA' }}>Baja</option>
+        </select>
+    </label><br>
+    <button type="submit">Tramitar</button>
+</form>
+<p><a href="{{ url_for('reporte_colonia') }}">← Cancelar y volver</a></p>
+{% endblock %}

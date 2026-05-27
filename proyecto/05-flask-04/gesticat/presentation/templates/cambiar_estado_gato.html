@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block titulo %}Cambiar estado — GestiCat{% endblock %}
+
+{% block contenido %}
+<h2>Cambiar estado de {{ gato.nombre }}</h2>
+
+{% if error %}
+<p style="color: red"><strong>Error:</strong> {{ error }}</p>
+{% endif %}
+
+<form method="post" action="{{ url_for('cambiar_estado_gato', id_gato=gato.id_gato) }}">
+    <label>Nuevo estado:
+        <select name="nuevo_estado">
+            <option value="COL" {{ 'selected' if datos.nuevo_estado == 'COL' }}>En colonia</option>
+            <option value="ACOG" {{ 'selected' if datos.nuevo_estado == 'ACOG' }}>En acogida</option>
+            <option value="ADOP" {{ 'selected' if datos.nuevo_estado == 'ADOP' }}>Adoptado</option>
+            <option value="FALL" {{ 'selected' if datos.nuevo_estado == 'FALL' }}>Fallecido</option>
+            <option value="DESA" {{ 'selected' if datos.nuevo_estado == 'DESA' }}>Desaparecido</option>
+        </select>
+    </label><br>
+    <button type="submit">Cambiar estado</button>
+</form>
+<p><a href="{{ url_for('ver_gato', id_gato=gato.id_gato) }}">← Cancelar y volver</a></p>
+{% endblock %}>
