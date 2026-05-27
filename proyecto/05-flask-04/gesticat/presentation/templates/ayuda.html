@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block titulo %}Ayuda — GestiCat{% endblock %}
+
+{% block contenido %}
+<h2>Rutas disponibles</h2>
+<ul>
+    {% for regla in reglas %}
+    <li><code>{{ regla.rule }}</code> — {{ regla.endpoint }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

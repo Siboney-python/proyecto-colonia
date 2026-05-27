@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block titulo %}Colonia — GestiCat{% endblock %}
+
+{% block contenido %}
+<h2>{{ reporte['nombre'] }}</h2>
+<table>
+    <tr><th>Responsable</th><td>{{ reporte['responsable'] }}</td></tr>
+    <tr><th>Estado</th><td>{{ reporte['estado'] }}</td></tr>
+    <tr><th>Última actualización</th><td>{{ reporte['ultima_actualizacion'] }}</td></tr>
+    <tr><th>Necesita actualización</th><td>{{ "Sí" if reporte['necesita_actualizacion'] else "No" }}</td></tr>
+    <tr><th>Total gatos activos</th><td>{{ reporte['total_gatos'] }}</td></tr>
+</table>
+{% endblock %}

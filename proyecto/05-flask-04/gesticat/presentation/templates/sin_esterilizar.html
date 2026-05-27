@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block titulo %}Sin esterilizar — GestiCat{% endblock %}
+
+{% block contenido %}
+<h2>Gatos sin esterilizar de {{ colonia['nombre'] }}</h2>
+{% if gatos %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Sexo</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for g in gatos %}
+        <tr>
+            <td><a href="{{ url_for('ver_gato', id_gato=g.id_gato) }}">{{ g.id_gato }}</a></td>
+            <td>{{ g.nombre }}</td>
+            <td>{{ g.sexo.value }}</td>
+            <td>{{ g.estado.value }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Todos los gatos activos están esterilizados.</p>
+{% endif %}
+{% endblock %}

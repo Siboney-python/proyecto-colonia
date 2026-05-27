@@ -96,6 +96,12 @@ Introducir plantillas Jinja2 para sacar el HTML inline de `app.py`: plantilla
 base con cabecera y navegación, plantillas hijas para cada vista de lectura,
 y plantilla común para errores 404 y 500.
 
+### Fase 05 — Formularios HTML y método POST (parte 4)
+Convertir las operaciones de escritura en formularios HTML con método POST.
+Validación con re-render conservando los datos tecleados, patrón
+Post/Redirect/Get tras éxito, y confirmación antes de eliminar.
+Ninguna acción de escritura queda accesible por GET.
+
 ---
 
 ## Checklists por fases
@@ -323,6 +329,45 @@ y plantilla común para errores 404 y 500.
 ### Documentación
 - [x] `CHANGELOG.md` con entrada nueva `0.7.0`.
 - [x] `README.md` y `docs/EJECUCION.md` actualizados (mencionan `presentation/templates/` y el patrón de herencia con `base.html`).
+
+</details>
+
+<details open>
+  <summary>Fase 05 — Formularios HTML y método POST (parte 4) [ ]</summary>
+
+### Preparación
+- [x] Carpeta `05-flask-04/` creada con el contenido de `05-flask-03/` como base.
+- [ ] Borrar el `.venv` copiado y crear uno nuevo con `python3 -m venv .venv` e `pip install -r gesticat/requirements.txt`.
+
+### Formularios
+- [ ] Cada operación de escritura tiene su plantilla HTML en `presentation/templates/`, extendiendo de `base.html`.
+- [ ] Cada `<form>` tiene `method="post"` y `action="{{ url_for(...) }}"`.
+- [ ] Los campos conservan los datos tecleados al volver tras un error.
+- [ ] Mensaje de error visible en el formulario cuando el dominio lanza una excepción.
+
+### Routes
+- [ ] Las routes de escritura aceptan `methods=['GET', 'POST']` (o solo `['POST']` si no necesitan pantalla previa).
+- [ ] Rama `GET` renderiza el formulario vacío (o con datos actuales si es edición).
+- [ ] Rama `POST` procesa los datos y llama al servicio del dominio.
+- [ ] Tras POST con éxito: `redirect(url_for(...))` a una ruta de lectura — patrón Post/Redirect/Get.
+- [ ] Tras POST con error: re-render del formulario con código HTTP coherente (400, 404, 409).
+
+### Eliminaciones
+- [ ] `GET /gatos/<id_gato>/eliminar` muestra pantalla de confirmación con datos del gato.
+- [ ] `POST /gatos/<id_gato>/eliminar` ejecuta la baja y redirige a `/gatos`.
+
+### Verificación
+- [ ] Ninguna URL accesible por GET modifica estado del dominio.
+- [ ] Las rutas viejas de escritura con parámetros en URL (de `ut4e1`) han desaparecido o devuelven 404.
+
+### Integridad de capas
+- [ ] `domain/` e `infrastructure/` sin cambios.
+- [ ] `application/` solo con métodos de delegación pura si hace falta.
+- [ ] `presentation/menu.py` sigue funcionando sin cambios.
+
+### Documentación
+- [ ] `CHANGELOG.md` con entrada nueva `0.8.0`.
+- [ ] `README.md` y `docs/EJECUCION.md` actualizados con lista de rutas y verbos HTTP.
 
 </details>
 ---

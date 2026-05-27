@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block titulo %}Gatos — GestiCat{% endblock %}
+
+{% block contenido %}
+<h2>Gatos de {{ colonia['nombre'] }}</h2>
+{% if gatos %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Color</th>
+            <th>Sexo</th>
+            <th>Estado</th>
+            <th>Esterilizado</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for g in gatos %}
+        <tr>
+            <td><a href="{{ url_for('ver_gato', id_gato=g.id_gato) }}">{{ g.id_gato }}</a></td>
+            <td>{{ g.nombre }}</td>
+            <td>{{ g.color }}</td>
+            <td>{{ g.sexo.value }}</td>
+            <td>{{ g.estado.value }}</td>
+            <td>{{ "Sí" if g.esterilizado else "No" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No hay gatos registrados.</p>
+{% endif %}
+{% endblock %}
