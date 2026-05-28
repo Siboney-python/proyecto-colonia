@@ -2,7 +2,7 @@
 
 ## Descripción funcional
 
-GestiCat es una aplicación de consola para gestionar el censo y seguimiento
+GestiCat es una aplicación para gestionar el censo y seguimiento
 de una colonia felina urbana. Permite registrar gatos con sus datos básicos
 (identificador, nombre, color, sexo, estado y esterilización), gestionar el
 responsable de la colonia, controlar el estado administrativo mediante anexos
@@ -16,10 +16,10 @@ el mismo dominio y la misma base de datos SQLite:
 
 ## Objetivos de la fase actual
 
-- Añadir Flask como segunda capa de presentación sin modificar el dominio.
-- Exponer todas las operaciones del menú de consola como routes HTTP.
-- Añadir observabilidad global: manejadores de error 404 y 500, ruta `/ayuda`
-  con introspección de routes, y logging de peticiones en `gesticat.log`.
+- Convertir las operaciones de escritura en formularios HTML con método POST.
+- Aplicar el patrón Post/Redirect/Get tras éxito y re-render con error conservado.
+- Ninguna acción de escritura queda accesible por GET.
+- Plantillas Jinja2 para todas las vistas, incluidas las de escritura.
 
 ## Alcance
 

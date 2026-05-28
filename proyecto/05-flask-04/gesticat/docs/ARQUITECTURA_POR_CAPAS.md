@@ -40,8 +40,9 @@ validaciones de negocio ni lógica de dominio. El proyecto tiene dos
 interfaces de presentación independientes que comparten el mismo servicio:
 
 - `menu.py` — interfaz de consola.
-- `app.py` — interfaz web con Flask. Expone las mismas operaciones como
-  routes HTTP. Incluye manejadores globales, ruta /ayuda, logging y templates.
+- `app.py` — interfaz web con Flask. Rutas de lectura con plantillas Jinja2
+  y rutas de escritura con formularios HTML y método POST. Patrón
+  Post/Redirect/Get tras éxito y re-render con error conservado tras fallo.
 
 ## Dependencias permitidas
 
@@ -82,15 +83,21 @@ gesticat/
       404.jpg                     → imagen para página de error 404
       500.jpg                     → imagen para página de error 500
     templates/
-      base.html                   → plantilla base con cabecera y navegación
-      inicio.html                 → página de bienvenida
-      gatos.html                  → listado de gatos
-      gato_detalle.html           → detalle de un gato
-      sin_esterilizar.html        → gatos sin esterilizar
-      colonia.html                → reporte general de la colonia
-      censo.html                  → reporte de censo
-      ayuda.html                  → rutas disponibles
-      error.html                  → plantilla común para errores 404 y 500
+      base.html                       → plantilla base con cabecera y navegación
+      inicio.html                     → página de bienvenida
+      gatos.html                      → listado de gatos
+      gato_detalle.html               → detalle de un gato
+      sin_esterilizar.html            → gatos sin esterilizar
+      colonia.html                    → reporte general de la colonia
+      censo.html                      → reporte de censo
+      ayuda.html                      → rutas disponibles
+      error.html                      → plantilla común para errores 404 y 500
+      registrar_gato.html             → formulario de alta de gato
+      quitar_gato.html                → confirmación de baja de gato
+      cambiar_estado_gato.html        → formulario de cambio de estado
+      esterilizar_gato.html           → formulario de esterilización
+      tramitar_anexo.html             → formulario de tramitación de anexo
+      asignar_responsable.html        → formulario de asignación de responsable
   tests/
     test_gato.py                  → tests de la entidad Gato
     test_responsable.py           → tests de la entidad Responsable
