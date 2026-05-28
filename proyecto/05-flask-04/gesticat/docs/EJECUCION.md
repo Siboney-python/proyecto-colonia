@@ -10,12 +10,12 @@
 
 ```bash
 git clone git@github.com:Siboney-python/proyecto-colonia.git
-cd proyecto-colonia/proyecto/05-flask-03
+cd proyecto-colonia/proyecto/05-flask-04
 ```
 
 ## Preparación del entorno
 
-Desde la carpeta `05-flask-03/`:
+Desde la carpeta `05-flask-04/`:
 
 ```bash
 python3 -m venv .venv
@@ -42,7 +42,7 @@ pip install -r gesticat/requirements.txt
 
 ## Crear base de datos
 
-Desde la carpeta `05-flask-03/`:
+Desde la carpeta `05-flask-04/`:
 
 ```bash
 python3 -m gesticat.crear_bd
@@ -50,7 +50,7 @@ python3 -m gesticat.crear_bd
 
 ## Ejecutar la interfaz web (Flask)
 
-Desde la carpeta `05-flask-03/`:
+Desde la carpeta `05-flask-04/`:
 
 ```bash
 python3 -m gesticat.presentation.app
@@ -88,9 +88,24 @@ cabecera y navegación comunes. Si añades una plantilla nueva debe
 extender de `base.html` con `{% extends "base.html" %}` para mantener
 la cabecera en todas las páginas.
 
+### Rutas de escritura (formularios POST)
+
+Las operaciones que modifican datos usan formularios HTML con método POST.
+Ninguna acción de escritura se dispara por GET.
+
+| Ruta | Verbo | Acción |
+|---|---|---|
+| `/gatos/nuevo` | GET / POST | Registrar gato nuevo |
+| `/gatos/<id_gato>/quitar` | GET / POST | Confirmación y baja de gato |
+| `/gatos/<id_gato>/estado` | GET / POST | Cambiar estado del gato |
+| `/gatos/<id_gato>/esterilizar` | GET / POST | Marcar como esterilizado |
+| `/colonia/estado` | GET / POST | Tramitar anexo |
+| `/colonia/responsable` | GET / POST | Asignar responsable |
+
+
 ## Ejecutar el menú
 
-Desde la carpeta `05-flask-03/`:
+Desde la carpeta `05-flask-04/`:
 
 ```bash
 python3 -m gesticat.presentation.menu
@@ -98,7 +113,7 @@ python3 -m gesticat.presentation.menu
 
 ## Ejecutar los tests
 
-Desde la carpeta `05-flask-03/`:
+Desde la carpeta `05-flask-04/`:
 
 ```bash
 python3 -m unittest

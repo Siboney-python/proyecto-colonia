@@ -340,30 +340,35 @@ Ninguna acción de escritura queda accesible por GET.
 - [x] Borrar el `.venv` copiado y crear uno nuevo con `python3 -m venv .venv` e `pip install -r gesticat/requirements.txt`.
 
 ### Formularios
-- [x] Cada operación de escritura tiene su plantilla HTML en `presentation/templates/`, extendiendo de `base.html`.
-- [x] Cada `<form>` tiene `method="post"` y `action="{{ url_for(...) }}"`.
-- [x] Los campos conservan los datos tecleados al volver tras un error.
-- [x] Mensaje de error visible en el formulario cuando el dominio lanza una excepción.
+- [x] Cada operación de escritura del proyecto tiene su propia plantilla HTML de formulario en presentation/templates/, extendiendo de base.html.
 
 ### Routes
-- [x] Las routes de escritura aceptan `methods=['GET', 'POST']` (o solo `['POST']` si no necesitan pantalla previa).
-- [x] Rama `GET` renderiza el formulario vacío (o con datos actuales si es edición).
-- [x] Rama `POST` procesa los datos y llama al servicio del dominio.
-- [x] Tras POST con éxito: `redirect(url_for(...))` a una ruta de lectura — patrón Post/Redirect/Get.
-- [ ] Tras POST con error: re-render del formulario con código HTTP coherente (400, 404, 409).
+- [x] Las routes correspondientes aceptan methods=['GET', 'POST'] (o 
+  solo ['POST'] si la acción no necesita pantalla previa) y separan 
+  claramente las dos ramas con if request.method == 'POST'.
+- [x] Tras un POST con éxito, patrón Post/Redirect/Get aplicado: return 
+  redirect(url_for(...)) a una ruta de lectura. Ninguna respuesta de 
+  éxito devuelve HTML directamente.
+- [x] Tras un POST con error, el formulario se re-renderiza con los datos
+  tecleados conservados y un mensaje de error visible. El código HTTP 
+  devuelto es coherente (400, 404, 409).
 
 ### Eliminaciones
-- [x] `GET /gatos/<id_gato>/eliminar` muestra pantalla de confirmación con datos del gato.
-- [x] `POST /gatos/<id_gato>/eliminar` ejecuta la baja y redirige a `/gatos`.
+- [x] Las eliminaciones requieren confirmación: GET muestra la pantalla
+  "¿seguro?" con los datos del recurso, POST sobre la misma URL ejecuta la baja y redirige.
 
 ### Verificación
-- [x] Ninguna URL accesible por GET modifica estado del dominio.
-- [ ] Las rutas viejas de escritura con parámetros en URL han desaparecido o devuelven 404.
+- [x] Las rutas viejas de escritura (las que en ut4e1 aceptaban GET con
+  los datos en la URL) se han reestructurado siguiendo los patrones del
+  lab a5: formulario propio, confirmación GET + acción POST, o ruta 
+  solo-POST según corresponda.
+- [x] Verificación final recorriendo la app: ninguna URL accesible por 
+  GET modifica estado del dominio.
 
 ### Integridad de capas
 - [x] `domain/` e `infrastructure/` sin cambios.
-- [ ] `application/` solo con métodos de delegación pura si hace falta.
-- [ ] `presentation/menu.py` sigue funcionando sin cambios.
+- [x] `application/` solo con métodos de delegación pura si hace falta.
+- [x] `presentation/menu.py` sigue funcionando sin cambios.
 
 ### Documentación
 - [ ] `CHANGELOG.md` con entrada nueva `0.8.0`.

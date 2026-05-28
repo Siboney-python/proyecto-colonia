@@ -4,6 +4,27 @@ Todos los cambios relevantes del proyecto, organizados por versión y fase.
 
 ---
 
+## [0.8.0] - 2026-05-28 (Fase 05.4: formularios HTML y método POST)
+
+### Added
+- `presentation/templates/registrar_gato.html`: formulario de alta de gato.
+- `presentation/templates/quitar_gato.html`: confirmación de baja de gato.
+- `presentation/templates/cambiar_estado_gato.html`: formulario de cambio de estado.
+- `presentation/templates/esterilizar_gato.html`: formulario de esterilización.
+- `presentation/templates/tramitar_anexo.html`: formulario de tramitación de anexo.
+- `presentation/templates/asignar_responsable.html`: formulario de asignación de responsable.
+
+### Changed
+- `presentation/app.py`: routes de escritura convertidos a `methods=['GET', 'POST']`
+  con patrón Post/Redirect/Get tras éxito y re-render con error conservado tras fallo.
+- `presentation/app.py`: route `quitar_gato` con patrón de confirmación — GET muestra
+  pantalla "¿seguro?" y POST ejecuta la baja.
+- `presentation/app.py`: enlace "Registrar gato" añadido al nav de `base.html`.
+
+### Removed
+- Routes de escritura con parámetros en URL (de `ut4e1`): los datos ahora viajan
+  por el cuerpo POST a través de formularios HTML.
+
 ## [0.7.0] - 2026-05-24 (Fase 05.3: plantillas Jinja2)
 
 ### Added

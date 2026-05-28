@@ -70,28 +70,31 @@ python3 -m gesticat.presentation.app
 
 Abre `http://localhost:5000` en el navegador. Rutas disponibles:
 
-**Lectura:**
+**Lectura (GET):**
 - `/` - bienvenida con enlaces a las rutas principales.
 - `/gatos` - lista todos los gatos de la colonia.
-- `/gatos/{id_gato}` - detalle de un gato (404 si no existe).
+- `/gatos/<id_gato>` - detalle de un gato (404 si no existe).
 - `/gatos/sin-esterilizar` - gatos activos sin esterilizar.
 - `/colonia` - reporte general de la colonia.
 - `/colonia/censo` - reporte de censo (estadísticas).
-- `/ayuda` — lista todas las rutas disponibles de la API.
+- `/ayuda` - lista todas las rutas disponibles de la API.
 
-Las vistas de lectura usan plantillas Jinja2 (`presentation/templates/`).
-La plantilla base `base.html` define la cabecera y navegación comunes —
-todas las páginas la heredan con `{% extends "base.html" %}`.
+**Escritura (GET formulario / POST acción):**
+- `/gatos/nuevo` - registrar gato nuevo.
+- `/gatos/<id_gato>/quitar` - confirmación y baja de gato.
+- `/gatos/<id_gato>/estado` - cambiar estado del gato.
+- `/gatos/<id_gato>/esterilizar` - marcar gato como esterilizado.
+- `/colonia/estado` - tramitar anexo (cambio de estado de la colonia).
+- `/colonia/responsable` - asignar nuevo responsable.
 
-**Escritura:**
-- `/gatos/nuevo/{id}/{nombre}/{color}/{sexo}/{estado}/{clinica}/{esterilizado}` 
-  - registrar gato.
-- `/gatos/{id_gato}/eliminar` - eliminar gato.
-- `/gatos/{id_gato}/estado/{nuevo_estado}` - cambiar estado.
-- `/gatos/{id_gato}/esterilizar/{clinica}` - marcar como esterilizado.
-- `/colonia/estado/{nuevo_estado}` - tramitar anexo.
-- `/colonia/responsable/{tipo}/{nombre}/{telefono}/{email}/{identificacion}/{campo_extra}` 
-  - asignar responsable.
+Al arrancar el servidor se crea automáticamente `gesticat.log` en la 
+carpeta desde la que lances el comando. Contiene una línea por cada 
+petición HTTP recibida.
+
+Las páginas usan plantillas Jinja2 ubicadas en `presentation/templates/`. 
+La plantilla `base.html` define la estructura común; el resto la heredan 
+con `{% extends %}`.
+
 
 ## Tests
 
